@@ -21,6 +21,29 @@ public class Square {
     private enum State{
         EMPTY, ONE, TWO, THREE, FOUR, 
         FIVE, SIX, SEVEN, EIGHT, MINE;
+        
+        public int getValue(){
+            switch(this){
+                case ONE:
+                    return 1;
+                case TWO:
+                    return 2;
+                case THREE:
+                    return 3;
+                case FOUR:
+                    return 4;
+                case FIVE:
+                    return 5;
+                case SIX:
+                    return 6;
+                case SEVEN:
+                    return 7;
+                case EIGHT:
+                    return 8;
+            }
+            
+            return 0;
+        }
     }
     
     private enum Marking{
@@ -34,6 +57,10 @@ public class Square {
     
     public void setState(State state){
         currentState = state;
+    }
+    
+    public State getState(){
+        return currentState;
     }
     
     public void markSquare(){
@@ -50,8 +77,12 @@ public class Square {
         }
     }
     
+    public Marking getMarking(){
+        return marking;
+    }
+    
     public void increaseState(){
-        switch(currentState){
+        switch(getState()){
             case ONE:
                 currentState = State.TWO;
             case TWO:
