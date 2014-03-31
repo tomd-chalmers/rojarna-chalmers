@@ -8,102 +8,66 @@ package com.rojarna.projektrojarna;
 
 /**
  *
- * @author Tobias Foughman Lind
+ * @author Gaming
+ * @revised Oskar Frost
  */
 public class Square {
-    
-    private boolean isVisible;
-    
-    private Marking marking;
-    private State currentState;
-    
-    
-    private enum State{
-        EMPTY, ONE, TWO, THREE, FOUR, 
-        FIVE, SIX, SEVEN, EIGHT, MINE;
-        
-        public int getValue(){
-            switch(this){
-                case ONE:
-                    return 1;
-                case TWO:
-                    return 2;
-                case THREE:
-                    return 3;
-                case FOUR:
-                    return 4;
-                case FIVE:
-                    return 5;
-                case SIX:
-                    return 6;
-                case SEVEN:
-                    return 7;
-                case EIGHT:
-                    return 8;
-            }
-            
-            return 0;
-        }
-    }
+	
+	private Item item;
+	private int value=0;
+	private boolean visible=false;
+    private Marking mark;
     
     private enum Marking{
         NONE, FLAG, QUESTION;
     }
-    
-    public Square(){
-        marking = Marking.NONE;
-        setState(State.EMPTY);
-    }
-    
-    public void setState(State state){
-        currentState = state;
-    }
-    
-    public State getState(){
-        return currentState;
-    }
-    
+    	
+	public enum Item{
+		MINE,NUMBER;
+	}
+	
+	public Square(){
+		item=Item.NUMBER;
+		mark=Marking.NONE;
+	}
+	public Item getItem(){
+		return item;
+	}
+	public void setItem(Item i){
+		item=i;
+	}
+	public void incValue(){
+		value++;
+	}
+	public void decValue(){
+		value--;
+	}
+	public int getValue(){
+		return value;
+	}
+	public boolean isMine(){
+		return item.equals(Item.MINE);
+	}
+	public boolean isVisible(){
+		return visible;
+	}
+	public void setVisible(boolean visible){
+		this.visible=visible;
+	}
     public void markSquare(){
-        if(!isVisible){
-            if(marking == Marking.NONE){
-                marking = Marking.FLAG;
+        if(!visible){
+            if(mark == Marking.NONE){
+                mark = Marking.FLAG;
             }
-            else if(marking == Marking.FLAG){
-                marking = Marking.QUESTION;
+            else if(mark == Marking.FLAG){
+                mark = Marking.QUESTION;
             }
             else{
-                marking = Marking.NONE;
+                mark = Marking.NONE;
             }
         }
     }
-    
     public Marking getMarking(){
-        return marking;
+        return mark;
     }
-    
-    public void increaseState(){
-        switch(getState()){
-            case ONE:
-                currentState = State.TWO;
-            case TWO:
-                currentState = State.THREE;
-            case THREE:
-                currentState = State.FOUR;
-            case FOUR:
-                currentState = State.FIVE;
-            case FIVE:
-                currentState = State.SIX;
-            case SIX:
-                currentState = State.SEVEN;
-            case SEVEN:
-                currentState = State.EIGHT;
-            case EIGHT:
-                currentState = State.ONE;
-        }
-    }
-    
-    public void setVisible(boolean value){
-        isVisible = value;
-    }
-    
 }
