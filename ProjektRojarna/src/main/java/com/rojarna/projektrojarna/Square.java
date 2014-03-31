@@ -16,13 +16,19 @@ public class Square {
 	private Item item;
 	private int value=0;
 	private boolean visible=false;
-	
+    private Marking mark;
+    
+    private enum Marking{
+        NONE, FLAG, QUESTION;
+    }
+    	
 	public enum Item{
 		MINE,NUMBER;
 	}
 	
 	public Square(){
 		item=Item.NUMBER;
+		mark=Marking.NONE;
 	}
 	public Item getItem(){
 		return item;
@@ -48,4 +54,20 @@ public class Square {
 	public void setVisible(boolean visible){
 		this.visible=visible;
 	}
+    public void markSquare(){
+        if(!visible){
+            if(mark == Marking.NONE){
+                mark = Marking.FLAG;
+            }
+            else if(mark == Marking.FLAG){
+                mark = Marking.QUESTION;
+            }
+            else{
+                mark = Marking.NONE;
+            }
+        }
+    }
+    public Marking getMarking(){
+        return mark;
+    }
 }

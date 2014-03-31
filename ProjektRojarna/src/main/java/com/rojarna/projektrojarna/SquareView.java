@@ -6,11 +6,14 @@
 
 package com.rojarna.projektrojarna;
 
+import javax.swing.SwingUtilities;
+
+
 /**
  *
- * @author Gaming
+ * @author Tom
  */
-public class SquareView extends javax.swing.JPanel {
+public class SquareView extends javax.swing.JPanel{
 
     /**
      * Creates new form SquareView
@@ -18,7 +21,15 @@ public class SquareView extends javax.swing.JPanel {
     public SquareView() {
         initComponents();
     }
-
+    
+    public void setMark(String s){ // TODO the input chould late be an Icon
+        Button.setText(s);
+    }
+    
+    public void Pressed(String s){ // TODO also an Icon
+        Button.setEnabled(false);
+        Button.setText(s);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,19 +39,54 @@ public class SquareView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Button = new javax.swing.JButton();
+
+        setMaximumSize(new java.awt.Dimension(20, 20));
+        setMinimumSize(new java.awt.Dimension(20, 20));
+        setName(""); // NOI18N
+        setPreferredSize(new java.awt.Dimension(20, 20));
+
+        Button.setMaximumSize(new java.awt.Dimension(20, 20));
+        Button.setMinimumSize(new java.awt.Dimension(20, 20));
+        Button.setPreferredSize(new java.awt.Dimension(20, 20));
+        Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(146, 146, 146)
+                .addComponent(Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(171, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonMouseClicked
+        if(SwingUtilities.isLeftMouseButton(evt)){
+            //send
+        }else if(SwingUtilities.isRightMouseButton(evt)){
+            //send
+        }
+        else{
+            // do nothing.
+        }
+    }//GEN-LAST:event_ButtonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button;
     // End of variables declaration//GEN-END:variables
+
 }
