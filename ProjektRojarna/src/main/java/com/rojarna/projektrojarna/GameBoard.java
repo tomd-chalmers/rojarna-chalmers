@@ -12,6 +12,7 @@ import java.awt.Point;
 
 import com.rojarna.projektrojarna.Square.Item;
 
+
 /**
  *
  * @author Gaming
@@ -87,15 +88,26 @@ public class GameBoard {
 	}
         
         public void markSquare(int x, int y){
-            board[x][y].markSquare();
+            board[y][x].markSquare();
         }
         
         public void chooseSquare(int x, int y){
+            if(board[y][x].getMarking()!= Marking.FLAG){
+                board[y][x].setVisible(true);
+                if(board[y][x].getItem() == Item.MINE){
+                    //förlora liv/spelet
+                } else if(board[y][x].getItem() == Item.NUMBER && board[y][x].getValue() == 0){
+                    //öppna alla nummer runtom
+                }
+            }
+        }
         
+        public Item getSquareItem(int x, int y){
+            return board[y][x].getItem();
         }
         
 	
-	/*public void systemPrint(){
+        /*public void systemPrint(){
 		for(int i=0;i<board.length;i++){
 			for(int j=0;j<board[i].length;j++){
 				if(board[i][j].isMine()){
