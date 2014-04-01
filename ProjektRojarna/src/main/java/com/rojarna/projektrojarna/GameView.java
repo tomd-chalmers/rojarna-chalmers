@@ -8,7 +8,7 @@ package com.rojarna.projektrojarna;
 
 /**
  *
- * @author Gaming
+ * @author Tobias
  */
 public class GameView extends javax.swing.JFrame {
 

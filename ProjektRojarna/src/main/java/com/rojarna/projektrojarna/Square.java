@@ -8,7 +8,7 @@ package com.rojarna.projektrojarna;
 
 /**
  *
- * @author Gaming
+ * @author Tobias
  * @revised Oskar Frost
  */
 public class Square {
@@ -18,7 +18,7 @@ public class Square {
     private boolean visible=false;
     private Marking mark;
     
-    private enum Marking{
+    public enum Marking{
         NONE, FLAG, QUESTION;
     }
     	

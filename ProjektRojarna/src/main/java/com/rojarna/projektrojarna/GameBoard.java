@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.Point;
 
-import com.rojarna.projektrojarna.Square.Item;
+import com.rojarna.projektrojarna.Square.*;
 
 
 /**
  *
- * @author Gaming
+ * @author Tobias
  * @revised Oskar Frost
  * @revised Joakim Milleson
  */
