@@ -15,9 +15,10 @@ import com.rojarna.projektrojarna.Square.Marking;
 import java.util.Scanner;
 
 
+
 /**
  *
- * @author Gaming
+ * @author Tobias
  * @revised Oskar Frost
  * @revised Joakim Milleson
  */

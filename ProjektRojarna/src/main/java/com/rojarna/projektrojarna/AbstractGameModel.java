@@ -8,8 +8,7 @@ package com.rojarna.projektrojarna;
 
 /**
  *
- * @author Gaming
+ * @author Tobias
  */
-public abstract class AbstractGameModel {
-    
+public abstract class AbstractGameModel{
 }
