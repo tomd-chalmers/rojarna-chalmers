@@ -16,6 +16,7 @@ import javax.swing.SwingUtilities;
 public class SquareView extends javax.swing.JPanel{
     private int x;
     private int y;
+    
     /**
      * Creates new form SquareView
      */
@@ -32,10 +33,10 @@ public class SquareView extends javax.swing.JPanel{
         Button.setText(s);
     }
     
-    public int getX(){
+    public int getBoardX(){
         return x;
     }
-    public int getY(){
+    public int getBoardY(){
         return y;
     }
     /**

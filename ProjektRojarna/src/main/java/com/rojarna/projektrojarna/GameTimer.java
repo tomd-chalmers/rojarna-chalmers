@@ -3,29 +3,44 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.rojarna.projektrojarna;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.Timer;
 
 
 /**
  *
- * @author Gaming
+ * @author Tobias
  * @revised Tom
+ * @revised Tobias
  */
-public class GameTimer{
-    private long startTime=0;
-    private boolean isRunning=false;
-    private long stopTime=0;
+public class GameTimer extends Timer{
+    private boolean descendingTime = false;
     
-    private void start(){
-        startTime=System.currentTimeMillis();
-        isRunning=true;
-    } 
+    private int     timeLeft = 0;
     
-    private void stop(){
-        stopTime=System.currentTimeMillis();
-        isRunning=false;
+    // Timern från java.swing.Timer körs tydligen i samma tråd som alla andra
+    // swing objekt, så detta borde vara optimalt att använda tillsammans med
+    // GUI:n enligt de källor jag kollat.
+    
+    // Sedan vet jag inte om vi borde extend:a eller endast ha en referens
+    // till en Timer i klassen så båda ligger här just nu.
+    private Timer gameTimer = null;
+    
+    
+    
+    //private List<ActionListener> timerListeners = new ArrayList<ActionListener>();
+    
+    
+    
+    public GameTimer(int delay, ActionListener listener){
+        super(delay, listener);
+        //gameTimer = new Timer(delay, listener);
+        
+        //timerListeners.add(listener);
     }
-    
-    // only some early thinking if u could create this class without threds.
 }
