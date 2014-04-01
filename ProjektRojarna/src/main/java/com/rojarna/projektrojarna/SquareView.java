@@ -14,11 +14,12 @@ import javax.swing.SwingUtilities;
  * @author Tom
  */
 public class SquareView extends javax.swing.JPanel{
-
+    private int x;
+    private int y;
     /**
      * Creates new form SquareView
      */
-    public SquareView() {
+    public SquareView(int x, int y) {
         initComponents();
     }
     
@@ -29,6 +30,13 @@ public class SquareView extends javax.swing.JPanel{
     public void Pressed(String s){ // TODO also an Icon
         Button.setEnabled(false);
         Button.setText(s);
+    }
+    
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
     }
     /**
      * This method is called from within the constructor to initialize the form.

@@ -19,16 +19,30 @@ public class GameBoardView extends javax.swing.JPanel {
     public GameBoardView() {
         initComponents();
         setLayout(new GridLayout(10,10));
+        int x=0;
+        int y=0;
         for(int i=0;i<100;i++){
-            add(new SquareView());
+            add(new SquareView(x,y));
+            x++;
+            if(x==10){
+                x=0;
+                y++;
+            }
         }
     }
     
     public GameBoardView(int x, int y){
         initComponents();
         setLayout(new GridLayout(x,y));
+        int posx=0;
+        int posy=0;
         for(int i=0;i<x*y;i++){
-            add(new SquareView());
+            add(new SquareView(posx,posy));
+            posx++;
+            if(posx==x){
+                posx=0;
+                posy++;
+            }
         }
     }
 
