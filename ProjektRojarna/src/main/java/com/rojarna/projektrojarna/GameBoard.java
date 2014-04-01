@@ -11,6 +11,8 @@ import java.util.List;
 import java.awt.Point;
 
 import com.rojarna.projektrojarna.Square.Item;
+import com.rojarna.projektrojarna.Square.Marking;
+import java.util.Scanner;
 
 
 /**
@@ -22,7 +24,7 @@ import com.rojarna.projektrojarna.Square.Item;
 public class GameBoard {
 	
 	private Square[][] board;
-	private int mines;
+	private int mines,width,height;
         
     
 	public GameBoard(){
@@ -36,6 +38,8 @@ public class GameBoard {
 			}
 		}
 		this.mines = mines;
+                this.height = height;
+                this.width = width;
 	}
 	
 	public void initBoard(int x,int y){
@@ -88,17 +92,26 @@ public class GameBoard {
 	}
         
         public void markSquare(int x, int y){
-            board[y][x].markSquare();
+                board[y][x].markSquare();
         }
         
         public void chooseSquare(int x, int y){
-            if(board[y][x].getMarking()!= Marking.FLAG){
-                board[y][x].setVisible(true);
-                if(board[y][x].getItem() == Item.MINE){
-                    //förlora liv/spelet
-                } else if(board[y][x].getItem() == Item.NUMBER && board[y][x].getValue() == 0){
-                    //öppna alla nummer runtom
-                }
+            if(board[y][x].getItem() == Item.MINE){
+                    board[y][x].setVisible(true);
+                    System.out.println("Mina");
+            } else if(board[y][x].getItem() == Item.NUMBER && board[y][x].getValue() == 0){
+                    board[y][x].setVisible(true);
+                    for(int i = -1; i < 2; i++){
+                        for(int j = -1; j < 2; j++){
+                            if(x+j < width && x+j >= 0 && y+i < height && y+i >= 0){
+                                if(!board[y+i][x+j].isVisible()){
+                                    chooseSquare(x + j,y + i);
+                                }
+                            }
+                        }
+                    }
+            } else {
+                    board[y][x].setVisible(true);
             }
         }
         
@@ -107,14 +120,23 @@ public class GameBoard {
         }
         
 	
-        /*public void systemPrint(){
+        public void systemPrint(){
+            System.out.println();
 		for(int i=0;i<board.length;i++){
 			for(int j=0;j<board[i].length;j++){
-				if(board[i][j].isMine()){
-					System.out.print("[*]");
-				}else{
-					System.out.print("["+board[i][j].getValue()+"]");
-				}
+				if(board[i][j].isVisible()){
+                                        if(board[i][j].isMine()){
+                                                System.out.print("[*]");
+                                        }else{
+                                                System.out.print("["+board[i][j].getValue()+"]");
+                                        }
+                                } else if(board[i][j].getMarking() == Marking.FLAG) {
+                                    System.out.print("[F]");
+                                } else if(board[i][j].getMarking() == Marking.QUESTION){
+                                    System.out.print("[?]");
+                                } else {
+                                    System.out.print("[ ]");
+                                }
 			}
 			System.out.println("");
 		}
@@ -122,7 +144,22 @@ public class GameBoard {
 	
 	public static void main(String[]args){
 		GameBoard g = new GameBoard();
+                Scanner sc = new Scanner(System.in);
 		g.initBoard(3,3);
 		g.systemPrint();
-	}*/
+                
+                while(true){
+                    String s = sc.next();
+                    int x = sc.nextInt();
+                    int y = sc.nextInt();
+                    
+                    if(s.equals("F")){
+                        g.markSquare(x,y);
+                        g.systemPrint();
+                    } else{
+                        g.chooseSquare(x,y);
+                        g.systemPrint();
+                    }
+                }
+	}
 }

@@ -18,7 +18,7 @@ public class Square {
 	private boolean visible=false;
     private Marking mark;
     
-    private enum Marking{
+    public enum Marking{
         NONE, FLAG, QUESTION;
     }
     	
@@ -52,7 +52,9 @@ public class Square {
 		return visible;
 	}
 	public void setVisible(boolean visible){
-		this.visible=visible;
+                if(mark != Marking.FLAG){
+                    this.visible=visible;
+                }
 	}
     public void markSquare(){
         if(!visible){
