@@ -54,9 +54,11 @@ public class SquareView extends javax.swing.JPanel{
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(20, 20));
 
+        Button.setText("jButton1");
         Button.setMaximumSize(new java.awt.Dimension(20, 20));
         Button.setMinimumSize(new java.awt.Dimension(20, 20));
         Button.setPreferredSize(new java.awt.Dimension(20, 20));
+        Button.setSelected(true);
         Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ButtonMouseClicked(evt);
@@ -67,17 +69,13 @@ public class SquareView extends javax.swing.JPanel{
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addComponent(Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(234, Short.MAX_VALUE))
+            .addComponent(Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -91,7 +89,7 @@ public class SquareView extends javax.swing.JPanel{
             // do nothing.
         }
     }//GEN-LAST:event_ButtonMouseClicked
-
+                                
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Button;
