@@ -11,7 +11,6 @@ import java.util.List;
 import java.awt.Point;
 
 import com.rojarna.projektrojarna.Square.Item;
-import com.rojarna.projektrojarna.Square.Marking;
 import java.util.Scanner;
 
 
@@ -103,14 +102,10 @@ public class GameBoard {
                     System.out.println("Mina");
             } else if(board[y][x].getItem() == Item.NUMBER && board[y][x].getValue() == 0){
                     board[y][x].setVisible(true);
-                    for(int i = -1; i < 2; i++){
-                        for(int j = -1; j < 2; j++){
-                            if(x+j < width && x+j >= 0 && y+i < height && y+i >= 0){
-                                if(!board[y+i][x+j].isVisible()){
-                                    chooseSquare(x + j,y + i);
-                                }
-                            }
-                        }
+                    for(Point p:getBorder(x,y)){
+                        if(!board[p.y][p.x].isVisible()){
+                            chooseSquare(p.x,p.y);
+                         }   
                     }
             } else {
                     board[y][x].setVisible(true);
@@ -132,10 +127,6 @@ public class GameBoard {
                                         }else{
                                                 System.out.print("["+board[i][j].getValue()+"]");
                                         }
-                                } else if(board[i][j].getMarking() == Marking.FLAG) {
-                                    System.out.print("[F]");
-                                } else if(board[i][j].getMarking() == Marking.QUESTION){
-                                    System.out.print("[?]");
                                 } else {
                                     System.out.print("[ ]");
                                 }
