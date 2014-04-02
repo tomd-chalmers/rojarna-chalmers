@@ -146,21 +146,17 @@ public class GameBoard {
 	public static void main(String[]args){
 		GameBoard g = new GameBoard();
                 Scanner sc = new Scanner(System.in);
-		g.initBoard(3,3);
-		g.systemPrint();
+                int x,y;
+                x = sc.nextInt();
+                y = sc.nextInt();
+                g.initBoard(x, y);
+                g.chooseSquare(x, y);
+                g.systemPrint();
                 
                 while(true){
-                    String s = sc.next();
-                    int x = sc.nextInt();
-                    int y = sc.nextInt();
+                    g.chooseSquare(sc.nextInt(),sc.nextInt());
+                    g.systemPrint();
                     
-                    if(s.equals("F")){
-                        g.markSquare(x,y);
-                        g.systemPrint();
-                    } else{
-                        g.chooseSquare(x,y);
-                        g.systemPrint();
-                    }
                 }
 	}
 }
