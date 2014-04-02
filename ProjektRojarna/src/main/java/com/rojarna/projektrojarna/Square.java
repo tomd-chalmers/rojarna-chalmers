@@ -18,7 +18,7 @@ public class Square {
 	private boolean visible=false;
     private Marking mark;
     
-    private enum Marking{
+    public enum Marking{
         NONE, FLAG, QUESTION;
     }
     	

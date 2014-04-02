@@ -74,17 +74,17 @@ public class GameBoard {
 			}if(y<board[y].length-1){
 				tmp.add(new Point(x+1,y+1));
 			}
-			if(y>0){
-				tmp.add(new Point(x,y-1));
-			}
-			if(y<board[y].length-1){
-				tmp.add(new Point(x,y+1));
-			}
+		}
+		if(y>0){
+			tmp.add(new Point(x,y-1));
+		}
+		if(y<board[y].length-1){
+			tmp.add(new Point(x,y+1));
 		}
 		return tmp;
 	}
 	
-	/*public void systemPrint(){
+	public void systemPrint(){
 		for(int i=0;i<board.length;i++){
 			for(int j=0;j<board[i].length;j++){
 				if(board[i][j].isMine()){
@@ -101,5 +101,5 @@ public class GameBoard {
 		GameBoard g = new GameBoard();
 		g.initBoard(3,3);
 		g.systemPrint();
-	}*/
+	}
 }
