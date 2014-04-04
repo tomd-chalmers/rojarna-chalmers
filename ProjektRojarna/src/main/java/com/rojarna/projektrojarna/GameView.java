@@ -6,11 +6,14 @@
 
 package com.rojarna.projektrojarna;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author Tobias
  */
-public class GameView extends javax.swing.JFrame {
+public class GameView extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form GameView
@@ -81,4 +84,8 @@ public class GameView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    public void update(Observable o, Object arg) {
+        ;
+    }
 }
