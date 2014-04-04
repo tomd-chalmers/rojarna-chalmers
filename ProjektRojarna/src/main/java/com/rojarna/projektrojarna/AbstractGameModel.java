@@ -6,9 +6,14 @@
 
 package com.rojarna.projektrojarna;
 
+import java.util.Observable;
+
 /**
  *
  * @author Tobias
  */
-public abstract class AbstractGameModel{
+public abstract class AbstractGameModel extends Observable{
+    
+    
+    public abstract void newGame(int mines, int width, int heigth);
 }
