@@ -94,10 +94,6 @@ public class GameBoard {
 		return tmp;
 	}
         
-        public void markSquare(int x, int y){
-                board[y][x].markSquare();
-        }
-        
         public void chooseSquare(int x, int y){
             if(getSquareMarking(x,y) != Marking.FLAG){
                 if(getSquareItem(x,y) == Item.MINE){
@@ -114,29 +110,10 @@ public class GameBoard {
                         board[y][x].setVisible(true);
                 }
             }
-       }
-        
-        public Item getSquareItem(int x, int y){
-            return board[y][x].getItem();
-        }
-        public int getWidth(){
-            return width;
         }
         
-        public int getHeight(){
-            return height;
-        }
-        
-        public Square getSquare(int i, int j){
-            return board[j][i];
-        }
-        
-        public Marking getSquareMarking(int x, int y){
-            return board[y][x].getMarking();
-        }
-        
-        public int getMines(){
-            return mines;
+        public void markSquare(int x, int y){
+            board[y][x].markSquare();
         }
         
         public boolean isAllNumberShown(){
@@ -148,6 +125,30 @@ public class GameBoard {
                 }
             }
             return true;
+        }
+
+        public Marking getSquareMarking(int x, int y){
+            return board[y][x].getMarking();
+        }
+        
+        public Item getSquareItem(int x, int y){
+            return board[y][x].getItem();
+        }
+        
+        public int getWidth(){
+            return width;
+        }
+        
+        public int getHeight(){
+            return height;
+        }
+        
+        public int getMines(){
+            return mines;
+        }
+        
+        public Square getSquare(int i, int j){
+            return board[j][i];
         }
         
 	
@@ -183,7 +184,7 @@ public class GameBoard {
                     g.chooseSquare(sc.nextInt(),sc.nextInt());
                     g.systemPrint();
                     if(g.isAllNumberShown()){
-                        System.out.print("Victory");
+                        System.out.println("Victory");
                     }
                     
                 }
