@@ -115,6 +115,17 @@ public class GameBoard {
         public Item getSquareItem(int x, int y){
             return board[y][x].getItem();
         }
+        public int getWidth(){
+            return width;
+        }
+        
+        public int getHeight(){
+            return height;
+        }
+        
+        public Square getSquare(int i, int j){
+            return board[j][i];
+        }
         
 	
         public void systemPrint(){

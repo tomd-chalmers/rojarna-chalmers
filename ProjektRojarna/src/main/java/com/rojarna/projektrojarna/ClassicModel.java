@@ -6,15 +6,23 @@
 
 package com.rojarna.projektrojarna;
 
+import com.rojarna.projektrojarna.Square.Item;
+
 /**
  *
  * @author Tobias
+ * @revised Oskar
  */
 public class ClassicModel extends AbstractGameModel{
     
     private GameBoard gameBoard;
     
     private boolean boardClicked = false;
+    
+    public enum Visibility{
+        EMPTY,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,
+        SQUARE,FLAG,UNKNOWN,MINE
+    }
     
     public ClassicModel(){
         newGame(10,8,8);
@@ -50,6 +58,52 @@ public class ClassicModel extends AbstractGameModel{
         
         gameBoard = new GameBoard(mines, width, heigth);
         boardClicked = false;
+    }
+    
+    public Visibility[][] getBoard(){
+        Visibility[][] tmp = new Visibility[gameBoard.getHeight()][gameBoard.getWidth()];
+            for(int i = 0; i<gameBoard.getWidth(); i++){
+                for(int j = 0; j<gameBoard.getHeight(); j++){
+                    tmp[j][i]= getVisibility(gameBoard.getSquare(i,j));
+                }
+            }
+        return tmp;
+    }
+    private Visibility getVisibility(Square s){
+        if(s.isVisible()){
+            if(s.getItem().equals(Item.MINE)){
+                return Visibility.MINE;
+            }else{
+                switch(s.getValue()){
+                    case 1:
+                        return Visibility.ONE;
+                    case 2:
+                        return Visibility.TWO;
+                    case 3:
+                        return Visibility.THREE;
+                    case 4:
+                        return Visibility.FOUR;
+                    case 5:
+                        return Visibility.FIVE;
+                    case 6:
+                        return Visibility.SIX;
+                    case 7:
+                        return Visibility.SEVEN;
+                    case 8:
+                        return Visibility.EIGHT;
+                }
+            }
+        }else{
+            switch(s.getMarking()){
+                case NONE:
+                    return Visibility.SQUARE;
+                case FLAG:
+                    return Visibility.FLAG;
+                case QUESTION:
+                    return Visibility.UNKNOWN;
+            }
+        }
+        return Visibility.UNKNOWN;
     }
     
 }
