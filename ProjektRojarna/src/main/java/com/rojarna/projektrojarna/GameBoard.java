@@ -11,6 +11,8 @@ import java.util.List;
 import java.awt.Point;
 
 import com.rojarna.projektrojarna.Square.Item;
+import com.rojarna.projektrojarna.Square.Marking;
+
 import java.util.Scanner;
 
 
@@ -97,20 +99,22 @@ public class GameBoard {
         }
         
         public void chooseSquare(int x, int y){
-            if(board[y][x].getItem() == Item.MINE){
-                    board[y][x].setVisible(true);
-                    System.out.println("Mina");
-            } else if(board[y][x].getItem() == Item.NUMBER && board[y][x].getValue() == 0){
-                    board[y][x].setVisible(true);
-                    for(Point p:getBorder(x,y)){
-                        if(!board[p.y][p.x].isVisible()){
-                            chooseSquare(p.x,p.y);
-                         }   
-                    }
-            } else {
-                    board[y][x].setVisible(true);
+            if(getSquareMarking(x,y) != Marking.FLAG){
+                if(getSquareItem(x,y) == Item.MINE){
+                        board[y][x].setVisible(true);
+                        System.out.print("Mina");
+                } else if(getSquareItem(x,y) == Item.NUMBER && board[y][x].getValue() == 0){
+                        board[y][x].setVisible(true);
+                        for(Point p:getBorder(x,y)){
+                            if(!board[p.y][p.x].isVisible()){
+                                chooseSquare(p.x,p.y);
+                            }   
+                        }
+                } else {
+                        board[y][x].setVisible(true);
+                }
             }
-        }
+       }
         
         public Item getSquareItem(int x, int y){
             return board[y][x].getItem();
@@ -125,6 +129,25 @@ public class GameBoard {
         
         public Square getSquare(int i, int j){
             return board[j][i];
+        }
+        
+        public Marking getSquareMarking(int x, int y){
+            return board[y][x].getMarking();
+        }
+        
+        public int getMines(){
+            return mines;
+        }
+        
+        public boolean isAllNumberShown(){
+            for(int i = 0; i<height; i++){
+		for(int j = 0; j<width; j++){
+                    if(getSquareItem(j,i) == Item.NUMBER && !board[i][j].isVisible()){
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
         
 	
@@ -159,6 +182,9 @@ public class GameBoard {
                 while(true){
                     g.chooseSquare(sc.nextInt(),sc.nextInt());
                     g.systemPrint();
+                    if(g.isAllNumberShown()){
+                        System.out.print("Victory");
+                    }
                     
                 }
 	}
