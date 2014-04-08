@@ -15,7 +15,7 @@ import com.rojarna.projektrojarna.Square.Item;
  */
 public class ClassicModel extends AbstractGameModel{
     
-    private GameBoard gameBoard;
+    private GameBoard gameBoard = null;
     
     private boolean boardClicked = false;
     
@@ -36,6 +36,14 @@ public class ClassicModel extends AbstractGameModel{
         if(xPos < 0 || yPos < 0)
             throw new IllegalArgumentException();
         
+        
+        
+        // eller:
+        
+        gameBoard.chooseSquare(xPos, yPos);
+        
+        /*
+        
         if(!boardClicked){
             gameBoard.initBoard(xPos, yPos);
             boardClicked = true;
@@ -43,11 +51,23 @@ public class ClassicModel extends AbstractGameModel{
         gameBoard.chooseSquare(xPos, yPos);
         
         if(gameBoard.getSquareItem(xPos, yPos) == Square.Item.MINE){
-            GameOver();
+            gameOver();
         }
+        */
     }
     
-    private void GameOver(){
+    public void markSquare(int xPos, int yPos){
+        if(xPos < 0 || yPos < 0)
+            throw new IllegalArgumentException();
+        
+        
+        
+        // eller:
+        
+        gameBoard.markSquare(xPos, yPos);
+    }
+    
+    public void gameOver(){
         ;
     }
 
@@ -60,7 +80,7 @@ public class ClassicModel extends AbstractGameModel{
         boardClicked = false;
     }
     
-    public Visibility[][] getBoard(){
+    public Visibility[][] getBoardVisibility(){
         Visibility[][] tmp = new Visibility[gameBoard.getHeight()][gameBoard.getWidth()];
             for(int i = 0; i<gameBoard.getWidth(); i++){
                 for(int j = 0; j<gameBoard.getHeight(); j++){
