@@ -16,6 +16,7 @@ import com.rojarna.projektrojarna.Square.Item;
 public class ClassicModel extends AbstractGameModel{
     
     private GameBoard gameBoard = null;
+    private GameTimer gameTimer = null;
     
     private boolean boardClicked = false;
     
@@ -77,6 +78,8 @@ public class ClassicModel extends AbstractGameModel{
             throw new IllegalArgumentException();
         
         gameBoard = new GameBoard(mines, width, heigth);
+        gameTimer = new GameTimer();
+        
         boardClicked = false;
     }
     

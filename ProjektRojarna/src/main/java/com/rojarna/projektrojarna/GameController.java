@@ -14,6 +14,13 @@ import java.util.Observer;
  * @author Tobias
  */
 public class GameController implements Observer{
+    
+    private AbstractGameModel gameModel = null;
+    
+    public GameController(AbstractGameModel model, GameView view){
+        gameModel = model;
+    }
+    
 
     public void update(Observable o, Object arg) {
         ;
