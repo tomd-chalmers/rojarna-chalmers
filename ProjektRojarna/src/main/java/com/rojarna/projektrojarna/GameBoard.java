@@ -28,7 +28,7 @@ public class GameBoard {
 	
 	private Square[][] board;
 	private int mines,width,height;
-        private boolean firstClick = true;
+        private boolean boardClicked = false;
         
     
 	public GameBoard(){
@@ -96,9 +96,9 @@ public class GameBoard {
 	}
         
         public void chooseSquare(int x, int y){
-            if(firstClick){
+            if(!boardClicked){
                 initBoard(x,y);
-                firstClick = false;
+                boardClicked = true;
             }
             if(getSquareMarking(x,y) != Marking.FLAG){
                 board[y][x].setVisible(true);
@@ -130,12 +130,18 @@ public class GameBoard {
         }
         
         public void reset(){
+            boardClicked = false;
+            
             for(int i = 0; i<height; i++){
 		for(int j = 0; j<width; j++){
                     board[i][j].setVisible(false);
                     board[i][j].setMarking(Marking.NONE);
                 }
             }
+        }
+        
+        public boolean isClicked(){
+            return boardClicked;
         }
         
         public void showSquare(int x, int y, boolean visible){

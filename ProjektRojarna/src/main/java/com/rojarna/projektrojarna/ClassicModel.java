@@ -37,33 +37,16 @@ public class ClassicModel extends AbstractGameModel{
         if(xPos < 0 || yPos < 0)
             throw new IllegalArgumentException();
         
-        
-        
-        // eller:
+        if(!gameBoard.isClicked()){
+            gameTimer = new GameTimer();
+        }
         
         gameBoard.chooseSquare(xPos, yPos);
-        
-        /*
-        
-        if(!boardClicked){
-            gameBoard.initBoard(xPos, yPos);
-            boardClicked = true;
-        }
-        gameBoard.chooseSquare(xPos, yPos);
-        
-        if(gameBoard.getSquareItem(xPos, yPos) == Square.Item.MINE){
-            gameOver();
-        }
-        */
     }
     
     public void markSquare(int xPos, int yPos){
         if(xPos < 0 || yPos < 0)
             throw new IllegalArgumentException();
-        
-        
-        
-        // eller:
         
         gameBoard.markSquare(xPos, yPos);
     }
@@ -78,9 +61,11 @@ public class ClassicModel extends AbstractGameModel{
             throw new IllegalArgumentException();
         
         gameBoard = new GameBoard(mines, width, heigth);
-        gameTimer = new GameTimer();
-        
-        boardClicked = false;
+    }
+    
+    public void restartGame(){
+        gameBoard.reset();
+        //gameTimer.stop();
     }
     
     public Visibility[][] getBoardVisibility(){
