@@ -28,6 +28,7 @@ public class GameBoard {
 	
 	private Square[][] board;
 	private int mines,width,height;
+        private boolean firstClick = true;
         
     
 	public GameBoard(){
@@ -45,7 +46,7 @@ public class GameBoard {
                 this.width = width;
 	}
 	
-	public void initBoard(int x,int y){
+	private void initBoard(int x,int y){
 		List<Point> tmp = getBorder(x,y);
 		for(int i=0; i<mines; i++){
 			int randX;
@@ -95,19 +96,20 @@ public class GameBoard {
 	}
         
         public void chooseSquare(int x, int y){
+            if(firstClick){
+                initBoard(x,y);
+                firstClick = false;
+            }
             if(getSquareMarking(x,y) != Marking.FLAG){
+                board[y][x].setVisible(true);
                 if(getSquareItem(x,y) == Item.MINE){
-                        board[y][x].setVisible(true);
-                        System.out.print("Mina");
+                    System.out.print("Mina");
                 } else if(getSquareItem(x,y) == Item.NUMBER && board[y][x].getValue() == 0){
-                        board[y][x].setVisible(true);
-                        for(Point p:getBorder(x,y)){
-                            if(!board[p.y][p.x].isVisible()){
-                                chooseSquare(p.x,p.y);
-                            }   
-                        }
-                } else {
-                        board[y][x].setVisible(true);
+                    for(Point p:getBorder(x,y)){
+                        if(!board[p.y][p.x].isVisible()){
+                            chooseSquare(p.x,p.y);
+                        }   
+                    }
                 }
             }
         }
@@ -125,6 +127,19 @@ public class GameBoard {
                 }
             }
             return true;
+        }
+        
+        public void reset(){
+            for(int i = 0; i<height; i++){
+		for(int j = 0; j<width; j++){
+                    board[i][j].setVisible(false);
+                    board[i][j].setMarking(Marking.NONE);
+                }
+            }
+        }
+        
+        public void showSquare(int x, int y, boolean visible){
+            board[y][x].setVisible(visible);
         }
 
         public Marking getSquareMarking(int x, int y){
