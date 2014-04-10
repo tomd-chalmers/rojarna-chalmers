@@ -15,42 +15,40 @@ import javax.swing.Timer;
  * @author Tobias
  * @revised Tom
  * @revised Tobias
+ * @revised (redone) Tom
  */
 public class GameTimer {
     
-    private boolean isRunning=false;
-    private boolean dec = false;
-    private int time = 0;
+    private final int startValue;
+    private boolean dec;
+    private int time;
     private static int SEC = 1000;
     
     private final Timer timer = new Timer(SEC, new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if(isRunning){
-                    if(dec){
-                        time--;
-                        // fire property change or something, for a view.
-                    }else{
-                        time++;
-                        // fire property change or something, for a view.
-                    }
-                }else{
-                    // do nothing...
-                }
+        public void actionPerformed(ActionEvent e) {
+            if(dec){
+                time--;
+                // fire property change or something, for a view.
+            }else{
+                time++;
+                // fire property change or something, for a view.
             }
-        });
+        }
+    });
     
         
     public GameTimer(){
-        isRunning = true;
-        timer.start();  //use method to start?
+        startValue = 0;
+        dec = false;
+        time = 0;
+        
     }
     
     public GameTimer(int time){
         this.time=time;
-        isRunning = true;
         dec = true;
-        timer.start(); //use method to start?
+        startValue = time;
     }
     
     
@@ -78,11 +76,8 @@ public class GameTimer {
         return min+":"+sec;
     }
     
-    public void pause(){
-        isRunning=false;
-    }
-    public void unPause(){
-        isRunning=true;
+    public void stop(){
+        this.timer.stop();
     }
     
     public boolean afford(int a){
@@ -102,8 +97,13 @@ public class GameTimer {
         this.time=time+a;
     }
     
-    
-    public void Start(){  // needed? or start in construktor.
+    public void start(){
         timer.start();
+    }
+    
+    // resets the timer, also stops the timer.
+    public void reset(){
+        timer.stop();
+        time=startValue;
     }
 }
