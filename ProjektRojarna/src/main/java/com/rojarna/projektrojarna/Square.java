@@ -63,6 +63,10 @@ public class Square {
             this.visible=visible;
     }
     
+    public void setMarking(Marking mark){
+        this.mark = mark;
+    }
+    
     public void markSquare(){
         if(!visible){
             if(mark == Marking.NONE){

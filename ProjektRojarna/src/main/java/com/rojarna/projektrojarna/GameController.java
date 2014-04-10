@@ -6,10 +6,24 @@
 
 package com.rojarna.projektrojarna;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author Tobias
  */
-public class GameController {
+public class GameController implements Observer{
+    
+    private AbstractGameModel gameModel = null;
+    
+    public GameController(AbstractGameModel model, GameView view){
+        gameModel = model;
+    }
+    
+
+    public void update(Observable o, Object arg) {
+        ;
+    }
     
 }

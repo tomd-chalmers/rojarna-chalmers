@@ -16,4 +16,5 @@ public abstract class AbstractGameModel extends Observable{
     
     
     public abstract void newGame(int mines, int width, int heigth);
+    public abstract void gameOver();
 }

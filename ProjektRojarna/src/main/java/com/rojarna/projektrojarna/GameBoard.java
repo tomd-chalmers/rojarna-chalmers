@@ -28,6 +28,7 @@ public class GameBoard {
 	
 	private Square[][] board;
 	private int mines,width,height;
+        private boolean boardClicked = false;
         
     
 	public GameBoard(){
@@ -45,7 +46,7 @@ public class GameBoard {
                 this.width = width;
 	}
 	
-	public void initBoard(int x,int y){
+	private void initBoard(int x,int y){
 		List<Point> tmp = getBorder(x,y);
 		for(int i=0; i<mines; i++){
 			int randX;
@@ -95,19 +96,20 @@ public class GameBoard {
 	}
         
         public void chooseSquare(int x, int y){
+            if(!boardClicked){
+                initBoard(x,y);
+                boardClicked = true;
+            }
             if(getSquareMarking(x,y) != Marking.FLAG){
+                board[y][x].setVisible(true);
                 if(getSquareItem(x,y) == Item.MINE){
-                        board[y][x].setVisible(true);
-                        System.out.print("Mina");
+                    System.out.print("Mina");
                 } else if(getSquareItem(x,y) == Item.NUMBER && board[y][x].getValue() == 0){
-                        board[y][x].setVisible(true);
-                        for(Point p:getBorder(x,y)){
-                            if(!board[p.y][p.x].isVisible()){
-                                chooseSquare(p.x,p.y);
-                            }   
-                        }
-                } else {
-                        board[y][x].setVisible(true);
+                    for(Point p:getBorder(x,y)){
+                        if(!board[p.y][p.x].isVisible()){
+                            chooseSquare(p.x,p.y);
+                        }   
+                    }
                 }
             }
         }
@@ -125,6 +127,25 @@ public class GameBoard {
                 }
             }
             return true;
+        }
+        
+        public void reset(){
+            boardClicked = false;
+            
+            for(int i = 0; i<height; i++){
+		for(int j = 0; j<width; j++){
+                    board[i][j].setVisible(false);
+                    board[i][j].setMarking(Marking.NONE);
+                }
+            }
+        }
+        
+        public boolean isClicked(){
+            return boardClicked;
+        }
+        
+        public void showSquare(int x, int y, boolean visible){
+            board[y][x].setVisible(visible);
         }
 
         public Marking getSquareMarking(int x, int y){
@@ -156,12 +177,16 @@ public class GameBoard {
             System.out.println();
 		for(int i=0;i<board.length;i++){
 			for(int j=0;j<board[i].length;j++){
-				if(board[i][j].isVisible()){
+                                if(board[i][j].isVisible()){
                                         if(board[i][j].isMine()){
                                                 System.out.print("[*]");
                                         }else{
                                                 System.out.print("["+board[i][j].getValue()+"]");
                                         }
+                                }else if(board[i][j].getMarking() == Marking.FLAG){
+                                    System.out.print("[F]");
+                                }else if(board[i][j].getMarking() == Marking.QUESTION){
+                                    System.out.print("[?]");
                                 } else {
                                     System.out.print("[ ]");
                                 }
@@ -173,20 +198,18 @@ public class GameBoard {
 	public static void main(String[]args){
 		GameBoard g = new GameBoard();
                 Scanner sc = new Scanner(System.in);
-                int x,y;
-                x = sc.nextInt();
-                y = sc.nextInt();
-                g.initBoard(x, y);
-                g.chooseSquare(x, y);
                 g.systemPrint();
                 
                 while(true){
-                    g.chooseSquare(sc.nextInt(),sc.nextInt());
+                    if(sc.next().equals("F")){
+                        g.markSquare(sc.nextInt(), sc.nextInt());
+                    } else {
+                        g.chooseSquare(sc.nextInt(),sc.nextInt());
+                    }
                     g.systemPrint();
                     if(g.isAllNumberShown()){
                         System.out.println("Victory");
                     }
-                    
                 }
 	}
 }
