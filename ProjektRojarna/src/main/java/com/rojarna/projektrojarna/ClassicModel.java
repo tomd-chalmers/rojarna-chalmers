@@ -20,8 +20,20 @@ public class ClassicModel extends AbstractGameModel{
     private boolean boardClicked = false;
     
     public enum Visibility{
-        EMPTY,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,
-        SQUARE,FLAG,UNKNOWN,MINE
+    	
+    	EMPTY(true),ONE(true),TWO(true),THREE(true),FOUR(true),
+        FIVE(true),SIX(true),SEVEN(true),EIGHT(true),
+        SQUARE(false),FLAG(false),UNKNOWN(false),MINE(true);
+    	
+    	private final boolean showContent;
+    	
+    	private Visibility(boolean v){
+    		showContent=v;
+    	}
+        
+        public boolean showsContent(){
+        	return showContent;
+        }
     }
     
     public ClassicModel(){
