@@ -6,39 +6,94 @@
 
 package com.rojarna.projektrojarna;
 
-import javax.swing.SwingUtilities;
-
+import java.awt.CardLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
- * @author Tom
+ * @author Oskar
  */
-public class SquareView extends javax.swing.JPanel{
+public class SquareView extends javax.swing.JPanel {
+    
+    private GameBoard board;
     private int x;
     private int y;
-    
+
     /**
      * Creates new form SquareView
      */
-    public SquareView(int x, int y) {
+    public SquareView(GameBoard board, int x, int y) {
+        this.board=board;
+        this.x=x;
+        this.y=y;
         initComponents();
+        contentCard.add(contentLabel);
+        setContent(board.getSquare(x,y));
+        
     }
     
-    public void setMark(String s){ // TODO the input chould late be an Icon
-        Button.setText(s);
+    private void setContent(Square s){
+        if(s.getItem()==Square.Item.MINE){
+            contentLabel.setIcon(new ImageIcon(""));
+        }else{
+            switch(s.getValue()){
+                case 0:
+                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-0.png"));
+                    break;
+                case 1:
+                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-1.png"));
+                    break;
+                case 2:
+                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-2.png"));
+                    break;
+                case 3:
+                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-3.png"));
+                    break;
+                case 4:
+                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-4.png"));
+                    break;
+                case 5:
+                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-5.png"));
+                    break;
+                case 6:
+                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-6.png"));
+                    break;
+                case 7:
+                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-7.png"));
+                    break;
+                case 8:
+                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-8.png"));
+                    break;
+            }
+        }
     }
     
-    public void Pressed(String s){ // TODO also an Icon
-        Button.setEnabled(false);
-        Button.setText(s);
+    private void setButtonIcon(Square.Marking m){
+        switch(m){
+            case NONE:
+                button.setIcon(new ImageIcon(""));
+                break;
+            case FLAG:
+                button.setIcon(new ImageIcon(""));
+                break;
+            case QUESTION:
+                button.setIcon(new ImageIcon(""));
+                break;
+        }
     }
     
-    public int getBoardX(){
-        return x;
+    public void update(){
+        if(board.getSquare(x,y).isVisible()){
+            CardLayout c = (CardLayout)(this.getLayout());
+            c.show(this,"content");
+        }else{
+            CardLayout c = (CardLayout)(this.getLayout());
+            c.show(this,"button");
+            setButtonIcon(board.getSquare(x,y).getMarking());
+        }
     }
-    public int getBoardY(){
-        return y;
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,52 +103,43 @@ public class SquareView extends javax.swing.JPanel{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Button = new javax.swing.JButton();
+        contentCard = new javax.swing.JPanel();
+        buttonCard = new javax.swing.JPanel();
+        button = new javax.swing.JButton();
 
-        setMaximumSize(new java.awt.Dimension(20, 20));
-        setMinimumSize(new java.awt.Dimension(20, 20));
-        setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(20, 20));
+        setLayout(new java.awt.CardLayout());
 
-        Button.setText("jButton1");
-        Button.setMaximumSize(new java.awt.Dimension(20, 20));
-        Button.setMinimumSize(new java.awt.Dimension(20, 20));
-        Button.setPreferredSize(new java.awt.Dimension(20, 20));
-        Button.setSelected(true);
-        Button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ButtonMouseClicked(evt);
+        contentCard.setLayout(new java.awt.GridLayout(1, 1));
+        add(contentCard, "content");
+
+        buttonCard.setLayout(new java.awt.GridLayout(1, 1));
+
+        button.setMaximumSize(new java.awt.Dimension(40, 40));
+        button.setMinimumSize(new java.awt.Dimension(40, 40));
+        button.setPreferredSize(new java.awt.Dimension(40, 40));
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                buttonMousePressed(evt);
             }
         });
+        buttonCard.add(button);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        add(buttonCard, "button");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonMouseClicked
-        if(SwingUtilities.isLeftMouseButton(evt)){
-            //send
-        }else if(SwingUtilities.isRightMouseButton(evt)){
-            //send
+    private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
+        if (evt.getButton()==evt.BUTTON1){ //Vänsterklick
+            board.chooseSquare(x,y);
+        }else if(evt.getButton()==evt.BUTTON2){ //Högerklick
+            board.markSquare(x,y);
         }
-        else{
-            // do nothing.
-        }
-    }//GEN-LAST:event_ButtonMouseClicked
-                                
+    }//GEN-LAST:event_buttonMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Button;
+    private javax.swing.JButton button;
+    private javax.swing.JPanel buttonCard;
+    private javax.swing.JPanel contentCard;
     // End of variables declaration//GEN-END:variables
-
+    private JLabel contentLabel;
 }
