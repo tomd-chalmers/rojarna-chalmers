@@ -7,6 +7,8 @@
 package com.rojarna.projektrojarna;
 
 import java.awt.GridLayout;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
@@ -16,8 +18,19 @@ public class GameBoardView extends javax.swing.JPanel {
     /**
      * Creates new form GameBoardView
      */
-    public GameBoardView() {
+    
+    private ClassicModel model;
+    
+    public GameBoardView(ClassicModel model) {
         initComponents();
+        this.model = model;
+        setLayout(new java.awt.GridLayout(model.getWidth(),model.getHeight()));
+        for(int x=0;x<model.getWidth();x++){
+            for(int y=0;y<model.getHeight();y++){
+                SquareView s = new SquareView(model,x,y);
+                this.add(s);
+            }
+        }
     }
 
     /**

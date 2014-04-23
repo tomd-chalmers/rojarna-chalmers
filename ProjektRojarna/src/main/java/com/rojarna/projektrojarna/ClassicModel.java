@@ -126,4 +126,15 @@ public class ClassicModel extends AbstractGameModel{
         return Visibility.UNKNOWN;
     }
     
+    public Square getSquare(int x, int y){
+        return gameBoard.getSquare(x, y);
+    }
+    
+    public int getWidth(){
+        return gameBoard.getWidth();
+    }
+    
+    public int getHeight(){
+        return gameBoard.getHeight();
+    }
 }

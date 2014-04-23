@@ -7,6 +7,8 @@
 package com.rojarna.projektrojarna;
 
 import java.awt.CardLayout;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -14,23 +16,22 @@ import javax.swing.JLabel;
  *
  * @author Oskar
  */
-public class SquareView extends javax.swing.JPanel {
+public class SquareView extends javax.swing.JPanel implements Observer{
     
-    private GameBoard board;
+    private ClassicModel model;
     private int x;
     private int y;
+    private boolean setBoard = false;
 
     /**
      * Creates new form SquareView
      */
-    public SquareView(GameBoard board, int x, int y) {
-        this.board=board;
+    public SquareView(ClassicModel model, int x, int y) {
+        this.model=model;
         this.x=x;
         this.y=y;
         initComponents();
-        contentCard.add(contentLabel);
-        setContent(board.getSquare(x,y));
-        
+        contentCard.add(contentLabel);        
     }
     
     private void setContent(Square s){
@@ -82,17 +83,6 @@ public class SquareView extends javax.swing.JPanel {
                 break;
         }
     }
-    
-    public void update(){
-        if(board.getSquare(x,y).isVisible()){
-            CardLayout c = (CardLayout)(this.getLayout());
-            c.show(this,"content");
-        }else{
-            CardLayout c = (CardLayout)(this.getLayout());
-            c.show(this,"button");
-            setButtonIcon(board.getSquare(x,y).getMarking());
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,9 +119,9 @@ public class SquareView extends javax.swing.JPanel {
 
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
         if (evt.getButton()==evt.BUTTON1){ //Vänsterklick
-            board.chooseSquare(x,y);
+            model.chooseSquare(x,y);
         }else if(evt.getButton()==evt.BUTTON2){ //Högerklick
-            board.markSquare(x,y);
+            model.markSquare(x,y);
         }
     }//GEN-LAST:event_buttonMousePressed
 
@@ -142,4 +132,16 @@ public class SquareView extends javax.swing.JPanel {
     private javax.swing.JPanel contentCard;
     // End of variables declaration//GEN-END:variables
     private JLabel contentLabel;
+
+    public void update(Observable o, Object arg) {
+        if(model.getSquare(x,y).isVisible()){
+            setContent(model.getSquare(x,y));
+            CardLayout c = (CardLayout)(this.getLayout());
+            c.show(this,"content");
+        }else{
+            CardLayout c = (CardLayout)(this.getLayout());
+            c.show(this,"button");
+            setButtonIcon(model.getSquare(x,y).getMarking());
+        }
+    }
 }
