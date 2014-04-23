@@ -6,6 +6,7 @@
 
 package com.rojarna.projektrojarna;
 
+import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,12 +15,20 @@ import java.util.Observer;
  * @author Tobias
  */
 public class GameView extends javax.swing.JFrame implements Observer{
+    
+    private AbstractGameModel gameModel;
 
     /**
      * Creates new form GameView
      */
     public GameView() {
         initComponents();
+    }
+    
+    public void setModel(AbstractGameModel model){
+        gameModel = model;
+        
+        repaint();
     }
 
     /**
@@ -84,7 +93,7 @@ public class GameView extends javax.swing.JFrame implements Observer{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
+    
     public void update(Observable o, Object arg) {
         ;
     }

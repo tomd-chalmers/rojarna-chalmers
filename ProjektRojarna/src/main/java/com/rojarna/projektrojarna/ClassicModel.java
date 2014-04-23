@@ -15,10 +15,7 @@ import com.rojarna.projektrojarna.Square.Item;
  */
 public class ClassicModel extends AbstractGameModel{
     
-    private GameBoard gameBoard = null;
     private GameTimer gameTimer = null;
-    
-    private boolean boardClicked = false;
     
     public enum Visibility{
     	
@@ -49,18 +46,28 @@ public class ClassicModel extends AbstractGameModel{
         if(xPos < 0 || yPos < 0)
             throw new IllegalArgumentException();
         
-        if(!gameBoard.isClicked()){
+        if(!getBoard().isClicked()){
             gameTimer = new GameTimer();
         }
         
-        gameBoard.chooseSquare(xPos, yPos);
+        getBoard().chooseSquare(xPos, yPos);
+        
+        //vet inte riktigt hur vi ska göra här
+        this.notifyObservers();
+        //this.notifyObservers(gameBoard);
+        //this.notifyObservers(gameBoard.copy());
     }
     
     public void markSquare(int xPos, int yPos){
         if(xPos < 0 || yPos < 0)
             throw new IllegalArgumentException();
         
-        gameBoard.markSquare(xPos, yPos);
+        getBoard().markSquare(xPos, yPos);
+        
+        //vet inte riktigt hur vi ska göra här
+        this.notifyObservers();
+        //this.notifyObservers(gameBoard);
+        //this.notifyObservers(gameBoard.copy());
     }
     
     public void gameOver(){
@@ -72,19 +79,29 @@ public class ClassicModel extends AbstractGameModel{
         if(mines < 0 || width < 0 || heigth < 0)
             throw new IllegalArgumentException();
         
-        gameBoard = new GameBoard(mines, width, heigth);
+        setBoard(new GameBoard(mines, width, heigth));
+        
+        //vet inte riktigt hur vi ska göra här
+        this.notifyObservers();
+        //this.notifyObservers(gameBoard);
+        //this.notifyObservers(gameBoard.copy());
     }
     
     public void restartGame(){
-        gameBoard.reset();
-        //gameTimer.stop();
+        getBoard().reset();
+        gameTimer.stop();
+        
+        //vet inte riktigt hur vi ska göra här
+        this.notifyObservers();
+        //this.notifyObservers(gameBoard);
+        //this.notifyObservers(gameBoard.copy());
     }
     
     public Visibility[][] getBoardVisibility(){
-        Visibility[][] tmp = new Visibility[gameBoard.getHeight()][gameBoard.getWidth()];
-            for(int i = 0; i<gameBoard.getWidth(); i++){
-                for(int j = 0; j<gameBoard.getHeight(); j++){
-                    tmp[j][i]= getVisibility(gameBoard.getSquare(i,j));
+        Visibility[][] tmp = new Visibility[getBoard().getHeight()][getBoard().getWidth()];
+            for(int i = 0; i<getBoard().getWidth(); i++){
+                for(int j = 0; j<getBoard().getHeight(); j++){
+                    tmp[j][i]= getVisibility(getBoard().getSquare(i,j));
                 }
             }
         return tmp;
@@ -127,14 +144,6 @@ public class ClassicModel extends AbstractGameModel{
     }
     
     public Square getSquare(int x, int y){
-        return gameBoard.getSquare(x, y);
-    }
-    
-    public int getWidth(){
-        return gameBoard.getWidth();
-    }
-    
-    public int getHeight(){
-        return gameBoard.getHeight();
+        return getBoard().getSquare(x, y);
     }
 }

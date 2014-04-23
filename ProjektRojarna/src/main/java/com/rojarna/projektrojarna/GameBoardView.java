@@ -19,12 +19,15 @@ public class GameBoardView extends javax.swing.JPanel {
      * Creates new form GameBoardView
      */
     
-    private ClassicModel model;
+    private AbstractGameModel model;
     
-    public GameBoardView(ClassicModel model) {
+    public GameBoardView(AbstractGameModel model) {
         initComponents();
+        
         this.model = model;
+        
         setLayout(new java.awt.GridLayout(model.getWidth(),model.getHeight()));
+        
         for(int x=0;x<model.getWidth();x++){
             for(int y=0;y<model.getHeight();y++){
                 SquareView s = new SquareView(model,x,y);

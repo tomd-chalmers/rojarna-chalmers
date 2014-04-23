@@ -16,9 +16,13 @@ import java.util.Observer;
 public class GameController implements Observer{
     
     private AbstractGameModel gameModel = null;
+    private GameView gameView = null;
     
     public GameController(AbstractGameModel model, GameView view){
         gameModel = model;
+        model.addObserver(this);
+        gameView = view;
+        view.setModel(model);
     }
     
 

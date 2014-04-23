@@ -18,7 +18,7 @@ import javax.swing.JLabel;
  */
 public class SquareView extends javax.swing.JPanel implements Observer{
     
-    private ClassicModel model;
+    private AbstractGameModel model;
     private int x;
     private int y;
     private boolean setBoard = false;
@@ -26,11 +26,14 @@ public class SquareView extends javax.swing.JPanel implements Observer{
     /**
      * Creates new form SquareView
      */
-    public SquareView(ClassicModel model, int x, int y) {
+    public SquareView(AbstractGameModel model, int x, int y) {
         this.model=model;
+        
         this.x=x;
         this.y=y;
+        
         initComponents();
+        
         contentCard.add(contentLabel);        
     }
     

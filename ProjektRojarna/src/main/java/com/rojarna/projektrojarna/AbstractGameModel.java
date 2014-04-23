@@ -13,8 +13,28 @@ import java.util.Observable;
  * @author Tobias
  */
 public abstract class AbstractGameModel extends Observable{
-    
+    private GameBoard gameBoard;
     
     public abstract void newGame(int mines, int width, int heigth);
     public abstract void gameOver();
+    
+    public abstract void chooseSquare(int x, int y);
+    public abstract void markSquare(int x, int y);
+    public abstract Square getSquare(int x, int y);
+    
+    public GameBoard getBoard(){
+        return gameBoard;
+    }
+    
+    public void setBoard(GameBoard board){
+        gameBoard = board;
+    }
+    
+    public int getWidth(){
+        return getBoard().getWidth();
+    }
+    
+    public int getHeight(){
+        return getBoard().getHeight();
+    }
 }
