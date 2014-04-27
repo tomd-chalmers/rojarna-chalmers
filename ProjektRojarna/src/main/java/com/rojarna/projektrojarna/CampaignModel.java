@@ -11,8 +11,6 @@ package com.rojarna.projektrojarna;
  * @author Joakim
  */
 public class CampaignModel extends AbstractGameModel{
-
-    private GameBoard gameBoard = null;
     
     private int mines, width, height, life = 3;
     
@@ -24,7 +22,7 @@ public class CampaignModel extends AbstractGameModel{
         if(xPos < 0 || yPos < 0)
             throw new IllegalArgumentException();
         
-        gameBoard.chooseSquare(xPos, yPos);
+        getBoard().chooseSquare(xPos, yPos);
         isMine(xPos,yPos);
         
     }
@@ -43,9 +41,15 @@ public class CampaignModel extends AbstractGameModel{
         if(xPos < 0 || yPos < 0)
             throw new IllegalArgumentException();
         
-        gameBoard.markSquare(xPos, yPos);
+        getBoard().markSquare(xPos, yPos);
         
-    }
+     }
+     
+     public void isLvlComplete(){
+         if(getBoard().isAllNumberShown()){
+             nextLevel();
+         }
+     }
      
     public void nextLevel(){
         //newgame med någon trevlig formel som ökar mines, width o height
