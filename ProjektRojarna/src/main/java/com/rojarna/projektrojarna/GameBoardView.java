@@ -9,6 +9,7 @@ package com.rojarna.projektrojarna;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JButton;
 
 /**
  *
@@ -25,13 +26,12 @@ public class GameBoardView extends javax.swing.JPanel {
         initComponents();
         
         this.model = model;
-        
         setLayout(new java.awt.GridLayout(model.getWidth(),model.getHeight()));
         
         for(int x=0;x<model.getWidth();x++){
             for(int y=0;y<model.getHeight();y++){
                 SquareView s = new SquareView(model,x,y);
-                this.add(s);
+                add(s);
             }
         }
     }
@@ -44,8 +44,6 @@ public class GameBoardView extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        setLayout(new java.awt.GridLayout(20, 20));
     }// </editor-fold>//GEN-END:initComponents
 
 

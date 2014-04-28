@@ -43,6 +43,7 @@ public class ClassicModel extends AbstractGameModel{
     }
     
     public void chooseSquare(int xPos, int yPos){
+        
         if(xPos < 0 || yPos < 0)
             throw new IllegalArgumentException();
         
@@ -53,6 +54,7 @@ public class ClassicModel extends AbstractGameModel{
         getBoard().chooseSquare(xPos, yPos);
         
         //vet inte riktigt hur vi ska göra här
+        this.setChanged();
         this.notifyObservers();
         //this.notifyObservers(gameBoard);
         //this.notifyObservers(gameBoard.copy());
@@ -65,6 +67,7 @@ public class ClassicModel extends AbstractGameModel{
         getBoard().markSquare(xPos, yPos);
         
         //vet inte riktigt hur vi ska göra här
+        this.setChanged();
         this.notifyObservers();
         //this.notifyObservers(gameBoard);
         //this.notifyObservers(gameBoard.copy());

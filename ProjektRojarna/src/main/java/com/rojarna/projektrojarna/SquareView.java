@@ -27,23 +27,31 @@ public class SquareView extends javax.swing.JPanel implements Observer{
      * Creates new form SquareView
      */
     public SquareView(AbstractGameModel model, int x, int y) {
-        this.model=model;
         
+        this.model=model;
         this.x=x;
         this.y=y;
         
-        initComponents();
+        model.addObserver(this);
         
-        contentCard.add(contentLabel);        
+        initComponents();
+        contentLabel = new JLabel();
+        contentCard.add(contentLabel);
+        
+        CardLayout c = (CardLayout)(this.getLayout());
+        c.show(this,"button");
+
+        
     }
     
     private void setContent(Square s){
         if(s.getItem()==Square.Item.MINE){
             contentLabel.setIcon(new ImageIcon(""));
+            contentLabel.setText("*");
         }else{
             switch(s.getValue()){
                 case 0:
-                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-0.png"));
+                    //contentLabel.setIcon(new ImageIcon("src/resources/nbr-0.png"));
                     break;
                 case 1:
                     contentLabel.setIcon(new ImageIcon("src/resources/nbr-1.png"));
@@ -80,9 +88,11 @@ public class SquareView extends javax.swing.JPanel implements Observer{
                 break;
             case FLAG:
                 button.setIcon(new ImageIcon(""));
+                button.setText("F");
                 break;
             case QUESTION:
                 button.setIcon(new ImageIcon(""));
+                button.setText("?");
                 break;
         }
     }
@@ -102,6 +112,7 @@ public class SquareView extends javax.swing.JPanel implements Observer{
 
         setLayout(new java.awt.CardLayout());
 
+        contentCard.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         contentCard.setLayout(new java.awt.GridLayout(1, 1));
         add(contentCard, "content");
 
@@ -121,9 +132,9 @@ public class SquareView extends javax.swing.JPanel implements Observer{
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
-        if (evt.getButton()==evt.BUTTON1){ //Vänsterklick
+        if (evt.getButton()==1){ //Vänsterklick
             model.chooseSquare(x,y);
-        }else if(evt.getButton()==evt.BUTTON2){ //Högerklick
+        }else if(evt.getButton()==3){ //Högerklick
             model.markSquare(x,y);
         }
     }//GEN-LAST:event_buttonMousePressed
@@ -137,6 +148,7 @@ public class SquareView extends javax.swing.JPanel implements Observer{
     private JLabel contentLabel;
 
     public void update(Observable o, Object arg) {
+        System.out.println("Updated!");
         if(model.getSquare(x,y).isVisible()){
             setContent(model.getSquare(x,y));
             CardLayout c = (CardLayout)(this.getLayout());

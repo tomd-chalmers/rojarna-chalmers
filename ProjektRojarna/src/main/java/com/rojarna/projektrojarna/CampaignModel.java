@@ -28,7 +28,7 @@ public class CampaignModel extends AbstractGameModel{
     }
     
     public void isMine(int x, int y){
-        if(getSquare(x,y).getItem() == Item.MINE){
+        if(getSquare(x,y).getItem() == Square.Item.MINE){
             if(life > 0){
                 life -= 1;
             } else {
