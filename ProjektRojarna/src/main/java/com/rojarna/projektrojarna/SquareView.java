@@ -51,7 +51,7 @@ public class SquareView extends javax.swing.JPanel implements Observer{
         }else{
             switch(s.getValue()){
                 case 0:
-                    //contentLabel.setIcon(new ImageIcon("src/resources/nbr-0.png"));
+                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-0.png"));
                     break;
                 case 1:
                     contentLabel.setIcon(new ImageIcon("src/resources/nbr-1.png"));
@@ -85,6 +85,7 @@ public class SquareView extends javax.swing.JPanel implements Observer{
         switch(m){
             case NONE:
                 button.setIcon(new ImageIcon(""));
+                button.setText("");
                 break;
             case FLAG:
                 button.setIcon(new ImageIcon(""));
@@ -113,7 +114,7 @@ public class SquareView extends javax.swing.JPanel implements Observer{
         setLayout(new java.awt.CardLayout());
 
         contentCard.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        contentCard.setLayout(new java.awt.GridLayout(1, 1));
+        contentCard.setLayout(new java.awt.GridBagLayout());
         add(contentCard, "content");
 
         buttonCard.setLayout(new java.awt.GridLayout(1, 1));
