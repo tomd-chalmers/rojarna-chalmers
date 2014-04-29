@@ -19,10 +19,11 @@ import javax.swing.Timer;
  */
 public class GameTimer {
     
+    private final static int SEC = 1000;
+    
     private final int startValue;
     private boolean dec;
     private int time;
-    private static int SEC = 1000;
     
     private final Timer timer = new Timer(SEC, new ActionListener() {
             @Override

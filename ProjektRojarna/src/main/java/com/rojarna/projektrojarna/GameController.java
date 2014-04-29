@@ -21,6 +21,7 @@ public class GameController implements Observer{
     public GameController(AbstractGameModel model, GameView view){
         gameModel = model;
         model.addObserver(this);
+        
         gameView = view;
         view.setModel(model);
     }

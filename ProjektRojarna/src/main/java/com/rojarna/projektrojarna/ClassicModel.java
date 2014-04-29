@@ -51,13 +51,12 @@ public class ClassicModel extends AbstractGameModel{
             gameTimer = new GameTimer();
         }
         
-        getBoard().chooseSquare(xPos, yPos);
+        if( getBoard().chooseSquare(xPos, yPos) == Item.MINE){
+            gameOver();
+        }
         
-        //vet inte riktigt hur vi ska göra här
         this.setChanged();
         this.notifyObservers();
-        //this.notifyObservers(gameBoard);
-        //this.notifyObservers(gameBoard.copy());
     }
     
     public void markSquare(int xPos, int yPos){
@@ -66,11 +65,8 @@ public class ClassicModel extends AbstractGameModel{
         
         getBoard().markSquare(xPos, yPos);
         
-        //vet inte riktigt hur vi ska göra här
         this.setChanged();
         this.notifyObservers();
-        //this.notifyObservers(gameBoard);
-        //this.notifyObservers(gameBoard.copy());
     }
     
     public void gameOver(){

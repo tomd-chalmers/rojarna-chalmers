@@ -28,6 +28,7 @@ public class GameView extends javax.swing.JFrame implements Observer{
     public void setModel(AbstractGameModel model){
         gameModel = model;
         
+        model.addObserver(this);
         repaint();
     }
 

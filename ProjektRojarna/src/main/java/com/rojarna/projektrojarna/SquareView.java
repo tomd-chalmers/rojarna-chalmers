@@ -150,12 +150,15 @@ public class SquareView extends javax.swing.JPanel implements Observer{
 
     public void update(Observable o, Object arg) {
         System.out.println("Updated!");
+        
         if(model.getSquare(x,y).isVisible()){
             setContent(model.getSquare(x,y));
+            
             CardLayout c = (CardLayout)(this.getLayout());
             c.show(this,"content");
         }else{
             CardLayout c = (CardLayout)(this.getLayout());
+            
             c.show(this,"button");
             setButtonIcon(model.getSquare(x,y).getMarking());
         }

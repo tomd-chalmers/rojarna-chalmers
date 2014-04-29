@@ -36,11 +36,13 @@ public class GameBoard {
 	}
 	public GameBoard(int mines, int height, int width){
 		board= new Square[height][width];
+                
 		for(int i = 0; i<height; i++){
 			for(int j = 0; j<width; j++){
 				board[i][j]=new Square();
 			}
 		}
+                
 		this.mines = mines;
                 this.height = height;
                 this.width = width;
@@ -95,16 +97,17 @@ public class GameBoard {
 		return tmp;
 	}
         
-        public void chooseSquare(int x, int y){
+        public Item chooseSquare(int x, int y){
             if(!boardClicked){
                 initBoard(x,y);
                 boardClicked = true;
             }
+            
             if(getSquareMarking(x,y) != Marking.FLAG){
                 board[y][x].setVisible(true);
-                if(getSquareItem(x,y) == Item.MINE){
-                    System.out.print("Mina");
-                } else if(getSquareItem(x,y) == Item.NUMBER && board[y][x].getValue() == 0){
+                
+                if(getSquareItem(x,y) == Item.NUMBER && board[y][x].getValue() == 0){
+
                     for(Point p:getBorder(x,y)){
                         if(!board[p.y][p.x].isVisible()){
                             chooseSquare(p.x,p.y);
@@ -112,6 +115,8 @@ public class GameBoard {
                     }
                 }
             }
+            
+            return board[x][y].getItem();
         }
         
         public void markSquare(int x, int y){

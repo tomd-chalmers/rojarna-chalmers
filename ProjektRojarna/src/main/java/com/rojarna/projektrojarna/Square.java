@@ -14,9 +14,11 @@ package com.rojarna.projektrojarna;
 public class Square {
 
     private Item item;
+    private Marking mark;
+    
     private int value=0;
     private boolean visible=false;
-    private Marking mark;
+    
     
     public enum Marking{
         NONE, FLAG, QUESTION;
