@@ -17,7 +17,7 @@ public class TestFrame extends javax.swing.JFrame {
      */
     public TestFrame() {
         initComponents();
-        ClassicModel game = new ClassicModel();
+        ClassicModel game = new ClassicModel(50,20,20);
         GameBoardView view = new GameBoardView(game);
         add(view);
     }
