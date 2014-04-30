@@ -70,7 +70,11 @@ public class ClassicModel extends AbstractGameModel{
     }
     
     public void gameOver(){
-        ;
+        gameTimer.stop();
+        
+        //Save highscore!
+        
+        
     }
 
     @Override
@@ -80,20 +84,16 @@ public class ClassicModel extends AbstractGameModel{
         
         setBoard(new GameBoard(mines, width, heigth));
         
-        //vet inte riktigt hur vi ska göra här
+        this.setChanged();
         this.notifyObservers();
-        //this.notifyObservers(gameBoard);
-        //this.notifyObservers(gameBoard.copy());
     }
     
     public void restartGame(){
         getBoard().reset();
         gameTimer.stop();
         
-        //vet inte riktigt hur vi ska göra här
+        this.setChanged();
         this.notifyObservers();
-        //this.notifyObservers(gameBoard);
-        //this.notifyObservers(gameBoard.copy());
     }
     
     public Visibility[][] getBoardVisibility(){

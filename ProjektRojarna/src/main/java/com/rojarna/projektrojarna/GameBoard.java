@@ -24,7 +24,7 @@ import java.util.Scanner;
  * @revised Joakim Milleson
  * @revised Oskar Frost
  */
-public class GameBoard {
+public class GameBoard{
 	
 	private Square[][] board;
 	private int mines,width,height;

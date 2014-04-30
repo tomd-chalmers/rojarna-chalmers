@@ -15,7 +15,7 @@ import javax.swing.JButton;
  *
  * @author Tom
  */
-public class GameBoardView extends javax.swing.JPanel {
+public class GameBoardView extends javax.swing.JPanel{
     /**
      * Creates new form GameBoardView
      */
@@ -35,6 +35,10 @@ public class GameBoardView extends javax.swing.JPanel {
             }
         }
     }
+    
+    public void enableView(boolean enable){
+        //isEnabled(enable);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,4 +53,5 @@ public class GameBoardView extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
 }

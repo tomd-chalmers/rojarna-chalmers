@@ -40,8 +40,6 @@ public class SquareView extends javax.swing.JPanel implements Observer{
         
         CardLayout c = (CardLayout)(this.getLayout());
         c.show(this,"button");
-
-        
     }
     
     private void setContent(Square s){
@@ -149,7 +147,6 @@ public class SquareView extends javax.swing.JPanel implements Observer{
     private JLabel contentLabel;
 
     public void update(Observable o, Object arg) {
-        System.out.println("Updated!");
         
         if(model.getSquare(x,y).isVisible()){
             setContent(model.getSquare(x,y));
