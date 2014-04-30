@@ -55,8 +55,8 @@ public class GameBoard{
 			int randY;
 			Point p;
 			do{
-				randX = (int) (board.length*Math.random());
-				randY = (int) (board[0].length*Math.random());
+				randX = (int) (board[0].length*Math.random());
+				randY = (int) (board.length*Math.random());
 				p = new Point(randX,randY);
 			}while(board[randY][randX].isMine()||(x==randX&&y==randY)||tmp.contains(p));
 			placeMine(randX,randY);
@@ -76,7 +76,7 @@ public class GameBoard{
 			tmp.add(new Point(x-1,y));
 			if(y>0){
 				tmp.add(new Point(x-1,y-1));
-			}if(y<board[y].length-1){
+                        }if (y<board.length-1){
 				tmp.add(new Point(x-1,y+1));
 			}
 		}
@@ -84,14 +84,14 @@ public class GameBoard{
 			tmp.add(new Point(x+1,y));
 			if(y>0){
 				tmp.add(new Point(x+1,y-1));
-			}if(y<board[y].length-1){
+                        }if(y<board.length-1){
 				tmp.add(new Point(x+1,y+1));
 			}
 		}
 		if(y>0){
 			tmp.add(new Point(x,y-1));
 		}
-		if(y<board[y].length-1){
+                if(y<board.length-1){
 			tmp.add(new Point(x,y+1));
 		}
 		return tmp;
@@ -116,7 +116,7 @@ public class GameBoard{
                 }
             }
             
-            return board[x][y].getItem();
+            return board[y][x].getItem();
         }
         
         public void markSquare(int x, int y){
