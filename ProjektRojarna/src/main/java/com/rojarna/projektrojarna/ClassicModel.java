@@ -26,6 +26,12 @@ public class ClassicModel extends AbstractGameModel{
         newGame(mines, width, heigth);
     }
     
+    //väldigt basic här bara...
+    public void usePowerup(PowerupInterface pu, int x, int y){
+        gameTimer.removeTime(pu.getCost());
+        pu.power(getBoard(), x, y);
+    }
+    
     public void chooseSquare(int xPos, int yPos){
         
         if(xPos < 0 || yPos < 0)
