@@ -8,6 +8,8 @@ package com.rojarna.projektrojarna;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,6 +28,12 @@ public class PUShowAll implements PowerupInterface{
             }
         }
         //wait a few sec here...
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(PUShowAll.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // no idea if this works...
         int k = 0;
         for(int i = 0;i<gb.getHeight();i++){
             for(int j = 0; j<gb.getWidth();j++){
