@@ -12,6 +12,7 @@ import com.rojarna.projektrojarna.Square.Item;
  *
  * @author Tobias
  * @revised Oskar
+ * @revised Tom
  */
 public class ClassicModel extends AbstractGameModel{
     
