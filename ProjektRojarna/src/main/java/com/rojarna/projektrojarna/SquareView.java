@@ -19,8 +19,10 @@ import javax.swing.JLabel;
 public class SquareView extends javax.swing.JPanel implements Observer{
     
     private AbstractGameModel model;
+    
     private int x;
     private int y;
+    
     private boolean setBoard = false;
 
     /**

@@ -12,7 +12,9 @@ package com.rojarna.projektrojarna;
  */
 public class CampaignModel extends AbstractGameModel{
     
-    private int mines, width, height, life = 3;
+    private final static int CAMPAIGN_LIVES = 3;
+    
+    private int mines, width, height, currentLives= 3;
     
     public CampaignModel(){
         newGame(10,8,8);
@@ -25,14 +27,16 @@ public class CampaignModel extends AbstractGameModel{
         getBoard().chooseSquare(xPos, yPos);
         isMine(xPos,yPos);
         
+        this.setChanged();
+        this.notifyObservers();
     }
     
     public void isMine(int x, int y){
         if(getSquare(x,y).getItem() == Square.Item.MINE){
-            if(life > 0){
-                life -= 1;
+            if(currentLives > 0){
+                currentLives -= 1;
             } else {
-                gameOver();
+                gameOver(false);
             }
         }
     }
@@ -43,15 +47,21 @@ public class CampaignModel extends AbstractGameModel{
         
         getBoard().markSquare(xPos, yPos);
         
+        this.setChanged();
+        this.notifyObservers();
      }
      
      public void isLvlComplete(){
          if(getBoard().isAllNumberShown()){
              nextLevel();
+             
+             this.setChanged();
+            this.notifyObservers();
          }
      }
      
     public void nextLevel(){
+        
         //newgame med någon trevlig formel som ökar mines, width o height
     }
     
@@ -61,20 +71,21 @@ public class CampaignModel extends AbstractGameModel{
             throw new IllegalArgumentException();
         
         this.mines = mines;
+        
+        this.currentLives = CAMPAIGN_LIVES;
+        
         this.width = width;
         this.height = height;
         
         setBoard(new GameBoard(mines, width, height));
         
-        //vet inte riktigt hur vi ska göra här
+        this.setChanged();
         this.notifyObservers();
-        //this.notifyObservers(gameBoard);
-        //this.notifyObservers(gameBoard.copy());
     }
 
     @Override
-    public void gameOver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void gameOver(boolean gameWon) {
+        // Boolean i just campaign kanske inte behövs...
     }
 
     @Override

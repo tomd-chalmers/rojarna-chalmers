@@ -16,7 +16,7 @@ public abstract class AbstractGameModel extends Observable{
     private GameBoard gameBoard;
     
     public abstract void newGame(int mines, int width, int heigth);
-    public abstract void gameOver();
+    public abstract void gameOver(boolean gameWon);
     
     public abstract void chooseSquare(int x, int y);
     public abstract void markSquare(int x, int y);

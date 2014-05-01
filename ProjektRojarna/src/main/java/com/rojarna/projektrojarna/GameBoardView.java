@@ -6,11 +6,6 @@
 
 package com.rojarna.projektrojarna;
 
-import java.awt.GridLayout;
-import java.util.Observable;
-import java.util.Observer;
-import javax.swing.JButton;
-
 /**
  *
  * @author Tom

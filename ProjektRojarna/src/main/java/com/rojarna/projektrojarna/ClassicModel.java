@@ -36,7 +36,9 @@ public class ClassicModel extends AbstractGameModel{
         }
         
         if( getBoard().chooseSquare(xPos, yPos) == Item.MINE){
-            gameOver();
+            gameOver(false);
+        } else if( getBoard().isAllNumberShown() ){
+            gameOver(true);
         }
         
         this.setChanged();
@@ -53,12 +55,14 @@ public class ClassicModel extends AbstractGameModel{
         this.notifyObservers();
     }
     
-    public void gameOver(){
+    public void gameOver(boolean gameWon){
         gameTimer.stop();
         
-        //Save highscore!
-        
-        
+        if(gameWon){
+            //Save highscore!
+        } else{
+            
+        }
     }
 
     @Override
