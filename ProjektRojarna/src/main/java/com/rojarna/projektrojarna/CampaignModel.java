@@ -28,13 +28,15 @@ public class CampaignModel extends AbstractGameModel{
             throw new IllegalArgumentException();
         
         if(!getBoard().isClicked()){
-            gameTimer = new GameTimer();
+            gameTimer = new GameTimer(120);
             gameTimer.start();
         }
         
-        getBoard().chooseSquare(xPos, yPos);
-        isMine(xPos,yPos);
-        isLvlComplete();
+        if(getBoard().getSquareMarking(xPos, yPos) != Square.Marking.FLAG){
+            getBoard().chooseSquare(xPos, yPos);
+            isMine(xPos,yPos);
+            isLvlComplete();
+        }
         
         this.setChanged();
         this.notifyObservers();
@@ -45,7 +47,7 @@ public class CampaignModel extends AbstractGameModel{
             if(currentLives > 0){
                 currentLives -= 1;
             } else {
-                gameOver(false);
+                gameOver();
             }
         }
     }
@@ -59,6 +61,13 @@ public class CampaignModel extends AbstractGameModel{
         this.setChanged();
         this.notifyObservers();
      }
+     
+    public void usePowerup(PowerupInterface pu, int x, int y){
+        if(gameTimer.afford(pu.getCost())){
+            gameTimer.removeTime(pu.getCost());
+            pu.power(getBoard(), x, y);
+        }
+    }
      
      public void isLvlComplete(){
          if(getBoard().isAllNumberShown()){
@@ -75,6 +84,7 @@ public class CampaignModel extends AbstractGameModel{
         width++;
         height++;
         mines = ;//....
+        gameTimer.addTime(120);
         newGame(mines,width,height);
     }
     
@@ -88,12 +98,21 @@ public class CampaignModel extends AbstractGameModel{
         this.setChanged();
         this.notifyObservers();
     }
-
-    @Override
-    public void gameOver(boolean gameWon) {
-        // Boolean i just campaign kanske inte behövs...
+    
+    public void gameOver(){
+        gameTimer.stop();
+        //spara highscore
+        //popup
     }
-
+    
+    public void pausGame(boolean b){
+        if(b){
+            gameTimer.stop();
+        } else {
+            gameTimer.start();
+        }
+    }
+    
     @Override
     public Square getSquare(int x, int y) {
         return getBoard().getSquare(x, y);
