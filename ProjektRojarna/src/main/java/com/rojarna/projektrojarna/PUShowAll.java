@@ -8,8 +8,6 @@ package com.rojarna.projektrojarna;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,7 +29,7 @@ public class PUShowAll implements PowerupInterface{
         try {
             Thread.sleep(2000);
         } catch (InterruptedException ex) {
-            Logger.getLogger(PUShowAll.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("error: in PUShowAll, thread interupted");
         }
         // no idea if this works...
         int k = 0;
