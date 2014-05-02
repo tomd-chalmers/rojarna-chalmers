@@ -25,8 +25,7 @@ public class PUSafeChooseArea implements PowerupInterface{
             for(int newX = x-1 ;newX<x+1;newX++){
                 for(int newY = y-1; newY<y+1;newY++){
                     if(gb.getSquareItem(newX, newY)== MINE){
-                        gb.getSquare(newX, newY).markSquare();
-                        // buggar om det är ett frågetäcken.
+                        gb.getSquare(newX, newY).setMarking(Square.Marking.FLAG);
                     }else{
                         gb.chooseSquare(newX, newY);
                     }
@@ -46,7 +45,7 @@ public class PUSafeChooseArea implements PowerupInterface{
                         // do nothing
                     }else{
                         if(gb.getSquareItem(newnewX, newnewY)== MINE){
-                            
+                            gb.getSquare(newX, newY).setMarking(Square.Marking.FLAG);
                         }
                     }
                 }
