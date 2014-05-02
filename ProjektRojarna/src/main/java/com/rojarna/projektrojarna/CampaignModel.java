@@ -16,6 +16,8 @@ public class CampaignModel extends AbstractGameModel{
     
     private int mines, width, height, currentLives= 3;
     
+    private GameTimer gameTimer = null;
+    
     public CampaignModel(){
         newGame(10,8,8);
     }
@@ -23,6 +25,10 @@ public class CampaignModel extends AbstractGameModel{
     public void chooseSquare(int xPos, int yPos){
         if(xPos < 0 || yPos < 0)
             throw new IllegalArgumentException();
+        
+        if(!getBoard().isClicked()){
+            gameTimer = new GameTimer();
+        }
         
         getBoard().chooseSquare(xPos, yPos);
         isMine(xPos,yPos);
