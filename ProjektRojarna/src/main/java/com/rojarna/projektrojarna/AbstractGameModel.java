@@ -14,7 +14,13 @@ import java.util.Observable;
  */
 public abstract class AbstractGameModel extends Observable{
     private GameBoard gameBoard;
+    
+    private boolean gamePaused = false;
+    
     //Ha timer här istället så pausa metoden kan vara här?
+    
+    // Dock ska väll paus i campaign disabla powerups och grejer? eller mena du bara
+    // att ha metodhuvudet här?
     
     public abstract void newGame(int mines, int width, int heigth);
     //public abstract void gameOver(boolean gameWon);
@@ -25,6 +31,10 @@ public abstract class AbstractGameModel extends Observable{
     
     public GameBoard getBoard(){
         return gameBoard;
+    }
+    
+    public boolean getGamePaused(){
+        return gamePaused;
     }
     
     public void setBoard(GameBoard board){
