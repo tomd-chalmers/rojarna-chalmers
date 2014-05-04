@@ -68,7 +68,7 @@ public class ClassicModel extends AbstractGameModel{
         if(gameWon){
             //Save highscore!
         } else{
-            
+            getBoard().showMines();
         }
     }
 

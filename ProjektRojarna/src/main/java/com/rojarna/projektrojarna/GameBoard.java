@@ -149,6 +149,16 @@ public class GameBoard{
             return boardClicked;
         }
         
+        public void showMines(){
+            for(int i = 0; i < width; i++){
+                for(int j = 0; j < height; j++){
+                    if(board[j][i].isMine()){
+                        showSquare(i,j,true);
+                    }
+                }
+            }
+        }
+        
         public void showSquare(int x, int y, boolean visible){
             board[y][x].setVisible(visible);
         }
