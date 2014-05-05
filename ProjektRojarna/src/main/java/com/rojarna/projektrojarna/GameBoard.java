@@ -70,7 +70,7 @@ public class GameBoard{
 		}
 	}
 
-	private List<Point> getBorder(int x,int y){
+	public List<Point> getBorder(int x,int y){
 		ArrayList<Point> tmp = new ArrayList<Point>();
 		if(x>0){
 			tmp.add(new Point(x-1,y));

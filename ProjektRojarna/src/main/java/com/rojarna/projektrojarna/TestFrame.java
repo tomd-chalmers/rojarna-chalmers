@@ -17,9 +17,10 @@ public class TestFrame extends javax.swing.JFrame {
      */
     public TestFrame() {
         initComponents();
-        ClassicModel game = new ClassicModel(15,20,7);
-        GameBoardView view = new GameBoardView(game);
+        CampaignModel game = new CampaignModel();
+        ModelView view = new ModelView(game);
         add(view);
+        pack();
     }
 
     /**

@@ -18,23 +18,18 @@ import javax.swing.JLabel;
  */
 public class SquareView extends javax.swing.JPanel implements Observer{
     
-    private AbstractGameModel model;
-    
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     
     private boolean setBoard = false;
 
     /**
      * Creates new form SquareView
      */
-    public SquareView(AbstractGameModel model, int x, int y) {
+    public SquareView(int x, int y) {
         
-        this.model=model;
         this.x=x;
         this.y=y;
-        
-        model.addObserver(this);
         
         initComponents();
         contentLabel = new JLabel();
@@ -97,6 +92,13 @@ public class SquareView extends javax.swing.JPanel implements Observer{
                 break;
         }
     }
+    
+    public int getXPos(){
+        return x;
+    }
+    public int getYPos(){
+        return y;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,9 +136,9 @@ public class SquareView extends javax.swing.JPanel implements Observer{
 
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
         if (evt.getButton()==1){ //Vänsterklick
-            model.chooseSquare(x,y);
+            this.firePropertyChange("leftClick", null , this);
         }else if(evt.getButton()==3){ //Högerklick
-            model.markSquare(x,y);
+            this.firePropertyChange("rightClick",0,this);
         }
     }//GEN-LAST:event_buttonMousePressed
 
@@ -149,6 +151,7 @@ public class SquareView extends javax.swing.JPanel implements Observer{
     private JLabel contentLabel;
 
     public void update(Observable o, Object arg) {
+        AbstractGameModel model = (AbstractGameModel)o;
         
         if(model.getSquare(x,y).isVisible()){
             setContent(model.getSquare(x,y));

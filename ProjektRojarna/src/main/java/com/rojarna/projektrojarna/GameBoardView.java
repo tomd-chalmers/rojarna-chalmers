@@ -6,6 +6,8 @@
 
 package com.rojarna.projektrojarna;
 
+import java.beans.PropertyChangeListener;
+
 /**
  *
  * @author Tom
@@ -17,15 +19,26 @@ public class GameBoardView extends javax.swing.JPanel{
     
     private AbstractGameModel model;
     
-    public GameBoardView(AbstractGameModel model) {
+    public GameBoardView(AbstractGameModel model,ModelView view) {
         initComponents();
         
         this.model = model;
+        setBoard(view);
+    }
+    
+    public void renewBoard(ModelView view){
+        this.removeAll();
+        setBoard(view);
+    }
+    
+    private void setBoard(ModelView view){
         setLayout(new java.awt.GridLayout(model.getWidth(),model.getHeight()));
         
         for(int x=0;x<model.getWidth();x++){
             for(int y=0;y<model.getHeight();y++){
-                SquareView s = new SquareView(model,x,y);
+                SquareView s = new SquareView(x,y);
+                model.addObserver(s);
+                s.addPropertyChangeListener(view);
                 add(s);
             }
         }

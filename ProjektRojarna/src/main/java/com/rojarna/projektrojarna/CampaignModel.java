@@ -66,24 +66,29 @@ public class CampaignModel extends AbstractGameModel{
         if(gameTimer.afford(pu.getCost())){
             gameTimer.removeTime(pu.getCost());
             pu.power(getBoard(), x, y);
+            this.setChanged();
+            this.notifyObservers();
         }
     }
      
-     public void isLvlComplete(){
+     public void finishLevel(){
          if(getBoard().isAllNumberShown()){
              gameTimer.stop();
-             nextLevel();
+             //nextLevel();
              
              this.setChanged();
              this.notifyObservers();
          }
+     }
+     public boolean isLvlComplete(){
+         return getBoard().isAllNumberShown();
      }
      
     public void nextLevel(){
         level++;
         width++;
         height++;
-        mines = ;//....
+        mines = width*height/4;//....
         gameTimer.addTime(120);
         newGame(mines,width,height);
     }
@@ -116,6 +121,9 @@ public class CampaignModel extends AbstractGameModel{
     @Override
     public Square getSquare(int x, int y) {
         return getBoard().getSquare(x, y);
+    }
+    public int getTime(){
+        return gameTimer.getTimeSec();
     }
     
 }

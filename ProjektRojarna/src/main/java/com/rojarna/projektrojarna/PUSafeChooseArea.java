@@ -6,7 +6,12 @@
 
 package com.rojarna.projektrojarna;
 
+import com.rojarna.projektrojarna.Square.Item;
 import static com.rojarna.projektrojarna.Square.Item.*;
+import com.rojarna.projektrojarna.Square.Marking;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,14 +19,13 @@ import static com.rojarna.projektrojarna.Square.Item.*;
  */
 public class PUSafeChooseArea implements PowerupInterface{
     
-    private final int COST=100;
+    private final int COST=10;
     
     public void power(GameBoard gb, int x, int y) {
-        Square s = new Square();
         //normal case:
         /*int newX=x--;
         int newY=y--;*/
-        if(x>0 && y>0 && x<gb.getHeight() && y<gb.getWidth()){
+        /*if(x>0 && y>0 && x<gb.getHeight() && y<gb.getWidth()){
             for(int newX = x-1 ;newX<x+1;newX++){
                 for(int newY = y-1; newY<y+1;newY++){
                     if(gb.getSquareItem(newX, newY)== MINE){
@@ -49,6 +53,18 @@ public class PUSafeChooseArea implements PowerupInterface{
                         }
                     }
                 }
+            }
+        }*/
+        if(gb.getSquare(x,y).getItem()==Item.MINE&&gb.getSquareMarking(x,y)!=Marking.FLAG){
+            gb.markSquare(x,y);
+        }else{
+            gb.chooseSquare(x, y);
+        }
+        for(Point p:gb.getBorder(x,y)){
+            if(gb.getSquareItem(p.x, p.y)==Item.MINE&&gb.getSquareMarking(p.x,p.y)!=Marking.FLAG){
+                gb.markSquare(p.x,p.y);
+            }else{
+                gb.chooseSquare(p.x,p.y);
             }
         }
     }
