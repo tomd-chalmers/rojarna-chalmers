@@ -21,7 +21,7 @@ public class SquareView extends javax.swing.JPanel implements Observer{
     private final int x;
     private final int y;
     
-    private boolean setBoard = false;
+    //private boolean setBoard = false;
 
     /**
      * Creates new form SquareView

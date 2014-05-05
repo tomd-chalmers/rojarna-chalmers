@@ -6,7 +6,7 @@
 
 package com.rojarna.projektrojarna;
 
-import java.awt.Graphics;
+import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,18 +17,28 @@ import java.util.Observer;
 public class GameView extends javax.swing.JFrame implements Observer{
     
     private AbstractGameModel gameModel;
+    private GameBoardView gameBoardView;
+    
+    private boolean gameIsPaused = false;
 
     /**
      * Creates new form GameView
      */
     public GameView() {
         initComponents();
+        
+        
     }
     
     public void setModel(AbstractGameModel model){
         gameModel = model;
-        
         model.addObserver(this);
+        
+        getContentPane().setBackground(Color.black);
+        
+        gameBoardView = new GameBoardView(model);
+        add(gameBoardView);
+        
         repaint();
     }
 
@@ -42,17 +52,7 @@ public class GameView extends javax.swing.JFrame implements Observer{
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        getContentPane().setLayout(new java.awt.GridLayout(1, 1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -96,6 +96,20 @@ public class GameView extends javax.swing.JFrame implements Observer{
     // End of variables declaration//GEN-END:variables
     
     public void update(Observable o, Object arg) {
-        ;
+        if(gameModel.getGamePaused() && !gameIsPaused){
+            remove(gameBoardView);
+            //gameBoardView.setEnabled(false);
+            repaint();
+            
+            System.out.println("PAUS!");
+            
+            gameIsPaused = true;
+        } else if(!gameModel.getGamePaused() && gameIsPaused){
+            add(gameBoardView);
+            //gameBoardView.setEnabled(true);
+            repaint();
+            
+            gameIsPaused = false;
+        }
     }
 }

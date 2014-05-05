@@ -28,7 +28,6 @@ public class CampaignModel extends AbstractGameModel{
             throw new IllegalArgumentException();
         
         if(!getBoard().isClicked()){
-            gameTimer = new GameTimer(120);
             gameTimer.start();
         }
         
@@ -63,6 +62,7 @@ public class CampaignModel extends AbstractGameModel{
      }
      
     public void usePowerup(PowerupInterface pu, int x, int y){
+        //Bättre att ha koll på om den har råd här istället för i getCost?
         if(gameTimer.afford(pu.getCost())){
             gameTimer.removeTime(pu.getCost());
             pu.power(getBoard(), x, y);
@@ -88,7 +88,8 @@ public class CampaignModel extends AbstractGameModel{
         level++;
         width++;
         height++;
-        mines = width*height/4;//....
+
+        mines = (int)Math.round(width * height * (0.3+(0.05 + level)));
         gameTimer.addTime(120);
         newGame(mines,width,height);
     }
@@ -97,6 +98,10 @@ public class CampaignModel extends AbstractGameModel{
     public void newGame(int mines, int width, int height) {
         if(mines < 0 || width < 0 || height < 0)
             throw new IllegalArgumentException();
+        
+        if(level == 1){
+            gameTimer = new GameTimer(120);
+        }
         
         setBoard(new GameBoard(mines, width, height));
         
@@ -108,6 +113,8 @@ public class CampaignModel extends AbstractGameModel{
         gameTimer.stop();
         //spara highscore
         //popup
+        this.setChanged();
+        this.notifyObservers();
     }
     
     public void pausGame(boolean b){

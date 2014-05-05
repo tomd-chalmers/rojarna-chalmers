@@ -43,10 +43,6 @@ public class GameBoardView extends javax.swing.JPanel{
             }
         }
     }
-    
-    public void enableView(boolean enable){
-        //isEnabled(enable);
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

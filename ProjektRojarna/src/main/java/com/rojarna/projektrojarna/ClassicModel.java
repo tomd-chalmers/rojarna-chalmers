@@ -18,6 +18,9 @@ public class ClassicModel extends AbstractGameModel{
     
     private GameTimer gameTimer = null;
 
+    private boolean betweenGames = false;
+    private boolean gamePaused = false;
+    
     
     public ClassicModel(){
         newGame(10,8,8);
@@ -29,7 +32,13 @@ public class ClassicModel extends AbstractGameModel{
     
     //väldigt basic här bara...
     public void usePowerup(PowerupInterface pu, int x, int y){
-        gameTimer.removeTime(pu.getCost());
+        if(gameTimer.afford(pu.getCost())){
+            gameTimer.removeTime(pu.getCost());
+        } else{
+            // Tycker som millhouse, känns bäst att ha koden för afford här.
+            System.out.println("NO MONAY!");
+        }
+        
         pu.power(getBoard(), x, y);
     }
     
@@ -43,8 +52,10 @@ public class ClassicModel extends AbstractGameModel{
         }
         if( getBoard().chooseSquare(xPos, yPos) == Item.MINE){
             gameOver(false);
+            pauseGame(true);
         } else if( getBoard().isAllNumberShown() ){
             gameOver(true);
+            pauseGame(true);
         }
         
         this.setChanged();
@@ -66,9 +77,16 @@ public class ClassicModel extends AbstractGameModel{
         
         if(gameWon){
             //Save highscore!
+            System.out.println("YOU WON!");
         } else{
-            
+            getBoard().showMines();
+            System.out.println("YOU LOST!");
         }
+        
+        betweenGames = true;
+        
+        this.setChanged();
+        this.notifyObservers();
     }
 
     @Override
@@ -88,6 +106,15 @@ public class ClassicModel extends AbstractGameModel{
         
         this.setChanged();
         this.notifyObservers();
+    }
+    
+    public void pauseGame(boolean pause){
+        if(pause && !gamePaused){
+            gamePaused = true;
+            
+            this.setChanged();
+            this.notifyObservers();
+        }
     }
     
     public Square getSquare(int x, int y){
