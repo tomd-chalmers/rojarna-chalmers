@@ -14,6 +14,7 @@ import java.util.Observable;
  */
 public abstract class AbstractGameModel extends Observable{
     private GameBoard gameBoard;
+    private GameTimer gameTimer;
     
     private boolean gamePaused = false;
     
@@ -33,10 +34,6 @@ public abstract class AbstractGameModel extends Observable{
         return gameBoard;
     }
     
-    public boolean getGamePaused(){
-        return gamePaused;
-    }
-    
     public void setBoard(GameBoard board){
         gameBoard = board;
     }
@@ -47,5 +44,17 @@ public abstract class AbstractGameModel extends Observable{
     
     public int getHeight(){
         return getBoard().getHeight();
+    }
+    
+    public boolean isGamePaused(){
+        return gamePaused;
+    }
+    
+    public int getGameTime(){
+        return gameTimer.getTimeSec();
+    }
+    
+    public String getGameTimeString(){
+        return gameTimer.getTimeMin();
     }
 }

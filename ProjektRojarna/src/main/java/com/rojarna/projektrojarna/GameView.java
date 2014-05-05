@@ -36,7 +36,7 @@ public class GameView extends javax.swing.JFrame implements Observer{
         
         getContentPane().setBackground(Color.black);
         
-        gameBoardView = new GameBoardView(model);
+        gameBoardView = new GameBoardView(model, null);
         add(gameBoardView);
         
         repaint();
@@ -96,7 +96,7 @@ public class GameView extends javax.swing.JFrame implements Observer{
     // End of variables declaration//GEN-END:variables
     
     public void update(Observable o, Object arg) {
-        if(gameModel.getGamePaused() && !gameIsPaused){
+        if(gameModel.isGamePaused() && !gameIsPaused){
             remove(gameBoardView);
             //gameBoardView.setEnabled(false);
             repaint();
@@ -104,7 +104,7 @@ public class GameView extends javax.swing.JFrame implements Observer{
             System.out.println("PAUS!");
             
             gameIsPaused = true;
-        } else if(!gameModel.getGamePaused() && gameIsPaused){
+        } else if(!gameModel.isGamePaused() && gameIsPaused){
             add(gameBoardView);
             //gameBoardView.setEnabled(true);
             repaint();

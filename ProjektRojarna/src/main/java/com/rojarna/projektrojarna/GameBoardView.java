@@ -6,8 +6,6 @@
 
 package com.rojarna.projektrojarna;
 
-import java.beans.PropertyChangeListener;
-
 /**
  *
  * @author Tom
@@ -19,7 +17,7 @@ public class GameBoardView extends javax.swing.JPanel{
     
     private AbstractGameModel model;
     
-    public GameBoardView(AbstractGameModel model,ModelView view) {
+    public GameBoardView(AbstractGameModel model, ModelView view) {
         initComponents();
         
         this.model = model;

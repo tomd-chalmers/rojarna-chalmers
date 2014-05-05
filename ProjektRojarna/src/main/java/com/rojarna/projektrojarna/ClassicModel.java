@@ -18,7 +18,7 @@ public class ClassicModel extends AbstractGameModel{
     
     private GameTimer gameTimer = null;
 
-    private boolean betweenGames = false;
+    private boolean gameOver = false;
     private boolean gamePaused = false;
     
     
@@ -30,16 +30,17 @@ public class ClassicModel extends AbstractGameModel{
         newGame(mines, width, heigth);
     }
     
-    //väldigt basic här bara...
-    public void usePowerup(PowerupInterface pu, int x, int y){
-        if(gameTimer.afford(pu.getCost())){
-            gameTimer.removeTime(pu.getCost());
-        } else{
-            // Tycker som millhouse, känns bäst att ha koden för afford här.
-            System.out.println("NO MONAY!");
-        }
+    @Override
+    public void newGame(int mines, int width, int heigth) {
+        if(mines < 0 || width < 0 || heigth < 0)
+            throw new IllegalArgumentException();
         
-        pu.power(getBoard(), x, y);
+        setBoard(new GameBoard(mines, width, heigth));
+        
+        setGameOver(false);
+        
+        this.setChanged();
+        this.notifyObservers();
     }
     
     public void chooseSquare(int xPos, int yPos){
@@ -83,18 +84,7 @@ public class ClassicModel extends AbstractGameModel{
             System.out.println("YOU LOST!");
         }
         
-        betweenGames = true;
-        
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    @Override
-    public void newGame(int mines, int width, int heigth) {
-        if(mines < 0 || width < 0 || heigth < 0)
-            throw new IllegalArgumentException();
-        
-        setBoard(new GameBoard(mines, width, heigth));
+        setGameOver(true);
         
         this.setChanged();
         this.notifyObservers();
@@ -115,6 +105,14 @@ public class ClassicModel extends AbstractGameModel{
             this.setChanged();
             this.notifyObservers();
         }
+    }
+    
+    public void setGameOver(boolean gameIsOver){
+        gameOver = gameIsOver;
+    }
+    
+    public boolean getGameOver(){
+        return gameOver;
     }
     
     public Square getSquare(int x, int y){
