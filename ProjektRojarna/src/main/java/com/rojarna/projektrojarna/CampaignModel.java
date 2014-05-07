@@ -138,5 +138,8 @@ public class CampaignModel extends AbstractGameModel{
     public int getLives(){
         return currentLives;
     }
+    public boolean isGameOver(){
+        return currentLives>0;
+    }
     
 }

@@ -60,7 +60,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         PU3 = new javax.swing.JToggleButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        pausButton = new javax.swing.JToggleButton();
         jPanel10 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         boardPanel = new javax.swing.JPanel();
@@ -143,13 +143,18 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
         menuPanel.add(jPanel8);
 
-        jButton1.setText("Paus");
-        jButton1.setPreferredSize(new java.awt.Dimension(80, 35));
-        jPanel9.add(jButton1);
+        pausButton.setText("Paus");
+        pausButton.setPreferredSize(new java.awt.Dimension(80, 35));
+        pausButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pausButtonActionPerformed(evt);
+            }
+        });
+        jPanel9.add(pausButton);
 
         menuPanel.add(jPanel9);
 
-        jButton2.setText("Absluta");
+        jButton2.setText("Avsluta");
         jButton2.setPreferredSize(new java.awt.Dimension(80, 35));
         jPanel10.add(jButton2);
 
@@ -179,13 +184,16 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         }
     }//GEN-LAST:event_PU3ActionPerformed
 
+    private void pausButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pausButtonActionPerformed
+        model.pausGame(pausButton.isSelected());
+    }//GEN-LAST:event_pausButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton PU1;
     private javax.swing.JToggleButton PU2;
     private javax.swing.JToggleButton PU3;
     private javax.swing.JPanel boardPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel10;
@@ -202,6 +210,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     private javax.swing.JPanel lifePanel;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel mineLabel;
+    private javax.swing.JToggleButton pausButton;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
 
@@ -229,13 +238,16 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     }
 
     public void update(Observable o, Object arg) {
+        if(model.isGameOver()){
+            
+        }
         if(model.isLvlComplete()){
             JOptionPane.showConfirmDialog(null,
             "Play next level?", "Play next level?", JOptionPane.YES_NO_OPTION);
             model.nextLevel();
             board.renewBoard(this);
         }
-        //labelUpdate();
+        labelUpdate();
     }
     
     private void labelUpdate(){
