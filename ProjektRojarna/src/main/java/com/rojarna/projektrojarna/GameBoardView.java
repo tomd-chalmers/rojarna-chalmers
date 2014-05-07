@@ -17,6 +17,20 @@ public class GameBoardView extends javax.swing.JPanel{
     
     private AbstractGameModel model;
     
+    public GameBoardView(AbstractGameModel model){
+        initComponents();
+        
+        this.model=model;
+        // OBS the gameBoard is never set so there may be problems!!
+        // CampaginView och classicView kan inte ha ett gemensamt interface, då
+        // det interfacet måste ha implementat proprtyChangeListener.
+        // Och dom kan inte extenda saker eftersom dom redan är en JPanel.
+        //I gameView körs GameBoard(Model, null) vilket buggar efter som nu
+        // så finns det 2 konstruktorer som den kan passa på.
+        //därför skapar jag änu en onstruktor som inte gör ett skit och använder den
+        // så länge.
+    }
+    
     public GameBoardView(AbstractGameModel model, CampaignView view) {
         initComponents();
         
@@ -41,7 +55,33 @@ public class GameBoardView extends javax.swing.JPanel{
             }
         }
     }
-
+    // this is some copypaste shit, but cant make an interface, cuz of propertycahnge stuff
+    // there for there will be duplicated code here, lets look at it at a later date.
+    
+    public GameBoardView(AbstractGameModel model, ClassicView view) {
+        initComponents();
+        
+        this.model = model;
+        setBoard(view);
+    }
+    
+    public void renewBoard(ClassicView view){
+        this.removeAll();
+        setBoard(view);
+    }
+    
+    private void setBoard(ClassicView view){
+        setLayout(new java.awt.GridLayout(model.getWidth(),model.getHeight()));
+        
+        for(int x=0;x<model.getWidth();x++){
+            for(int y=0;y<model.getHeight();y++){
+                SquareView s = new SquareView(x,y);
+                model.addObserver(s);
+                s.addPropertyChangeListener(view);
+                add(s);
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

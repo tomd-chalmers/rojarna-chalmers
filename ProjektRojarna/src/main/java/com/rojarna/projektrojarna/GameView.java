@@ -36,7 +36,8 @@ public class GameView extends javax.swing.JFrame implements Observer{
         
         getContentPane().setBackground(Color.black);
         
-        gameBoardView = new GameBoardView(model, null);
+        gameBoardView = new GameBoardView(model);// OBS! gameboardView kör INTE
+                                                 // setBoard(view) här!
         add(gameBoardView);
         
         repaint();
