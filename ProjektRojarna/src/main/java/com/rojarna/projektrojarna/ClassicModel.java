@@ -15,12 +15,13 @@ import com.rojarna.projektrojarna.Square.Item;
  * @revised Tom
  */
 public class ClassicModel extends AbstractGameModel{
-    
-    private GameTimer gameTimer = null;
 
     private boolean gameOver = false;
     private boolean gamePaused = false;
     
+    public enum state{
+        PLAYING,GAMEOVER;
+    }
     
     public ClassicModel(){
         newGame(10,8,8);
@@ -49,7 +50,7 @@ public class ClassicModel extends AbstractGameModel{
             throw new IllegalArgumentException();
         
         if(!getBoard().isClicked()){
-            gameTimer = new GameTimer();
+            setGameTimer(new GameTimer());
         }
         if( getBoard().chooseSquare(xPos, yPos) == Item.MINE){
             gameOver(false);
@@ -77,7 +78,7 @@ public class ClassicModel extends AbstractGameModel{
     }
     
     public void gameOver(boolean gameWon){
-        gameTimer.stop();
+        getGameTimer().stop();
         
         if(gameWon){
             //Save highscore!
@@ -95,7 +96,7 @@ public class ClassicModel extends AbstractGameModel{
     
     public void restartGame(){
         getBoard().reset();
-        gameTimer.stop();
+        getGameTimer().stop();
         
         this.setChanged();
         this.notifyObservers();
