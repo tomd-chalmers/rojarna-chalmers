@@ -57,4 +57,29 @@ public abstract class AbstractGameModel extends Observable{
     public String getGameTimeString(){
         return gameTimer.getTimeMin();
     }
+    
+    public GameTimer getGameTimer(){
+        return gameTimer;
+    }
+    
+    public void setGameTimer(GameTimer g){
+        gameTimer = g;
+    }
+    
+    public void pausGame(boolean b){
+        if(b){
+            gameTimer.stop();
+        } else {
+            gameTimer.start();
+        }
+    }
+    
+    public String getTimeString(){
+        return gameTimer.getTimeMin();
+    }
+    
+    public int getTime(){
+        return gameTimer.getTimeSec();
+    }
 }
+
