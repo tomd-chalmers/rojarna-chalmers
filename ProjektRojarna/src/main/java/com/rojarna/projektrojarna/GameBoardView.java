@@ -17,19 +17,19 @@ public class GameBoardView extends javax.swing.JPanel{
     
     private AbstractGameModel model;
     
-    public GameBoardView(AbstractGameModel model, ModelView view) {
+    public GameBoardView(AbstractGameModel model, CampaignView view) {
         initComponents();
         
         this.model = model;
         setBoard(view);
     }
     
-    public void renewBoard(ModelView view){
+    public void renewBoard(CampaignView view){
         this.removeAll();
         setBoard(view);
     }
     
-    private void setBoard(ModelView view){
+    private void setBoard(CampaignView view){
         setLayout(new java.awt.GridLayout(model.getWidth(),model.getHeight()));
         
         for(int x=0;x<model.getWidth();x++){

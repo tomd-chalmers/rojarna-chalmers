@@ -18,7 +18,7 @@ public class TestFrame extends javax.swing.JFrame {
     public TestFrame() {
         initComponents();
         CampaignModel game = new CampaignModel();
-        ModelView view = new ModelView(game);
+        CampaignView view = new CampaignView(game);
         add(view);
         pack();
     }

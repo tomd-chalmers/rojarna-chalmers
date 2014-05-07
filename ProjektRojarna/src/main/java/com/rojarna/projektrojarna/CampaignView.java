@@ -6,17 +6,31 @@
 
 package com.rojarna.projektrojarna;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Oskar
  */
-public class CampaignView extends javax.swing.JPanel {
+public class CampaignView extends javax.swing.JPanel implements PropertyChangeListener,Observer{
+    
+    private CampaignModel model;
+    GameBoardView board;
 
     /**
-     * Creates new form CampaignView
+     * Creates new form ModelView
      */
-    public CampaignView() {
+    public CampaignView(CampaignModel model) {
         initComponents();
+        this.model=model;
+        model.addObserver(this);
+        GameBoardView board = new GameBoardView(model, this);
+        boardPanel.add(board);
+        this.board=board;
     }
 
     /**
@@ -28,155 +42,224 @@ public class CampaignView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        CardPanel = new javax.swing.JPanel();
-        TimePanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        menuPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        timeLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        levelLabel = new javax.swing.JLabel();
+        lifePanel = new javax.swing.JPanel();
+        lifeLabel1 = new javax.swing.JLabel();
+        lifeLabel2 = new javax.swing.JLabel();
+        lifeLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        mineLabel = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
+        PU1 = new javax.swing.JToggleButton();
+        PU2 = new javax.swing.JToggleButton();
+        PU3 = new javax.swing.JToggleButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jPanel11 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        boardPanel = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
-        CardPanel.setMinimumSize(new java.awt.Dimension(486, 340));
-        CardPanel.setPreferredSize(new java.awt.Dimension(200, 0));
-        CardPanel.setLayout(new java.awt.GridLayout(8, 1));
+        menuPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        menuPanel.setMinimumSize(new java.awt.Dimension(200, 408));
+        menuPanel.setPreferredSize(new java.awt.Dimension(200, 408));
+        menuPanel.setLayout(new java.awt.GridLayout(8, 1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Time");
-        jLabel1.setFocusable(false);
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        TimePanel.add(jLabel1);
+        timeLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        timeLabel.setText("Time");
+        jPanel3.add(timeLabel);
 
-        CardPanel.add(TimePanel);
+        menuPanel.add(jPanel3);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Level:");
-        jPanel2.add(jLabel2);
+        levelLabel.setText("Level");
+        jPanel4.add(levelLabel);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("3");
-        jPanel2.add(jLabel3);
+        menuPanel.add(jPanel4);
 
-        CardPanel.add(jPanel2);
+        lifeLabel1.setText("LifeIcon");
+        lifePanel.add(lifeLabel1);
 
-        jLabel4.setText("LifeIcon");
-        jPanel3.add(jLabel4);
+        lifeLabel2.setText("LifeIcon");
+        lifePanel.add(lifeLabel2);
 
-        jLabel5.setText("LifeIcon");
-        jPanel3.add(jLabel5);
+        lifeLabel3.setText("LifeIcon");
+        lifePanel.add(lifeLabel3);
 
-        jLabel6.setText("LifeIcon");
-        jPanel3.add(jLabel6);
+        menuPanel.add(lifePanel);
 
-        CardPanel.add(jPanel3);
+        jLabel6.setText("MineIcon");
+        jPanel6.add(jLabel6);
 
-        jLabel7.setText("MineIcon");
-        jPanel4.add(jLabel7);
+        mineLabel.setText("nbrOfMines");
+        jPanel6.add(mineLabel);
 
-        jLabel8.setText(": 15");
-        jPanel4.add(jLabel8);
+        menuPanel.add(jPanel6);
 
-        CardPanel.add(jPanel4);
+        jPanel7.setLayout(new java.awt.GridBagLayout());
 
-        jPanel5.setLayout(new java.awt.GridLayout(1, 3));
+        PU1.setText("PU1");
+        PU1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PU1ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(PU1, new java.awt.GridBagConstraints());
 
-        jPanel6.setLayout(new java.awt.BorderLayout());
-        jPanel5.add(jPanel6);
+        PU2.setText("PU2");
+        PU2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PU2ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(PU2, new java.awt.GridBagConstraints());
 
-        jPanel7.setLayout(new java.awt.BorderLayout());
-        jPanel5.add(jPanel7);
+        PU3.setText("PU3");
+        PU3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PU3ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(PU3, new java.awt.GridBagConstraints());
 
-        jPanel8.setLayout(new java.awt.BorderLayout());
-        jPanel5.add(jPanel8);
+        menuPanel.add(jPanel7);
 
-        CardPanel.add(jPanel5);
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 196, Short.MAX_VALUE)
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        CardPanel.add(jPanel9);
+        menuPanel.add(jPanel8);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Paus");
-        jButton1.setPreferredSize(new java.awt.Dimension(100, 30));
-        jPanel10.add(jButton1);
+        jButton1.setPreferredSize(new java.awt.Dimension(80, 35));
+        jPanel9.add(jButton1);
 
-        CardPanel.add(jPanel10);
+        menuPanel.add(jPanel9);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setText("Avsluta");
-        jButton2.setPreferredSize(new java.awt.Dimension(100, 30));
-        jPanel11.add(jButton2);
+        jButton2.setText("Absluta");
+        jButton2.setPreferredSize(new java.awt.Dimension(80, 35));
+        jPanel10.add(jButton2);
 
-        CardPanel.add(jPanel11);
+        menuPanel.add(jPanel10);
 
-        add(CardPanel, java.awt.BorderLayout.WEST);
+        add(menuPanel, java.awt.BorderLayout.WEST);
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(200, 340));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
-        );
-
-        add(jPanel1, java.awt.BorderLayout.CENTER);
+        boardPanel.setMinimumSize(new java.awt.Dimension(100, 408));
+        boardPanel.setPreferredSize(new java.awt.Dimension(200, 408));
+        add(boardPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void PU1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PU1ActionPerformed
+        if(PU3.isSelected()){
+            PU3.setSelected(false);
+        }
+    }//GEN-LAST:event_PU1ActionPerformed
+
+    private void PU2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PU2ActionPerformed
+        model.usePowerup(new PUShowAll(),0,0);
+        PU2.setSelected(false);
+    }//GEN-LAST:event_PU2ActionPerformed
+
+    private void PU3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PU3ActionPerformed
+        if(PU1.isSelected()){
+            PU1.setSelected(false);
+        }
+    }//GEN-LAST:event_PU3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel CardPanel;
-    private javax.swing.JPanel TimePanel;
+    private javax.swing.JToggleButton PU1;
+    private javax.swing.JToggleButton PU2;
+    private javax.swing.JToggleButton PU3;
+    private javax.swing.JPanel boardPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel levelLabel;
+    private javax.swing.JLabel lifeLabel1;
+    private javax.swing.JLabel lifeLabel2;
+    private javax.swing.JLabel lifeLabel3;
+    private javax.swing.JPanel lifePanel;
+    private javax.swing.JPanel menuPanel;
+    private javax.swing.JLabel mineLabel;
+    private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
+
+    public void propertyChange(PropertyChangeEvent evt) {
+        String command = evt.getPropertyName();
+        labelUpdate();
+        if(command.equals("leftClick")){
+            SquareView view = (SquareView)evt.getNewValue();
+            if(PU1.isSelected()){
+                model.usePowerup(new PUSafeChooseArea(),view.getXPos(), view.getYPos());
+                PU1.setSelected(false);
+            }else if(PU3.isSelected()){
+                //Kod för sista PU.
+                PU3.setSelected(false);
+            }else{
+            model.chooseSquare(view.getXPos(), view.getYPos());                
+            }
+            
+        }else if(command.equals("rightClick")){
+            PU1.setSelected(false);
+            PU3.setSelected(false);
+            SquareView view = (SquareView)evt.getNewValue();
+            model.markSquare(view.getXPos(), view.getYPos());
+        }
+    }
+
+    public void update(Observable o, Object arg) {
+        if(model.isLvlComplete()){
+            JOptionPane.showConfirmDialog(null,
+            "Play next level?", "Play next level?", JOptionPane.YES_NO_OPTION);
+            model.nextLevel();
+            board.renewBoard(this);
+        }
+        //labelUpdate();
+    }
+    
+    private void labelUpdate(){
+        timeLabel.setText(model.getTime()+"");
+        levelLabel.setText("Level: "+model.getLevel());
+        setLives(model.getLives());
+        mineLabel.setText("NA");
+    }
+    
+    private void setLives(int lifes){
+        if(lifes>0){
+            lifeLabel1.setText("<3");
+            if(lifes>1){
+                lifeLabel2.setText("<3");
+                if(lifes>2){
+                    lifeLabel3.setText("<3");
+                }else{
+                    lifeLabel3.setText("");
+                }
+            }else{
+                lifeLabel2.setText("");
+            }
+        }else{
+            lifeLabel1.setText("");
+        }
+    }
 }

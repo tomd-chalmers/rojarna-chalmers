@@ -86,10 +86,10 @@ public class CampaignModel extends AbstractGameModel{
      
     public void nextLevel(){
         level++;
-        width++;
-        height++;
+        width=width+2;
+        height=height+2;
 
-        mines = (int)Math.round(width * height * (0.3+(0.05 + level)));
+        mines = (int) ((int) (width*height)*(0.1+0.05*level));
         gameTimer.addTime(120);
         newGame(mines,width,height);
     }
@@ -131,6 +131,12 @@ public class CampaignModel extends AbstractGameModel{
     }
     public int getTime(){
         return gameTimer.getTimeSec();
+    }
+    public int getLevel(){
+        return level;
+    }
+    public int getLives(){
+        return currentLives;
     }
     
 }

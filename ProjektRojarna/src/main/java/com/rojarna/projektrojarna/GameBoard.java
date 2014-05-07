@@ -58,6 +58,7 @@ public class GameBoard{
                 randX = (int) (board[0].length*Math.random());
                 randY = (int) (board.length*Math.random());
                 p = new Point(randX,randY);
+                System.out.println("Error: "+randX);
             }while(board[randY][randX].isMine()||(x==randX&&y==randY)||tmp.contains(p));
             
             placeMine(randX,randY);
