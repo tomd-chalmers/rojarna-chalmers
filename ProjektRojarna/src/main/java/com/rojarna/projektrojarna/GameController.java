@@ -24,6 +24,7 @@ public class GameController implements Observer{
         
         gameView = view;
         view.setModel(model);
+        view.pack();
     }
     
 

@@ -10,6 +10,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -185,7 +186,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     }//GEN-LAST:event_PU3ActionPerformed
 
     private void pausButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pausButtonActionPerformed
-        model.pausGame(pausButton.isSelected());
+        model.pauseGame(pausButton.isSelected());
     }//GEN-LAST:event_pausButtonActionPerformed
 
 
@@ -251,27 +252,29 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     }
     
     private void labelUpdate(){
-        timeLabel.setText(model.getTime()+"");
+        timeLabel.setText(model.getGameTime()+"");
         levelLabel.setText("Level: "+model.getLevel());
         setLives(model.getLives());
         mineLabel.setText("NA");
     }
     
-    private void setLives(int lifes){
-        if(lifes>0){
-            lifeLabel1.setText("<3");
-            if(lifes>1){
-                lifeLabel2.setText("<3");
-                if(lifes>2){
-                    lifeLabel3.setText("<3");
+    private void setLives(int lives){
+        if(lives>0){
+            lifeLabel1.setIcon(new ImageIcon("src/resources/heart.png"));
+            
+            if(lives>1){
+                lifeLabel2.setIcon(new ImageIcon("src/resources/heart.png"));
+                
+                if(lives>2){
+                    lifeLabel3.setIcon(new ImageIcon("src/resources/heart.png"));
                 }else{
-                    lifeLabel3.setText("");
+                    lifeLabel3.setIcon(null);
                 }
             }else{
-                lifeLabel2.setText("");
+                lifeLabel2.setIcon(null);
             }
         }else{
-            lifeLabel1.setText("");
+            lifeLabel1.setIcon(null);
         }
     }
 }

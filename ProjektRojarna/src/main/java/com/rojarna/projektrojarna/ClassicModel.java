@@ -16,11 +16,12 @@ import com.rojarna.projektrojarna.Square.Item;
  */
 public class ClassicModel extends AbstractGameModel{
 
-    private boolean gameOver = false;
     private boolean gamePaused = false;
     
-    public enum state{
-        PLAYING,GAMEOVER;
+    private GameState state;
+    
+    public enum GameState{
+        PLAYING, GAMEWON, GAMELOST;
     }
     
     public ClassicModel(){
@@ -37,8 +38,7 @@ public class ClassicModel extends AbstractGameModel{
             throw new IllegalArgumentException();
         
         setBoard(new GameBoard(mines, width, heigth));
-        
-        setGameOver(false);
+        setGameState(GameState.PLAYING);
         
         this.setChanged();
         this.notifyObservers();
@@ -78,14 +78,14 @@ public class ClassicModel extends AbstractGameModel{
         getGameTimer().stop();
         
         if(gameWon){
-            //Save highscore!
-            System.out.println("YOU WON!");
+            Save.saveClassic(getMines());
+            setGameState(GameState.GAMEWON);
+            //gameOver = true;
         } else{
             getBoard().showMines();
-            System.out.println("YOU LOST!");
+            setGameState(GameState.GAMELOST);
+            //gameOver = true;
         }
-        
-        setGameOver(true);
         
         this.setChanged();
         this.notifyObservers();
@@ -100,6 +100,8 @@ public class ClassicModel extends AbstractGameModel{
     }
     
     public void pauseGame(boolean pause){
+        super.pauseGame(pause);
+        
         if(pause && !gamePaused){
             gamePaused = true;
             
@@ -108,15 +110,15 @@ public class ClassicModel extends AbstractGameModel{
         }
     }
     
-    public void setGameOver(boolean gameIsOver){
-        gameOver = gameIsOver;
-    }
-    
-    public boolean getGameOver(){
-        return gameOver;
-    }
-    
     public Square getSquare(int x, int y){
         return getBoard().getSquare(x, y);
+    }
+    
+    public void setGameState(GameState gameState){
+        state = gameState;
+    }
+    
+    public GameState getGameState(){
+        return state;
     }
 }
