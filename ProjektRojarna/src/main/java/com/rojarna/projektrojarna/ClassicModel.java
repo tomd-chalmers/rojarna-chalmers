@@ -63,9 +63,6 @@ public class ClassicModel extends AbstractGameModel{
         this.setChanged();
         this.notifyObservers();
     }
-    public String getTime(){
-        return gameTimer.getTimeMin();
-    }
     
     public void markSquare(int xPos, int yPos){
         if(xPos < 0 || yPos < 0)

@@ -186,7 +186,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     
     public void propertyChange(PropertyChangeEvent evt) {
         String command = evt.getPropertyName();
-        timeLabel.setText(model.getTime());
+        timeLabel.setText(model.getTimeString());
         if(command.equals("leftClick")){
             SquareView view = (SquareView)evt.getNewValue();
             model.chooseSquare(view.getXPos(), view.getYPos());                

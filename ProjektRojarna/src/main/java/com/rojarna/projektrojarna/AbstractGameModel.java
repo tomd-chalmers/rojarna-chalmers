@@ -74,7 +74,12 @@ public abstract class AbstractGameModel extends Observable{
         }
     }
     
+    public String getTimeString(){
+        return gameTimer.getTimeMin();
+    }
+    
     public int getTime(){
         return gameTimer.getTimeSec();
     }
 }
+
