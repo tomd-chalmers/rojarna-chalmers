@@ -121,6 +121,7 @@ public class SquareView extends javax.swing.JPanel implements Observer{
 
         buttonCard.setLayout(new java.awt.GridLayout(1, 1));
 
+        button.setFocusable(false);
         button.setMaximumSize(new java.awt.Dimension(40, 40));
         button.setMinimumSize(new java.awt.Dimension(40, 40));
         button.setPreferredSize(new java.awt.Dimension(40, 40));

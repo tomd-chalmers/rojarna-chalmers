@@ -34,7 +34,6 @@ public class ClassicModel extends AbstractGameModel{
         this.mines=mines;
     }
     
-    @Override
     public void newGame(int mines, int width, int heigth) {
         if(mines < 0 || width < 0 || heigth < 0)
             throw new IllegalArgumentException();

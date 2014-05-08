@@ -107,6 +107,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         jPanel7.setLayout(new java.awt.GridBagLayout());
 
         PU1.setText("PU1");
+        PU1.setFocusable(false);
         PU1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PU1ActionPerformed(evt);
@@ -115,6 +116,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         jPanel7.add(PU1, new java.awt.GridBagConstraints());
 
         PU2.setText("PU2");
+        PU2.setFocusable(false);
         PU2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PU2ActionPerformed(evt);
@@ -123,6 +125,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         jPanel7.add(PU2, new java.awt.GridBagConstraints());
 
         PU3.setText("PU3");
+        PU3.setFocusable(false);
         PU3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PU3ActionPerformed(evt);
@@ -138,6 +141,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         menuPanel.add(jPanel8);
 
         pausButton.setText("Paus");
+        pausButton.setFocusable(false);
         pausButton.setPreferredSize(new java.awt.Dimension(80, 35));
         pausButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +153,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         menuPanel.add(jPanel9);
 
         jButton2.setText("Avsluta");
+        jButton2.setFocusable(false);
         jButton2.setPreferredSize(new java.awt.Dimension(80, 35));
         jPanel10.add(jButton2);
 
@@ -264,13 +269,16 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
                 if(lives>2){
                     lifeLabel3.setIcon(new ImageIcon("src/resources/heart.png"));
                 }else{
-                    lifeLabel3.setIcon(null);
+                    //lifeLabel3.setIcon(null);
+                    lifeLabel3.setText("");
                 }
             }else{
-                lifeLabel2.setIcon(null);
+                //lifeLabel2.setIcon(null);
+                lifeLabel2.setText("");
             }
         }else{
-            lifeLabel1.setIcon(null);
+            //lifeLabel1.setIcon(null);
+            lifeLabel1.setText("");
         }
     }
 }

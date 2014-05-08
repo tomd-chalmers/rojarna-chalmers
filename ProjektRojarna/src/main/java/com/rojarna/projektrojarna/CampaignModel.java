@@ -26,32 +26,34 @@ public class CampaignModel extends AbstractGameModel{
     }
     
     public void chooseSquare(int xPos, int yPos){
-        if(xPos < 0 || yPos < 0)
-            throw new IllegalArgumentException();
-        
-        if(!getBoard().isClicked()){
-            getGameTimer().start();
-        }
-        
-        if(getBoard().getSquareMarking(xPos, yPos) != Square.Marking.FLAG){
-            getBoard().chooseSquare(xPos, yPos);
-            if(isMine(xPos,yPos)){
-                removeLife();
+        if(gameState.equals(state.PLAYING)){
+            if(xPos < 0 || yPos < 0)
+                throw new IllegalArgumentException();
+
+            if(!getBoard().isClicked()){
+                getGameTimer().start();
             }
-            if(isLvlComplete()){
-                finishLevel();
+
+            if(getBoard().getSquareMarking(xPos, yPos) != Square.Marking.FLAG){
+                getBoard().chooseSquare(xPos, yPos);
+                if(isMine(xPos,yPos)){
+                    removeLife();
+                }
+                if(isLvlComplete()){
+                    finishLevel();
+                }
             }
+
+            this.setChanged();
+            this.notifyObservers();
         }
-        
-        this.setChanged();
-        this.notifyObservers();
     }
     
     public boolean isMine(int x, int y){
         return getSquare(x,y).getItem() == Square.Item.MINE;
     }
     
-    public void removeLife(){
+    private void removeLife(){
         if(currentLives > 0){
             currentLives--;
         }
@@ -61,28 +63,33 @@ public class CampaignModel extends AbstractGameModel{
     }
     
      public void markSquare(int xPos, int yPos){
-        if(xPos < 0 || yPos < 0)
-            throw new IllegalArgumentException();
-        
-        getBoard().markSquare(xPos, yPos);
-        
-        this.setChanged();
-        this.notifyObservers();
+         if(gameState.equals(state.PLAYING)){
+            if(xPos < 0 || yPos < 0)
+               throw new IllegalArgumentException();
+
+           getBoard().markSquare(xPos, yPos);
+
+           this.setChanged();
+           this.notifyObservers();
+        }
      }
      
     public void usePowerup(PowerupInterface pu, int x, int y){
         //Bättre att ha koll på om den har råd här istället för i getCost?
-        if(getGameTimer().afford(pu.getCost())){
+        if(getGameTimer().afford(pu.getCost())&&gameState.equals(state.PLAYING)){
             getGameTimer().removeTime(pu.getCost());
             
             pu.power(getBoard(), x, y);
             
+            if(isLvlComplete()){
+                finishLevel();
+            }
             this.setChanged();
             this.notifyObservers();
         }
     }
      
-     public void finishLevel(){
+     private void finishLevel(){
          if(getBoard().isAllNumberShown()){
              getGameTimer().stop();
              gameState = state.FINISHED;
@@ -97,17 +104,18 @@ public class CampaignModel extends AbstractGameModel{
      }
      
     public void nextLevel(){
-        level++;
-        width=width+2;
-        height=height+2;
+        if(gameState.equals(state.FINISHED)){
+            level++;
+            width=width+2;
+            height=height+2;
 
-        mines = (int) ((int) (width*height)*(0.1+0.05*level));
-        getGameTimer().addTime(120);
-        newGame(mines,height,width);
+            mines = (int) ((int) (width*height)*(0.1+0.05*level));
+            getGameTimer().addTime(120);
+            newGame(mines,height,width);
+        }
     }
     
-    @Override
-    public void newGame(int mines, int height, int width) {
+    private void newGame(int mines, int height, int width) {
         if(mines < 0 || width < 0 || height < 0)
             throw new IllegalArgumentException();
         
@@ -121,7 +129,7 @@ public class CampaignModel extends AbstractGameModel{
         this.notifyObservers();
     }
     
-    public void gameOver(){
+    private void gameOver(){
         System.out.println("GameOver");
         getGameTimer().stop();
         gameState = state.GAMEOVER;

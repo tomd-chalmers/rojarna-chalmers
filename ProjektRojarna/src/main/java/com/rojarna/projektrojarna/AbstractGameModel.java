@@ -6,13 +6,15 @@
 
 package com.rojarna.projektrojarna;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Observable;
 
 /**
  *
  * @author Tobias
  */
-public abstract class AbstractGameModel extends Observable{
+public abstract class AbstractGameModel extends Observable implements PropertyChangeListener{
     private GameBoard gameBoard;
     private GameTimer gameTimer;
     
@@ -23,7 +25,6 @@ public abstract class AbstractGameModel extends Observable{
     // Dock ska väll paus i campaign disabla powerups och grejer? eller mena du bara
     // att ha metodhuvudet här?
     
-    public abstract void newGame(int mines, int width, int heigth);
     //public abstract void gameOver(boolean gameWon);
     
     public abstract void chooseSquare(int x, int y);
@@ -73,6 +74,7 @@ public abstract class AbstractGameModel extends Observable{
     
     public void setGameTimer(GameTimer g){
         gameTimer = g;
+        gameTimer.addPropertyChangeListener(this);
     }
     
     public int getGameTime(){
@@ -81,6 +83,13 @@ public abstract class AbstractGameModel extends Observable{
     
     public String getGameTimeString(){
         return gameTimer.getTimeMin();
+    }
+    
+    public void propertyChange(PropertyChangeEvent evt){
+        if(evt.getPropertyName().equals("time")){
+            this.setChanged();
+            this.notifyObservers();
+        }
     }
     
 

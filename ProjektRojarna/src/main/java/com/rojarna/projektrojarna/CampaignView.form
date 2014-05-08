@@ -110,6 +110,7 @@
             <Component class="javax.swing.JToggleButton" name="PU1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="PU1"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PU1ActionPerformed"/>
@@ -123,6 +124,7 @@
             <Component class="javax.swing.JToggleButton" name="PU2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="PU2"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PU2ActionPerformed"/>
@@ -136,6 +138,7 @@
             <Component class="javax.swing.JToggleButton" name="PU3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="PU3"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PU3ActionPerformed"/>
@@ -166,6 +169,7 @@
             <Component class="javax.swing.JToggleButton" name="pausButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Paus"/>
+                <Property name="focusable" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[80, 35]"/>
                 </Property>
@@ -183,6 +187,7 @@
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Avsluta"/>
+                <Property name="focusable" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[80, 35]"/>
                 </Property>
