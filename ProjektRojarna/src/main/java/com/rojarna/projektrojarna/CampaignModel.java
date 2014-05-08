@@ -101,7 +101,7 @@ public class CampaignModel extends AbstractGameModel{
         width=width+2;
         height=height+2;
 
-        mines = (int) ((int) (width*height)*(0.1+0.01*level));
+        mines = (int) ((int) (width*height)*(0.1+0.05*level));
         getGameTimer().addTime(120);
         newGame(mines,height,width);
     }
