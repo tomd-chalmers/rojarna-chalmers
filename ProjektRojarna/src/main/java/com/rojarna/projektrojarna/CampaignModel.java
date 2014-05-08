@@ -11,10 +11,11 @@ package com.rojarna.projektrojarna;
  * @author Joakim
  */
 public class CampaignModel extends AbstractGameModel{
-      
-    private int mines, width, height, currentLives= 3, level = 1;
+    private int mines, width, height, currentLives= 3,level = 1;
     
-    public enum state{
+    private GameState state;
+    
+    public enum GameState{
         PLAYING,BETWEEN,GAMEOVER;
     }
     
@@ -22,7 +23,24 @@ public class CampaignModel extends AbstractGameModel{
         mines = 10;
         width = 8;
         height = 8;
+        
         newGame(10,8,8);
+    }
+    
+    @Override
+    public void newGame(int mines, int width, int height) {
+        if(mines < 0 || width < 0 || height < 0)
+            throw new IllegalArgumentException();
+        
+        if(level == 1){
+            setGameTimer(new GameTimer(120));
+        }
+        
+        setBoard(new GameBoard(mines, width, height));
+        setGameState(GameState.PLAYING);
+        
+        this.setChanged();
+        this.notifyObservers();
     }
     
     public void chooseSquare(int xPos, int yPos){
@@ -36,7 +54,7 @@ public class CampaignModel extends AbstractGameModel{
         if(getBoard().getSquareMarking(xPos, yPos) != Square.Marking.FLAG){
             getBoard().chooseSquare(xPos, yPos);
             if(isMine(xPos,yPos)){
-                removeLive();
+                removeLife();
             }
             if(isLvlComplete()){
                 finishLevel();
@@ -51,7 +69,7 @@ public class CampaignModel extends AbstractGameModel{
         return getSquare(x,y).getItem() == Square.Item.MINE;
     }
     
-    public void removeLive(){
+    public void removeLife(){
         if(currentLives > 0){
             currentLives -= 1;
         } else {
@@ -73,24 +91,28 @@ public class CampaignModel extends AbstractGameModel{
         //Bättre att ha koll på om den har råd här istället för i getCost?
         if(getGameTimer().afford(pu.getCost())){
             getGameTimer().removeTime(pu.getCost());
+            
             pu.power(getBoard(), x, y);
+            
             this.setChanged();
             this.notifyObservers();
         }
     }
      
-     public void finishLevel(){
-         if(getBoard().isAllNumberShown()){
-             getGameTimer().stop();
-             //nextLevel();
-             
-             this.setChanged();
-             this.notifyObservers();
-         }
-     }
-     public boolean isLvlComplete(){
-         return getBoard().isAllNumberShown();
-     }
+    public void finishLevel(){
+        if(getBoard().isAllNumberShown()){
+            getGameTimer().stop();
+            //nextLevel();
+            
+            setGameState(GameState.BETWEEN);
+            
+            this.setChanged();
+            this.notifyObservers();
+        }
+    }
+    public boolean isLvlComplete(){
+        return getBoard().isAllNumberShown();
+    }
      
     public void nextLevel(){
         level++;
@@ -102,25 +124,13 @@ public class CampaignModel extends AbstractGameModel{
         newGame(mines,width,height);
     }
     
-    @Override
-    public void newGame(int mines, int width, int height) {
-        if(mines < 0 || width < 0 || height < 0)
-            throw new IllegalArgumentException();
-        
-        if(level == 1){
-            setGameTimer(new GameTimer(120));
-        }
-        
-        setBoard(new GameBoard(mines, width, height));
-        
-        this.setChanged();
-        this.notifyObservers();
-    }
-    
     public void gameOver(){
         getGameTimer().stop();
         //spara highscore
         //popup
+        
+        setGameState(GameState.GAMEOVER);
+        
         this.setChanged();
         this.notifyObservers();
     }
@@ -136,5 +146,15 @@ public class CampaignModel extends AbstractGameModel{
     public int getLives(){
         return currentLives;
     }
+    public boolean isGameOver(){
+        return currentLives>0;
+    }
     
+    public void setGameState(GameState gameState){
+        state = gameState;
+    }
+    
+    public GameState getGameState(){
+        return state;
+    }
 }

@@ -18,17 +18,17 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     
     
     private ClassicModel model;
-    private GameBoardView gameboard;
+    private GameBoardView gameBoard;
     /**
      * Creates new form ClassicView
      */
     public ClassicView(ClassicModel m) {
         initComponents();
         this.model=m;
-        this.gameboard=new GameBoardView(this.model, this);
-        gamePanel.add(gameboard);
+        this.gameBoard=new GameBoardView(this.model, this);
+        gamePanel.add(gameBoard);
         
-        setHighscore();
+        showHighscore();
     }
 
     /**
@@ -186,7 +186,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     
     public void propertyChange(PropertyChangeEvent evt) {
         String command = evt.getPropertyName();
-        timeLabel.setText(model.getTimeString());
+        timeLabel.setText(model.getGameTimeString());
         if(command.equals("leftClick")){
             SquareView view = (SquareView)evt.getNewValue();
             model.chooseSquare(view.getXPos(), view.getYPos());                
@@ -195,7 +195,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
             model.markSquare(view.getXPos(), view.getYPos());
         }
     }
-    private void setHighscore(){
+    private void showHighscore(){
         List<Integer> list = Save.getHighscore();
         firstPlaceLabel.setText(list.get(0)+"");
         secondPlaceLabel.setText(list.get(1)+"");
