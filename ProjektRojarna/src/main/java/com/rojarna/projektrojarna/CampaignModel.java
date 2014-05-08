@@ -148,9 +148,10 @@ public class CampaignModel extends AbstractGameModel{
     public state getState(){
         return gameState;
     }
-    public void pausGame(boolean paus){
+    public void pauseGame(boolean paus){
         
         super.pauseGame(paus);
+        
         if(paus){
             gameState = state.PAUSED;
         }else{
