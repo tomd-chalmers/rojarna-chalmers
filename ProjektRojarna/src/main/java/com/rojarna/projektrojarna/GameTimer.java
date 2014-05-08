@@ -86,12 +86,12 @@ public class GameTimer {
     }
     
     public void removeTime(int a){
-        if(afford(a)){
+        //if(afford(a)){
             time=time-a;
-        }
-        else{
+        //}
+        //else{
             //cant afford, do stuff?
-        }
+        //}
     }
     
     public void addTime(int a){

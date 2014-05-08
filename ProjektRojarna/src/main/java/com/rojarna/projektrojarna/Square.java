@@ -82,7 +82,6 @@ public class Square {
             }
         }
     }
-    
     public Marking getMarking(){
         return mark;
     }
