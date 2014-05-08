@@ -18,6 +18,7 @@ public class ClassicModel extends AbstractGameModel{
 
     private boolean gameOver = false;
     private boolean gamePaused = false;
+    private int mines;
     
     public enum state{
         PLAYING,GAMEOVER;
@@ -29,6 +30,7 @@ public class ClassicModel extends AbstractGameModel{
     
     public ClassicModel(int mines, int width, int heigth){
         newGame(mines, width, heigth);
+        this.mines=mines;
     }
     
     @Override
@@ -118,5 +120,8 @@ public class ClassicModel extends AbstractGameModel{
     
     public Square getSquare(int x, int y){
         return getBoard().getSquare(x, y);
+    }
+    public int getMines() {
+        return mines;
     }
 }

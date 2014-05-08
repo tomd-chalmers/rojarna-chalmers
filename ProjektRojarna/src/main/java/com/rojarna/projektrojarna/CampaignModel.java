@@ -13,16 +13,17 @@ package com.rojarna.projektrojarna;
 public class CampaignModel extends AbstractGameModel{
       
     private int mines, width, height, currentLives= 3, level = 1;
+    private state gameState;
     
     public enum state{
-        PLAYING,BETWEEN,GAMEOVER;
+        PLAYING,PAUSED,FINISHED,GAMEOVER;
     }
     
     public CampaignModel(){
         mines = 10;
         width = 8;
         height = 8;
-        newGame(10,8,8);
+        newGame(10,height,width);
     }
     
     public void chooseSquare(int xPos, int yPos){
@@ -53,8 +54,9 @@ public class CampaignModel extends AbstractGameModel{
     
     public void removeLive(){
         if(currentLives > 0){
-            currentLives -= 1;
-        } else {
+            currentLives--;
+        }
+        if(currentLives==0){
             gameOver();
         }
     }
@@ -82,6 +84,7 @@ public class CampaignModel extends AbstractGameModel{
      public void finishLevel(){
          if(getBoard().isAllNumberShown()){
              getGameTimer().stop();
+             gameState = state.FINISHED;
              //nextLevel();
              
              this.setChanged();
@@ -97,28 +100,30 @@ public class CampaignModel extends AbstractGameModel{
         width=width+2;
         height=height+2;
 
-        mines = (int) ((int) (width*height)*(0.1+0.05*level));
+        mines = (int) ((int) (width*height)*(0.1+0.01*level));
         getGameTimer().addTime(120);
-        newGame(mines,width,height);
+        newGame(mines,height,width);
     }
     
     @Override
-    public void newGame(int mines, int width, int height) {
+    public void newGame(int mines, int height, int width) {
         if(mines < 0 || width < 0 || height < 0)
             throw new IllegalArgumentException();
         
         if(level == 1){
             setGameTimer(new GameTimer(120));
         }
-        
-        setBoard(new GameBoard(mines, width, height));
+        gameState = state.PLAYING;
+        setBoard(new GameBoard(mines, height, width));
         
         this.setChanged();
         this.notifyObservers();
     }
     
     public void gameOver(){
+        System.out.println("GameOver");
         getGameTimer().stop();
+        gameState = state.GAMEOVER;
         //spara highscore
         //popup
         this.setChanged();
@@ -139,5 +144,21 @@ public class CampaignModel extends AbstractGameModel{
     public boolean isGameOver(){
         return currentLives>0;
     }
-    
+    public state getState(){
+        return gameState;
+    }
+    public void pausGame(boolean paus){
+        
+        super.pausGame(paus);
+        if(paus){
+            gameState = state.PAUSED;
+        }else{
+            gameState = state.PLAYING;
+        }
+        this.setChanged();
+        this.notifyObservers();
+    }
+    public int getMines(){
+        return mines;
+    }
 }

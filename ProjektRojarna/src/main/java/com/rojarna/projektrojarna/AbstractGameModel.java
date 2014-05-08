@@ -29,6 +29,7 @@ public abstract class AbstractGameModel extends Observable{
     public abstract void chooseSquare(int x, int y);
     public abstract void markSquare(int x, int y);
     public abstract Square getSquare(int x, int y);
+    public abstract int getMines();
     
     public GameBoard getBoard(){
         return gameBoard;

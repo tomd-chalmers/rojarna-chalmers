@@ -59,6 +59,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         PU2 = new javax.swing.JToggleButton();
         PU3 = new javax.swing.JToggleButton();
         jPanel8 = new javax.swing.JPanel();
+        testLabel = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         pausButton = new javax.swing.JToggleButton();
         jPanel10 = new javax.swing.JPanel();
@@ -130,16 +131,8 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
         menuPanel.add(jPanel7);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 196, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
+        testLabel.setText("jLabel1");
+        jPanel8.add(testLabel);
 
         menuPanel.add(jPanel8);
 
@@ -186,6 +179,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
     private void pausButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pausButtonActionPerformed
         model.pausGame(pausButton.isSelected());
+        System.out.println(pausButton.isSelected());
     }//GEN-LAST:event_pausButtonActionPerformed
 
 
@@ -211,12 +205,12 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel mineLabel;
     private javax.swing.JToggleButton pausButton;
+    private javax.swing.JLabel testLabel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
 
     public void propertyChange(PropertyChangeEvent evt) {
         String command = evt.getPropertyName();
-        labelUpdate();
         if(command.equals("leftClick")){
             SquareView view = (SquareView)evt.getNewValue();
             if(PU1.isSelected()){
@@ -235,9 +229,11 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
             SquareView view = (SquareView)evt.getNewValue();
             model.markSquare(view.getXPos(), view.getYPos());
         }
+        labelUpdate();
     }
 
     public void update(Observable o, Object arg) {
+        labelUpdate();
         if(model.isGameOver()){
             
         }
@@ -250,11 +246,12 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         labelUpdate();
     }
     
-    private void labelUpdate(){
+    private void labelUpdate(){        
         timeLabel.setText(model.getTime()+"");
         levelLabel.setText("Level: "+model.getLevel());
         setLives(model.getLives());
-        mineLabel.setText("NA");
+        mineLabel.setText("NA/"+model.getMines());
+        testLabel.setText(model.getState()+"");
     }
     
     private void setLives(int lifes){
