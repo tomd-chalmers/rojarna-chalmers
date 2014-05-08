@@ -214,7 +214,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         if(command.equals("leftClick")){
             SquareView view = (SquareView)evt.getNewValue();
             if(PU1.isSelected()){
-                model.usePowerup(new PUSafeChooseArea(),view.getXPos(), view.getYPos());
+                model.usePowerup(new PUChooseSafeArea(),view.getXPos(), view.getYPos());
                 PU1.setSelected(false);
             }else if(PU3.isSelected()){
                 //Kod för sista PU.
