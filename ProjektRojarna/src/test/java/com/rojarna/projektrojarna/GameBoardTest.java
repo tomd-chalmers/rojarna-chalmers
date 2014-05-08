@@ -49,9 +49,20 @@ public class GameBoardTest extends TestCase {
     }
 
     public void testIsAllNumberShown() {
-        GameBoard gb = new GameBoard(5,3,3);
-        gb.chooseSquare(0,0);//nu borde 0,0 vara tom
-        // dvs att 01 , 11 och 10 är siffror, kvar blir då 5 minor.
+        GameBoard gb = new GameBoard(1,5,5);
+        int x=0;
+        int y=0;
+        for(int i = 0; i<25; i++){
+            if(gb.getSquareItem(x, y) != Item.MINE){
+                gb.chooseSquare(x,y);
+            }
+            if(x<4){
+                x++;
+            }else{
+                x=0;
+                y++;
+            }
+        }
         assertTrue(gb.isAllNumberShown());
     }
 
@@ -70,6 +81,7 @@ public class GameBoardTest extends TestCase {
 
     public void testShowMines() {
         GameBoard gb = new GameBoard(10,5,5);
+        gb.showMines();
         int mineCounter=0;
         int x =0;
         int y =0;
@@ -77,7 +89,7 @@ public class GameBoardTest extends TestCase {
             if(gb.getSquare(x,y).isVisible() || gb.getSquareItem(x,y)==Item.MINE){
                 mineCounter++;
             }
-            if(y<5){
+            if(y<4){
                 y++;
             }else{
                 y=0;
@@ -100,18 +112,18 @@ public class GameBoardTest extends TestCase {
     }
 
     public void testGetSquareItem() {
-        GameBoard gb = new GameBoard(1,1,1);
-        assertTrue(gb.getSquareItem(0,0)==Item.MINE);// vet inte om detta funkar
+        GameBoard gb = new GameBoard(0,5,5);
+        assertTrue(gb.getSquareItem(0,0)==Item.NUMBER);
     }
 
     public void testGetWidth() {
         GameBoard gb = new GameBoard(2,3,2);
-        assertTrue(gb.getHeight()==2);
+        assertTrue(gb.getHeight()==3);
     }
 
     public void testGetHeight() {
         GameBoard gb = new GameBoard(2,3,2);
-        assertTrue(gb.getWidth()==3);
+        assertTrue(gb.getWidth()==2);
     }
 
     public void testGetMines() {

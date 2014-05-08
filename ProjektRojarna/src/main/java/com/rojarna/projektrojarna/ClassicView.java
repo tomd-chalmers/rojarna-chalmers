@@ -196,9 +196,9 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         }
     }
     private void showHighscore(){
-        List<Integer> list = Save.getHighscore();
-        firstPlaceLabel.setText(list.get(0)+"");
-        secondPlaceLabel.setText(list.get(1)+"");
-        thirdPlaceLabel.setText(list.get(3)+"");   
+        //List<Integer> list = Save.getHighscore();
+        //firstPlaceLabel.setText(list.get(0)+"");
+        //secondPlaceLabel.setText(list.get(1)+"");
+        //thirdPlaceLabel.setText(list.get(3)+"");   
     }
 }
