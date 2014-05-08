@@ -29,7 +29,6 @@ public abstract class AbstractGameModel extends Observable{
     public abstract void chooseSquare(int x, int y);
     public abstract void markSquare(int x, int y);
     public abstract Square getSquare(int x, int y);
-    public abstract int getMines();
     
     public GameBoard getBoard(){
         return gameBoard;
@@ -47,16 +46,25 @@ public abstract class AbstractGameModel extends Observable{
         return getBoard().getHeight();
     }
     
+    public int getMines(){
+        return getBoard().getMines();
+    }
+    
+    public void pauseGame(boolean b){
+        if(b){
+            gameTimer.stop();
+            gamePaused = true;
+        } else {
+            gameTimer.start();
+            gamePaused = false;
+        }
+        
+        this.setChanged();
+        this.notifyObservers();
+    }
+    
     public boolean isGamePaused(){
         return gamePaused;
-    }
-    
-    public int getGameTime(){
-        return gameTimer.getTimeSec();
-    }
-    
-    public String getGameTimeString(){
-        return gameTimer.getTimeMin();
     }
     
     public GameTimer getGameTimer(){
@@ -67,20 +75,14 @@ public abstract class AbstractGameModel extends Observable{
         gameTimer = g;
     }
     
-    public void pausGame(boolean b){
-        if(b){
-            gameTimer.stop();
-        } else {
-            gameTimer.start();
-        }
+    public int getGameTime(){
+        return gameTimer.getTimeSec();
     }
     
-    public String getTimeString(){
+    public String getGameTimeString(){
         return gameTimer.getTimeMin();
     }
     
-    public int getTime(){
-        return gameTimer.getTimeSec();
-    }
+
 }
 

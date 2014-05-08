@@ -18,7 +18,6 @@ public class CampaignModel extends AbstractGameModel{
     public enum state{
         PLAYING,PAUSED,FINISHED,GAMEOVER;
     }
-    
     public CampaignModel(){
         mines = 10;
         width = 8;
@@ -37,7 +36,7 @@ public class CampaignModel extends AbstractGameModel{
         if(getBoard().getSquareMarking(xPos, yPos) != Square.Marking.FLAG){
             getBoard().chooseSquare(xPos, yPos);
             if(isMine(xPos,yPos)){
-                removeLive();
+                removeLife();
             }
             if(isLvlComplete()){
                 finishLevel();
@@ -52,7 +51,7 @@ public class CampaignModel extends AbstractGameModel{
         return getSquare(x,y).getItem() == Square.Item.MINE;
     }
     
-    public void removeLive(){
+    public void removeLife(){
         if(currentLives > 0){
             currentLives--;
         }
@@ -75,7 +74,9 @@ public class CampaignModel extends AbstractGameModel{
         //Bättre att ha koll på om den har råd här istället för i getCost?
         if(getGameTimer().afford(pu.getCost())){
             getGameTimer().removeTime(pu.getCost());
+            
             pu.power(getBoard(), x, y);
+            
             this.setChanged();
             this.notifyObservers();
         }
@@ -149,7 +150,7 @@ public class CampaignModel extends AbstractGameModel{
     }
     public void pausGame(boolean paus){
         
-        super.pausGame(paus);
+        super.pauseGame(paus);
         if(paus){
             gameState = state.PAUSED;
         }else{
