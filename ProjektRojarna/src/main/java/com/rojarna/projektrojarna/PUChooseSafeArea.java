@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Tom
  */
-public class PUSafeChooseArea implements PowerupInterface{
+public class PUChooseSafeArea implements PowerupInterface{
     
     private final int COST=10;
     
