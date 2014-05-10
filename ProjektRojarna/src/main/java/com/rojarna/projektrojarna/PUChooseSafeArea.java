@@ -55,15 +55,13 @@ public class PUChooseSafeArea implements PowerupInterface{
                 }
             }
         }*/
-        if(gb.getSquare(x,y).getItem()==Item.MINE&&gb.getSquareMarking(x,y)!=Marking.FLAG){
-            gb.markSquare(x,y);
-        }else{
-            gb.chooseSquare(x, y);
-        }
-        for(Point p:gb.getBorder(x,y)){
-            if(gb.getSquareItem(p.x, p.y)==Item.MINE&&gb.getSquareMarking(p.x,p.y)!=Marking.FLAG){
-                gb.markSquare(p.x,p.y);
+        List <Point> tmp = gb.getBorder(x,y);
+        tmp.add(new Point(x,y));
+        for(Point p:tmp){
+            if(gb.getSquareItem(p.x, p.y)==Item.MINE){
+                gb.getSquare(p.x,p.y).setMarking(Marking.FLAG);
             }else{
+                gb.getSquare(p.x,p.y).setMarking(Marking.NONE);
                 gb.chooseSquare(p.x,p.y);
             }
         }
