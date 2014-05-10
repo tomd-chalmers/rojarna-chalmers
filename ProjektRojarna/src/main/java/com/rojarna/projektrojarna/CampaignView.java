@@ -9,6 +9,7 @@ package com.rojarna.projektrojarna;
 import com.rojarna.projektrojarna.CampaignModel.state;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Observable;
@@ -24,8 +25,8 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     
     private CampaignModel model;
     private PowerupInterface PU1 = new PUChooseSafeArea();
-    private PowerupInterface PU2 = new PUChooseSafeSingle();
-    private PowerupInterface PU3 = new PUShowAll();
+    private PowerupInterface PU2 = new PUShowAll();
+    private PowerupInterface PU3 = new PUChooseSafeSingle();
     GameBoardView board;
 
     /**
@@ -37,6 +38,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         model.addObserver(this);
         board = new GameBoardView(model, this);
         boardCard.add(board);
+        boardCard.setBackground(Color.red);
     }
 
     /**
@@ -244,10 +246,10 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         if(command.equals("leftClick")){
             SquareView view = (SquareView)evt.getNewValue();
             if(PUButton1.isSelected()){
-                model.usePowerup(new PUChooseSafeArea(),view.getXPos(), view.getYPos());
+                model.usePowerup(PU1,view.getXPos(), view.getYPos());
                 PUButton1.setSelected(false);
             }else if(PUButton3.isSelected()){
-                //Kod för sista PU.
+                model.usePowerup(PU3, view.getXPos(),view.getYPos());
                 PUButton3.setSelected(false);
             }else{
             model.chooseSquare(view.getXPos(), view.getYPos());                
@@ -313,7 +315,9 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         model.addObserver(this);
         GameBoardView board = new GameBoardView(model, this);
         boardCard.add(board);
+        boardCard.setBackground(Color.red);
         this.board=board;
+        revalidate();
 
         
     }
