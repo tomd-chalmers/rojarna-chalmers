@@ -20,13 +20,6 @@ public abstract class AbstractGameModel extends Observable implements PropertyCh
     
     private boolean gamePaused = false;
     
-    //Ha timer här istället så pausa metoden kan vara här?
-    
-    // Dock ska väll paus i campaign disabla powerups och grejer? eller mena du bara
-    // att ha metodhuvudet här?
-    
-    //public abstract void gameOver(boolean gameWon);
-    
     public abstract void chooseSquare(int x, int y);
     public abstract void markSquare(int x, int y);
     public abstract Square getSquare(int x, int y);
@@ -51,6 +44,9 @@ public abstract class AbstractGameModel extends Observable implements PropertyCh
         return getBoard().getMines();
     }
     
+    public abstract void pauseGame(boolean pause);
+    
+    /*
     public void pauseGame(boolean b){
         if(b){
             gameTimer.stop();
@@ -63,6 +59,7 @@ public abstract class AbstractGameModel extends Observable implements PropertyCh
         this.setChanged();
         this.notifyObservers();
     }
+    */
     
     public boolean isGamePaused(){
         return gamePaused;

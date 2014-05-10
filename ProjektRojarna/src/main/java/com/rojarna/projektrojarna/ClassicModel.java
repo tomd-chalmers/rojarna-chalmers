@@ -15,14 +15,10 @@ import com.rojarna.projektrojarna.Square.Item;
  * @revised Tom
  */
 public class ClassicModel extends AbstractGameModel{
-
-    private boolean gamePaused = false;
-    private int mines;
-    
     private GameState state;
     
     public enum GameState{
-        PLAYING, GAMEWON, GAMELOST;
+        PLAYING, PAUSED, GAMEWON, GAMELOST;
     }
     
     public ClassicModel(){
@@ -31,7 +27,6 @@ public class ClassicModel extends AbstractGameModel{
     
     public ClassicModel(int mines, int width, int heigth){
         newGame(mines, width, heigth);
-        this.mines=mines;
     }
     
     public void newGame(int mines, int width, int heigth) {
@@ -81,11 +76,9 @@ public class ClassicModel extends AbstractGameModel{
         if(gameWon){
             Save.saveClassic(getMines());
             setGameState(GameState.GAMEWON);
-            //gameOver = true;
         } else{
             getBoard().showMines();
             setGameState(GameState.GAMELOST);
-            //gameOver = true;
         }
         
         this.setChanged();
@@ -101,10 +94,10 @@ public class ClassicModel extends AbstractGameModel{
     }
     
     public void pauseGame(boolean pause){
-        super.pauseGame(pause);
+        //super.pauseGame(pause);
         
-        if(pause && !gamePaused){
-            gamePaused = true;
+        if(pause && state == GameState.PLAYING){
+            state = GameState.PAUSED;
             
             this.setChanged();
             this.notifyObservers();
@@ -121,8 +114,5 @@ public class ClassicModel extends AbstractGameModel{
     
     public GameState getGameState(){
         return state;
-    }
-    public int getMines() {
-        return mines;
     }
 }
