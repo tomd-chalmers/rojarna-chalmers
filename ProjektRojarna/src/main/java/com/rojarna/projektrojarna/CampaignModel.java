@@ -6,6 +6,8 @@
 
 package com.rojarna.projektrojarna;
 
+import java.beans.PropertyChangeEvent;
+
 /**
  *
  * @author Joakim
@@ -170,5 +172,12 @@ public class CampaignModel extends AbstractGameModel{
     }
     public int getMines(){
         return mines;
+    }
+    public void propertyChange(PropertyChangeEvent evt){
+        if(evt.getPropertyName().equals("time")&&getGameTime()<=0){
+            gameOver();
+        }
+        this.setChanged();
+        this.notifyObservers();
     }
 }

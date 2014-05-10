@@ -6,6 +6,9 @@
 
 package com.rojarna.projektrojarna;
 
+import com.rojarna.projektrojarna.CampaignModel.state;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Observable;
@@ -20,18 +23,20 @@ import javax.swing.JOptionPane;
 public class CampaignView extends javax.swing.JPanel implements PropertyChangeListener,Observer{
     
     private CampaignModel model;
+    private PowerupInterface PU1 = new PUChooseSafeArea();
+    private PowerupInterface PU2 = new PUChooseSafeSingle();
+    private PowerupInterface PU3 = new PUShowAll();
     GameBoardView board;
 
     /**
      * Creates new form ModelView
      */
-    public CampaignView(CampaignModel model) {
+    public CampaignView() {
         initComponents();
-        this.model=model;
+        model= new CampaignModel();
         model.addObserver(this);
-        GameBoardView board = new GameBoardView(model, this);
-        boardPanel.add(board);
-        this.board=board;
+        board = new GameBoardView(model, this);
+        boardCard.add(board);
     }
 
     /**
@@ -56,16 +61,19 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         jLabel6 = new javax.swing.JLabel();
         mineLabel = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        PU1 = new javax.swing.JToggleButton();
-        PU2 = new javax.swing.JToggleButton();
-        PU3 = new javax.swing.JToggleButton();
+        PUButton1 = new javax.swing.JToggleButton();
+        PUButton2 = new javax.swing.JToggleButton();
+        PUButton3 = new javax.swing.JToggleButton();
         jPanel8 = new javax.swing.JPanel();
         testLabel = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         pausButton = new javax.swing.JToggleButton();
         jPanel10 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        boardPanel = new javax.swing.JPanel();
+        cardPanel = new javax.swing.JPanel();
+        boardCard = new javax.swing.JPanel();
+        pausCard = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -85,13 +93,8 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
         menuPanel.add(jPanel4);
 
-        lifeLabel1.setText("LifeIcon");
         lifePanel.add(lifeLabel1);
-
-        lifeLabel2.setText("LifeIcon");
         lifePanel.add(lifeLabel2);
-
-        lifeLabel3.setText("LifeIcon");
         lifePanel.add(lifeLabel3);
 
         menuPanel.add(lifePanel);
@@ -106,32 +109,32 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
         jPanel7.setLayout(new java.awt.GridBagLayout());
 
-        PU1.setText("PU1");
-        PU1.setFocusable(false);
-        PU1.addActionListener(new java.awt.event.ActionListener() {
+        PUButton1.setText("PU1");
+        PUButton1.setFocusable(false);
+        PUButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PU1ActionPerformed(evt);
+                PUButton1ActionPerformed(evt);
             }
         });
-        jPanel7.add(PU1, new java.awt.GridBagConstraints());
+        jPanel7.add(PUButton1, new java.awt.GridBagConstraints());
 
-        PU2.setText("PU2");
-        PU2.setFocusable(false);
-        PU2.addActionListener(new java.awt.event.ActionListener() {
+        PUButton2.setText("PU2");
+        PUButton2.setFocusable(false);
+        PUButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PU2ActionPerformed(evt);
+                PUButton2ActionPerformed(evt);
             }
         });
-        jPanel7.add(PU2, new java.awt.GridBagConstraints());
+        jPanel7.add(PUButton2, new java.awt.GridBagConstraints());
 
-        PU3.setText("PU3");
-        PU3.setFocusable(false);
-        PU3.addActionListener(new java.awt.event.ActionListener() {
+        PUButton3.setText("PU3");
+        PUButton3.setFocusable(false);
+        PUButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PU3ActionPerformed(evt);
+                PUButton3ActionPerformed(evt);
             }
         });
-        jPanel7.add(PU3, new java.awt.GridBagConstraints());
+        jPanel7.add(PUButton3, new java.awt.GridBagConstraints());
 
         menuPanel.add(jPanel7);
 
@@ -161,39 +164,60 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
         add(menuPanel, java.awt.BorderLayout.WEST);
 
-        boardPanel.setMinimumSize(new java.awt.Dimension(100, 408));
-        boardPanel.setPreferredSize(new java.awt.Dimension(200, 408));
-        add(boardPanel, java.awt.BorderLayout.CENTER);
+        cardPanel.setMinimumSize(new java.awt.Dimension(100, 408));
+        cardPanel.setPreferredSize(new java.awt.Dimension(200, 408));
+        cardPanel.setLayout(new java.awt.CardLayout());
+        cardPanel.add(boardCard, "card2");
+
+        pausCard.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Game Paused");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        pausCard.add(jLabel1, java.awt.BorderLayout.CENTER);
+
+        cardPanel.add(pausCard, "card3");
+
+        add(cardPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PU1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PU1ActionPerformed
-        if(PU3.isSelected()){
-            PU3.setSelected(false);
+    private void PUButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PUButton1ActionPerformed
+        if(PUButton3.isSelected()){
+            PUButton3.setSelected(false);
         }
-    }//GEN-LAST:event_PU1ActionPerformed
+    }//GEN-LAST:event_PUButton1ActionPerformed
 
-    private void PU2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PU2ActionPerformed
+    private void PUButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PUButton2ActionPerformed
         model.usePowerup(new PUShowAll(),0,0);
-        PU2.setSelected(false);
-    }//GEN-LAST:event_PU2ActionPerformed
+        PUButton2.setSelected(false);
+    }//GEN-LAST:event_PUButton2ActionPerformed
 
-    private void PU3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PU3ActionPerformed
-        if(PU1.isSelected()){
-            PU1.setSelected(false);
+    private void PUButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PUButton3ActionPerformed
+        if(PUButton1.isSelected()){
+            PUButton1.setSelected(false);
         }
-    }//GEN-LAST:event_PU3ActionPerformed
+    }//GEN-LAST:event_PUButton3ActionPerformed
 
     private void pausButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pausButtonActionPerformed
         model.pauseGame(pausButton.isSelected());
+        pausButton.setSelected(model.isGamePaused());
+        CardLayout tmp = (CardLayout) cardPanel.getLayout();
+        if(model.isGamePaused()){
+            tmp.last(cardPanel);
+        }else{
+            tmp.first(cardPanel);
+        }
     }//GEN-LAST:event_pausButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton PU1;
-    private javax.swing.JToggleButton PU2;
-    private javax.swing.JToggleButton PU3;
-    private javax.swing.JPanel boardPanel;
+    private javax.swing.JToggleButton PUButton1;
+    private javax.swing.JToggleButton PUButton2;
+    private javax.swing.JToggleButton PUButton3;
+    private javax.swing.JPanel boardCard;
+    private javax.swing.JPanel cardPanel;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel3;
@@ -210,6 +234,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel mineLabel;
     private javax.swing.JToggleButton pausButton;
+    private javax.swing.JPanel pausCard;
     private javax.swing.JLabel testLabel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
@@ -218,19 +243,19 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         String command = evt.getPropertyName();
         if(command.equals("leftClick")){
             SquareView view = (SquareView)evt.getNewValue();
-            if(PU1.isSelected()){
+            if(PUButton1.isSelected()){
                 model.usePowerup(new PUChooseSafeArea(),view.getXPos(), view.getYPos());
-                PU1.setSelected(false);
-            }else if(PU3.isSelected()){
+                PUButton1.setSelected(false);
+            }else if(PUButton3.isSelected()){
                 //Kod för sista PU.
-                PU3.setSelected(false);
+                PUButton3.setSelected(false);
             }else{
             model.chooseSquare(view.getXPos(), view.getYPos());                
             }
             
         }else if(command.equals("rightClick")){
-            PU1.setSelected(false);
-            PU3.setSelected(false);
+            PUButton1.setSelected(false);
+            PUButton3.setSelected(false);
             SquareView view = (SquareView)evt.getNewValue();
             model.markSquare(view.getXPos(), view.getYPos());
         }
@@ -239,10 +264,12 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
     public void update(Observable o, Object arg) {
         labelUpdate();
-        if(model.isGameOver()){
-            
+        if(model.getState().equals(state.GAMEOVER)){
+            JOptionPane.showConfirmDialog(null,
+            "Restart?", "Restart?", JOptionPane.YES_NO_OPTION);
+            restart();
         }
-        if(model.isLvlComplete()){
+        if(model.getState().equals(state.FINISHED)){
             JOptionPane.showConfirmDialog(null,
             "Play next level?", "Play next level?", JOptionPane.YES_NO_OPTION);
             model.nextLevel();
@@ -257,28 +284,37 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         setLives(model.getLives());
         mineLabel.setText("NA/"+model.getMines());
         testLabel.setText(model.getState()+"");
+        PUButton1.setEnabled(PU1.getCost()<model.getGameTime());
+        PUButton2.setEnabled(PU2.getCost()<model.getGameTime());
+        PUButton3.setEnabled(PU3.getCost()<model.getGameTime());
     }
     
     private void setLives(int lives){
         if(lives>0){
             lifeLabel1.setIcon(new ImageIcon("src/resources/heart.png"));
-            
             if(lives>1){
                 lifeLabel2.setIcon(new ImageIcon("src/resources/heart.png"));
-                
                 if(lives>2){
                     lifeLabel3.setIcon(new ImageIcon("src/resources/heart.png"));
                 }else{
-                    //lifeLabel3.setIcon(null);
-                    lifeLabel3.setText("");
+                    lifeLabel3.setIcon(null);
                 }
             }else{
-                //lifeLabel2.setIcon(null);
-                lifeLabel2.setText("");
+                lifeLabel2.setIcon(null);
             }
         }else{
-            //lifeLabel1.setIcon(null);
-            lifeLabel1.setText("");
+            lifeLabel1.setIcon(null);
         }
+    }
+    private void restart(){
+        model.deleteObserver(this);
+        boardCard.removeAll();
+        model= new CampaignModel();
+        model.addObserver(this);
+        GameBoardView board = new GameBoardView(model, this);
+        boardCard.add(board);
+        this.board=board;
+
+        
     }
 }

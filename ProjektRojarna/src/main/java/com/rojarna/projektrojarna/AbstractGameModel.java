@@ -91,7 +91,5 @@ public abstract class AbstractGameModel extends Observable implements PropertyCh
             this.notifyObservers();
         }
     }
-    
-
 }
 

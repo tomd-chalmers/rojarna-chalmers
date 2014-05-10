@@ -79,16 +79,13 @@ public class SquareView extends javax.swing.JPanel implements Observer{
     private void setButtonIcon(Square.Marking m){
         switch(m){
             case NONE:
-                button.setIcon(new ImageIcon(""));
-                button.setText("");
+                button.setIcon(null);
                 break;
             case FLAG:
-                button.setIcon(new ImageIcon(""));
-                button.setText("F");
+                button.setIcon(new ImageIcon("src/resources/flag.png"));
                 break;
             case QUESTION:
-                button.setIcon(new ImageIcon(""));
-                button.setText("?");
+                button.setIcon(new ImageIcon("src/resources/question.png"));
                 break;
         }
     }
