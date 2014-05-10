@@ -157,14 +157,16 @@ public class CampaignModel extends AbstractGameModel{
         return gameState;
     }
     public void pauseGame(boolean paus){
-        super.pauseGame(paus);   
-        if(paus){
-            gameState = state.PAUSED;
-        }else{
-            gameState = state.PLAYING;
+        if(gameState.equals(state.PAUSED)||gameState.equals(state.PLAYING)){
+            super.pauseGame(paus);   
+            if(paus){
+                gameState = state.PAUSED;
+            }else{
+                gameState = state.PLAYING;
+            }
+            this.setChanged();
+            this.notifyObservers();
         }
-        this.setChanged();
-        this.notifyObservers();
     }
     public int getMines(){
         return mines;
