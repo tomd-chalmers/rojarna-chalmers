@@ -48,7 +48,7 @@ public class ClassicModel extends AbstractGameModel{
         if(!getBoard().isClicked()){
             setGameTimer(new GameTimer());
         }
-        if( getBoard().chooseSquare(xPos, yPos) == Item.MINE){
+        if(getBoard().chooseSquare(xPos, yPos) == Item.MINE){
             gameOver(false);
             pauseGame(true);
         } else if( getBoard().isAllNumberShown() ){

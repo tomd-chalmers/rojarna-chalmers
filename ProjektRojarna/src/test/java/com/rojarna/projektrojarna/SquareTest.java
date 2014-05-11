@@ -52,27 +52,65 @@ public class SquareTest extends TestCase {
     }
 
     public void testDecValue() {
+        Square s = new Square();
+        assertTrue(s.getValue() == 0);
+        s.incValue();
+        s.incValue();
+        s.decValue();
+        assertTrue(s.getValue() == 1);
     }
 
     public void testGetValue() {
+        Square s = new Square();
+        assertTrue(s.getValue() == 0);
+        s.incValue();
+        assertTrue(s.getValue() == 1);
     }
 
     public void testIsMine() {
+        Square s = new Square();
+        assertFalse(s.isMine());
+        s.setItem(Item.MINE);
+        assertTrue(s.isMine());
     }
 
     public void testIsVisible() {
+        Square s = new Square();
+        assertFalse(s.isVisible());
+        s.setVisible(true);
+        assertTrue(s.isVisible());
     }
 
     public void testSetVisible() {
+        Square s = new Square();
+        assertFalse(s.isVisible());
+        s.setVisible(true);
+        assertTrue(s.isVisible());
     }
 
     public void testSetMarking() {
+        Square s = new Square();
+        assertTrue(s.getMarking() == Marking.NONE);
+        s.setMarking(Marking.FLAG);
+        assertTrue(s.getMarking() == Marking.FLAG);
     }
 
     public void testMarkSquare() {
+        Square s = new Square();
+        assertTrue(s.getMarking() == Marking.NONE);
+        s.markSquare();
+        assertTrue(s.getMarking() == Marking.FLAG);
+        s.markSquare();
+        assertTrue(s.getMarking() == Marking.QUESTION);
+        s.markSquare();
+        assertTrue(s.getMarking() == Marking.NONE);
     }
 
     public void testGetMarking() {
+        Square s = new Square();
+        assertTrue(s.getMarking() == Marking.NONE);
+        s.setMarking(Marking.FLAG);
+        assertTrue(s.getMarking() == Marking.FLAG);
     }
     
 }
