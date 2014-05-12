@@ -16,7 +16,7 @@ import javax.swing.JLabel;
  *
  * @author Tom
  */
-public class ClassicView extends javax.swing.JPanel implements PropertyChangeListener{
+public class ClassicView extends javax.swing.JPanel implements PropertyChangeListener, IGameView{
     
     
     private ClassicModel model;
@@ -27,8 +27,12 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     public ClassicView(ClassicModel m) {
         initComponents();
         
+<<<<<<< HEAD
         gamePanel.setLayout(new FlowLayout());
         this.model=m;
+=======
+        setGameModel(m);
+>>>>>>> 9cbddd9d2d32496e76d7caaa31e19130533f941a
         this.gameBoard=new GameBoardView(this.model, this);
         gamePanel.add(gameBoard);
         //gamePanel.add(new JLabel("test"));
@@ -230,6 +234,15 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         else{
             thirdPlaceLabel.setText("0");
                     
+        }
+    }
+
+    public void setGameModel(AbstractGameModel model) {
+        try{
+            this.model = (ClassicModel)model;
+        }
+        catch(ClassCastException e){
+            throw new IllegalArgumentException();
         }
     }
 }

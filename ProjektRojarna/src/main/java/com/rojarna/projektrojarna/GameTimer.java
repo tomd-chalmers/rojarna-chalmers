@@ -7,6 +7,8 @@ package com.rojarna.projektrojarna;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import javax.swing.Timer;
 
 
@@ -18,6 +20,8 @@ import javax.swing.Timer;
  * @revised (redone) Tom
  */
 public class GameTimer {
+    
+    private final PropertyChangeSupport property = new PropertyChangeSupport(this);
     
     private final static int SEC = 1000;
     
@@ -35,6 +39,7 @@ public class GameTimer {
                 time++;
                 // fire property change or something, for a view.
             }
+            property.firePropertyChange("time",true,false);
         }
     });
     
@@ -107,4 +112,12 @@ public class GameTimer {
         timer.stop();
         time=startValue;
     }
+    
+     public void addPropertyChangeListener(PropertyChangeListener l) {
+         property.addPropertyChangeListener(l);
+     }
+
+     public void removePropertyChangeListener(PropertyChangeListener l) {
+         property.removePropertyChangeListener(l);
+     }
 }

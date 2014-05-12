@@ -6,6 +6,9 @@
 
 package com.rojarna.projektrojarna;
 
+import java.beans.PropertyChangeEvent;
+
+
 /**
  *
  * @author Joakim
@@ -13,9 +16,9 @@ package com.rojarna.projektrojarna;
 public class CampaignModel extends AbstractGameModel{
       
     private int mines, width, height, currentLives= 3, level = 1;
-    private state gameState;
+    private State gameState;
     
-    public enum state{
+    public enum State{
         PLAYING,PAUSED,FINISHED,GAMEOVER;
     }
     public CampaignModel(){
@@ -26,32 +29,34 @@ public class CampaignModel extends AbstractGameModel{
     }
     
     public void chooseSquare(int xPos, int yPos){
-        if(xPos < 0 || yPos < 0)
-            throw new IllegalArgumentException();
-        
-        if(!getBoard().isClicked()){
-            getGameTimer().start();
-        }
-        
-        if(getBoard().getSquareMarking(xPos, yPos) != Square.Marking.FLAG){
-            getBoard().chooseSquare(xPos, yPos);
-            if(isMine(xPos,yPos)){
-                removeLife();
+        if(gameState.equals(State.PLAYING)){
+            if(xPos < 0 || yPos < 0)
+                throw new IllegalArgumentException();
+
+            if(!getBoard().isClicked()){
+                getGameTimer().start();
             }
-            if(isLvlComplete()){
-                finishLevel();
+
+            if(getBoard().getSquareMarking(xPos, yPos) != Square.Marking.FLAG){
+                getBoard().chooseSquare(xPos, yPos);
+                if(isMine(xPos,yPos)){
+                    removeLife();
+                }
+                if(isLvlComplete()){
+                    finishLevel();
+                }
             }
+
+            this.setChanged();
+            this.notifyObservers();
         }
-        
-        this.setChanged();
-        this.notifyObservers();
     }
     
     public boolean isMine(int x, int y){
         return getSquare(x,y).getItem() == Square.Item.MINE;
     }
     
-    public void removeLife(){
+    private void removeLife(){
         if(currentLives > 0){
             currentLives--;
         }
@@ -61,31 +66,36 @@ public class CampaignModel extends AbstractGameModel{
     }
     
      public void markSquare(int xPos, int yPos){
-        if(xPos < 0 || yPos < 0)
-            throw new IllegalArgumentException();
-        
-        getBoard().markSquare(xPos, yPos);
-        
-        this.setChanged();
-        this.notifyObservers();
+         if(gameState.equals(State.PLAYING)){
+            if(xPos < 0 || yPos < 0)
+               throw new IllegalArgumentException();
+
+           getBoard().markSquare(xPos, yPos);
+
+           this.setChanged();
+           this.notifyObservers();
+        }
      }
      
     public void usePowerup(PowerupInterface pu, int x, int y){
         //Bättre att ha koll på om den har råd här istället för i getCost?
-        if(getGameTimer().afford(pu.getCost())){
+        if(getGameTimer().afford(pu.getCost())&&gameState.equals(State.PLAYING)){
             getGameTimer().removeTime(pu.getCost());
             
             pu.power(getBoard(), x, y);
             
+            if(isLvlComplete()){
+                finishLevel();
+            }
             this.setChanged();
             this.notifyObservers();
         }
     }
      
-     public void finishLevel(){
+     private void finishLevel(){
          if(getBoard().isAllNumberShown()){
              getGameTimer().stop();
-             gameState = state.FINISHED;
+             gameState = State.FINISHED;
              //nextLevel();
              
              this.setChanged();
@@ -97,34 +107,35 @@ public class CampaignModel extends AbstractGameModel{
      }
      
     public void nextLevel(){
-        level++;
-        width=width+2;
-        height=height+2;
+        if(gameState.equals(State.FINISHED)){
+            level++;
+            width=width+2;
+            height=height+2;
 
-        mines = (int) ((int) (width*height)*(0.1+0.05*level));
-        getGameTimer().addTime(120);
-        newGame(mines,height,width);
+            mines = (int) ((int) (width*height)*(0.1+0.05*level));
+            getGameTimer().addTime(120);
+            newGame(mines,height,width);
+        }
     }
     
-    @Override
-    public void newGame(int mines, int height, int width) {
+    private void newGame(int mines, int height, int width) {
         if(mines < 0 || width < 0 || height < 0)
             throw new IllegalArgumentException();
         
         if(level == 1){
             setGameTimer(new GameTimer(120));
         }
-        gameState = state.PLAYING;
+        gameState = State.PLAYING;
         setBoard(new GameBoard(mines, height, width));
         
         this.setChanged();
         this.notifyObservers();
     }
     
-    public void gameOver(){
+    private void gameOver(){
         System.out.println("GameOver");
         getGameTimer().stop();
-        gameState = state.GAMEOVER;
+        gameState = State.GAMEOVER;
         //spara highscore
         //popup
         this.setChanged();
@@ -145,22 +156,29 @@ public class CampaignModel extends AbstractGameModel{
     public boolean isGameOver(){
         return currentLives>0;
     }
-    public state getState(){
+    public State getState(){
         return gameState;
     }
     public void pauseGame(boolean paus){
-        
-        super.pauseGame(paus);
-        
-        if(paus){
-            gameState = state.PAUSED;
-        }else{
-            gameState = state.PLAYING;
+        if(gameState.equals(State.PAUSED)||gameState.equals(State.PLAYING)){
+            super.pauseGame(paus);   
+            if(paus){
+                gameState = State.PAUSED;
+            }else{
+                gameState = State.PLAYING;
+            }
+            this.setChanged();
+            this.notifyObservers();
         }
-        this.setChanged();
-        this.notifyObservers();
     }
     public int getMines(){
         return mines;
+    }
+    public void propertyChange(PropertyChangeEvent evt){
+        if(evt.getPropertyName().equals("time")&&getGameTime()<=0){
+            gameOver();
+        }
+        this.setChanged();
+        this.notifyObservers();
     }
 }

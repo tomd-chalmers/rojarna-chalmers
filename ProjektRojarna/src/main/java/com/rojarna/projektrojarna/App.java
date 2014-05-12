@@ -8,10 +8,11 @@ public class App
 {
     public static void main( String[] args )
     {
-        ClassicModel model = new ClassicModel(10, 10, 30);
-        GameView view = new GameView();
+        //ClassicModel model = new ClassicModel(10, 10, 30);
+        //GameView view = new GameView();
         
-        new GameController(model, view);
-        view.setVisible(true);
+        new GameController();
+        //new GameController(model, view);
+        //view.setVisible(true);
     }
 }

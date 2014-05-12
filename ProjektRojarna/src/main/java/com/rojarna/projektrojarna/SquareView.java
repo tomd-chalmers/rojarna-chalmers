@@ -41,8 +41,7 @@ public class SquareView extends javax.swing.JPanel implements Observer{
     
     private void setContent(Square s){
         if(s.getItem()==Square.Item.MINE){
-            contentLabel.setIcon(new ImageIcon(""));
-            contentLabel.setText("*");
+            contentLabel.setIcon(new ImageIcon("src/resources/mine.32.png"));
         }else{
             switch(s.getValue()){
                 case 0:
@@ -79,16 +78,13 @@ public class SquareView extends javax.swing.JPanel implements Observer{
     private void setButtonIcon(Square.Marking m){
         switch(m){
             case NONE:
-                button.setIcon(new ImageIcon(""));
-                button.setText("");
+                button.setIcon(null);
                 break;
             case FLAG:
-                button.setIcon(new ImageIcon(""));
-                button.setText("F");
+                button.setIcon(new ImageIcon("src/resources/flag.png"));
                 break;
             case QUESTION:
-                button.setIcon(new ImageIcon(""));
-                button.setText("?");
+                button.setIcon(new ImageIcon("src/resources/question.png"));
                 break;
         }
     }
@@ -113,14 +109,18 @@ public class SquareView extends javax.swing.JPanel implements Observer{
         buttonCard = new javax.swing.JPanel();
         button = new javax.swing.JButton();
 
+        setOpaque(false);
         setLayout(new java.awt.CardLayout());
 
-        contentCard.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        contentCard.setBackground(new java.awt.Color(255, 255, 255));
         contentCard.setLayout(new java.awt.GridBagLayout());
         add(contentCard, "content");
 
+        buttonCard.setOpaque(false);
         buttonCard.setLayout(new java.awt.GridLayout(1, 1));
 
+        button.setBorder(null);
+        button.setFocusable(false);
         button.setMaximumSize(new java.awt.Dimension(40, 40));
         button.setMinimumSize(new java.awt.Dimension(40, 40));
         button.setPreferredSize(new java.awt.Dimension(40, 40));
