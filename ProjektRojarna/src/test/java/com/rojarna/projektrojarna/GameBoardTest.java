@@ -25,9 +25,11 @@ public class GameBoardTest extends TestCase {
     }
 
     public void testGetBorder() {
-        GameBoard gb = new GameBoard();
-        //List<Point> border = new ArrayList<Point>();
-        //border = gb.getBorder();
+        GameBoard gb = new GameBoard(1,5,5);
+        List<Point> border = new ArrayList<Point>();
+        border = gb.getBorder(gb.getWidth()-1,gb.getHeight()-1);
+        System.out.println(border.size());
+        assertTrue(border.size()==16);
         // INTE KLAR.
     }
 
@@ -35,7 +37,6 @@ public class GameBoardTest extends TestCase {
         GameBoard gb = new GameBoard(0,5,5);
         gb.chooseSquare(2, 2);
         assertTrue(gb.getSquare(2, 2).isVisible());
-        // mera här.
     }
 
     public void testMarkSquare() {
@@ -81,12 +82,13 @@ public class GameBoardTest extends TestCase {
 
     public void testShowMines() {
         GameBoard gb = new GameBoard(10,5,5);
+        gb.chooseSquare(2, 2);
         gb.showMines();
         int mineCounter=0;
         int x =0;
         int y =0;
         for(int i = 0; i<25;i++){
-            if(gb.getSquare(x,y).isVisible() || gb.getSquareItem(x,y)==Item.MINE){
+            if(gb.getSquare(x,y).isVisible() && gb.getSquareItem(x,y)==Item.MINE){
                 mineCounter++;
             }
             if(y<4){
@@ -131,8 +133,7 @@ public class GameBoardTest extends TestCase {
         assertTrue(gb.getMines()==2);
     }
 
-    public void testGetSquare() {
-        //hur testar man denna???   
+    public void testGetSquare() {   
     }
 
     public void testSystemPrint() {

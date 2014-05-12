@@ -6,9 +6,11 @@
 
 package com.rojarna.projektrojarna;
 
+import java.awt.FlowLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
+import javax.swing.JLabel;
 
 /**
  *
@@ -18,16 +20,18 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     
     
     private ClassicModel model;
-    private GameBoardView gameBoard;
+    GameBoardView gameBoard;
     /**
      * Creates new form ClassicView
      */
     public ClassicView(ClassicModel m) {
         initComponents();
+        
+        gamePanel.setLayout(new FlowLayout());
         this.model=m;
         this.gameBoard=new GameBoardView(this.model, this);
         gamePanel.add(gameBoard);
-        
+        //gamePanel.add(new JLabel("test"));
         showHighscore();
     }
 
@@ -41,9 +45,10 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     private void initComponents() {
 
         gamePanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         timeLabel = new javax.swing.JLabel();
-        PauseButton = new javax.swing.JButton();
-        ExitButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         highScorePanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -52,26 +57,41 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         firstPlaceLabel = new javax.swing.JLabel();
         secondPlaceLabel = new javax.swing.JLabel();
         thirdPlaceLabel = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        PauseButton = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setPreferredSize(new java.awt.Dimension(400, 340));
+        setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
         gamePanel.setLayout(gamePanelLayout);
         gamePanelLayout.setHorizontalGroup(
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGap(0, 319, Short.MAX_VALUE)
         );
         gamePanelLayout.setVerticalGroup(
             gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 340, Short.MAX_VALUE)
         );
 
+        add(gamePanel, java.awt.BorderLayout.CENTER);
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(100, 138));
+        jPanel1.setMinimumSize(new java.awt.Dimension(100, 138));
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 138));
+        jPanel1.setLayout(new java.awt.GridLayout(3, 1));
+
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
         timeLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         timeLabel.setText("Time");
+        jPanel2.add(timeLabel, new java.awt.GridBagConstraints());
 
-        PauseButton.setText("PAUSE");
+        jPanel1.add(jPanel2);
 
-        ExitButton.setText("EXIT");
+        jPanel3.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setText("HIGHSCORE");
 
@@ -132,40 +152,27 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
                 .addGroup(highScorePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(thirdPlaceLabel))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(timeLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ExitButton, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                            .addComponent(PauseButton, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                            .addComponent(highScorePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(gamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gamePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(highScorePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(PauseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jPanel3.add(highScorePanel, new java.awt.GridBagConstraints());
+
+        jPanel1.add(jPanel3);
+
+        jPanel4.setLayout(new java.awt.GridLayout(2, 1));
+
+        PauseButton.setText("PAUSE");
+        jPanel4.add(PauseButton);
+
+        ExitButton.setText("EXIT");
+        jPanel4.add(ExitButton);
+
+        jPanel1.add(jPanel4);
+
+        add(jPanel1, java.awt.BorderLayout.WEST);
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        add(jSeparator1, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -179,6 +186,11 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel secondPlaceLabel;
     private javax.swing.JLabel thirdPlaceLabel;
     private javax.swing.JLabel timeLabel;
@@ -186,7 +198,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     
     public void propertyChange(PropertyChangeEvent evt) {
         String command = evt.getPropertyName();
-        timeLabel.setText(model.getGameTimeString());
+        //timeLabel.setText(model.getGameTime()+"");
         if(command.equals("leftClick")){
             SquareView view = (SquareView)evt.getNewValue();
             model.chooseSquare(view.getXPos(), view.getYPos());                
@@ -196,9 +208,28 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         }
     }
     private void showHighscore(){
-        //List<Integer> list = Save.getHighscore();
-        //firstPlaceLabel.setText(list.get(0)+"");
-        //secondPlaceLabel.setText(list.get(1)+"");
-        //thirdPlaceLabel.setText(list.get(3)+"");   
+        
+        List<Integer> list = Save.getHighscore();
+        if(list.size()>0){
+            firstPlaceLabel.setText(list.get(0)+"");
+        }
+        else{
+            firstPlaceLabel.setText("0");
+                    
+        }
+        if(list.size()>1){
+            secondPlaceLabel.setText(list.get(0)+"");
+        }
+        else{
+            secondPlaceLabel.setText("0");
+                    
+        }
+        if(list.size()>2){
+            thirdPlaceLabel.setText(list.get(0)+"");
+        }
+        else{
+            thirdPlaceLabel.setText("0");
+                    
+        }
     }
 }
