@@ -86,6 +86,15 @@ public class ClassicModelTest extends TestCase {
 
     public void testGetSquare() {
         ClassicModel m = new ClassicModel();
+        Square s = m.getBoard().getSquare(2,2);
+        m.getBoard().getSquare(2,2).setItem(Item.MINE);
+        m.getBoard().getSquare(2,2).setMarking(Marking.FLAG);
+        m.getBoard().getSquare(2,2).setVisible(true);
+        s.setItem(Item.MINE);
+        s.setMarking(Marking.FLAG);
+        s.setVisible(true);
+        assertTrue(m.getBoard().getSquare(2,2).equals(s));
+        
     }
 
     public void testSetGameState() {
