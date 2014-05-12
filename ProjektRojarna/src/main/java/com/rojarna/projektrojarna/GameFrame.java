@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  *
  * @author Gaming
  */
-public class GameFrame extends javax.swing.JFrame implements PropertyChangeListener{
+public class GameFrame extends javax.swing.JFrame{
 
     MenuPanel menuPanel;
     GameBoardView boardViewPanel;
@@ -26,12 +26,12 @@ public class GameFrame extends javax.swing.JFrame implements PropertyChangeListe
     public GameFrame() {
         initComponents();
         
-        this.getContentPane().setLayout(new CardLayout());
+        getContentPane().setLayout(new CardLayout());
         
         menuPanel = new MenuPanel();
         add(menuPanel, "Menu");
         
-        ((CardLayout)this.getContentPane().getLayout()).show(this.getContentPane(), "Menu");
+        ((CardLayout)getContentPane().getLayout()).show(getContentPane(), "Menu");
     }
 
     /**
@@ -99,10 +99,20 @@ public class GameFrame extends javax.swing.JFrame implements PropertyChangeListe
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
     public void setGamePanel(JPanel game){
-        add(game);
+        getContentPane().add(game, "Game");
     }
-
-    public void propertyChange(PropertyChangeEvent evt) {
-        this.firePropertyChange(evt.getPropertyName(), false, true);
+    
+    public void show(String s){
+        ((CardLayout)getContentPane().getLayout()).show(getContentPane(), s);
+    }
+    
+    @Override
+    public void addPropertyChangeListener(PropertyChangeListener listener){
+        menuPanel.addPropertyChangeListener(listener);
+    }
+    
+    @Override
+    public void removePropertyChangeListener(PropertyChangeListener listener){
+        menuPanel.removePropertyChangeListener(listener);
     }
 }

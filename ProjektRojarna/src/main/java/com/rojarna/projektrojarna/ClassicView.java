@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Tom
  */
-public class ClassicView extends javax.swing.JPanel implements PropertyChangeListener{
+public class ClassicView extends javax.swing.JPanel implements PropertyChangeListener, IGameView{
     
     
     private ClassicModel model;
@@ -24,7 +24,8 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
      */
     public ClassicView(ClassicModel m) {
         initComponents();
-        this.model=m;
+        
+        setGameModel(m);
         this.gameBoard=new GameBoardView(this.model, this);
         gamePanel.add(gameBoard);
         
@@ -200,5 +201,14 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         //firstPlaceLabel.setText(list.get(0)+"");
         //secondPlaceLabel.setText(list.get(1)+"");
         //thirdPlaceLabel.setText(list.get(3)+"");   
+    }
+
+    public void setGameModel(AbstractGameModel model) {
+        try{
+            this.model = (ClassicModel)model;
+        }
+        catch(ClassCastException e){
+            throw new IllegalArgumentException();
+        }
     }
 }

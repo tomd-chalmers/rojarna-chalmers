@@ -19,7 +19,7 @@ import java.util.Observer;
 public class GameController implements Observer, PropertyChangeListener{
     
     private AbstractGameModel gameModel = null;
-    private GameView gameView = null;
+    private IGameView gameView = null;
     
     private GameFrame frame = null;
     private MenuPanel panel = null;
@@ -31,32 +31,31 @@ public class GameController implements Observer, PropertyChangeListener{
         //((CardLayout)panel.getLayout()).show(frame.getContentPane(), "Menu");
         frame.setVisible(true);
         frame.pack();
-        
-        frame.addPropertyChangeListener("ClassicGame", this);
-        frame.addPropertyChangeListener("CampaignGame", this);
-        
-        frame.addPropertyChangeListener("ExitGame", this);
+        frame.addPropertyChangeListener(this);
     }
     
-    public GameController(AbstractGameModel model, GameView view){
+    public GameController(AbstractGameModel model, IGameView view){
         gameModel = model;
         model.addObserver(this);
         
         gameView = view;
-        view.setModel(model);
-        view.pack();
+        view.setGameModel(model);
     }
     
-    private void newGame(AbstractGameModel model, GameView view){
+    private void newGame(AbstractGameModel model, IGameView view){
+        frame.setGamePanel(new ClassicView((ClassicModel)model));
+        
+        frame.show("Game");
+        
         gameModel = model;
         model.addObserver(this);
         
         gameView = view;
-        view.setModel(model);
-        view.pack();
+        view.setGameModel(model);
     }
     
     private void exitProgram(){
+        frame.setEnabled(false);
         System.exit(0);
     }
 
@@ -65,15 +64,13 @@ public class GameController implements Observer, PropertyChangeListener{
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
-        System.out.println("property has changed");
-        
         if(evt.getPropertyName().equals("ClassicGame")){
-            newGame(new ClassicModel(), new GameView());
-            System.out.println("classic clicked");
+            ClassicModel m = new ClassicModel();
+            newGame(m, new ClassicView(m));
         }
         else if(evt.getPropertyName().equals("CampaignGame")){
-            newGame(new CampaignModel(), new GameView());
-            System.out.println("campaign clicked");
+            CampaignModel m = new CampaignModel();
+            newGame(m, new CampaignView(m));
         }
         else if(evt.getPropertyName().equals("ClassicGame")){
             exitProgram();

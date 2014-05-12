@@ -88,15 +88,15 @@ public class MenuPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ClassicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClassicButtonActionPerformed
-        this.firePropertyChange("ClassicGame", null, this);
+        this.firePropertyChange("ClassicGame", false, true);
     }//GEN-LAST:event_ClassicButtonActionPerformed
 
     private void CampaignButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampaignButtonActionPerformed
-        this.firePropertyChange("CampaignGame", null, this);
+        this.firePropertyChange("CampaignGame", false, true);
     }//GEN-LAST:event_CampaignButtonActionPerformed
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
-        this.firePropertyChange("ExitGame", null, this);
+        this.firePropertyChange("ExitGame", false, true);
     }//GEN-LAST:event_ExitButtonActionPerformed
 
 
