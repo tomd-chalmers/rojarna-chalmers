@@ -44,11 +44,8 @@ public abstract class AbstractGameModel extends Observable implements PropertyCh
         return getBoard().getMines();
     }
     
-    public abstract void pauseGame(boolean pause);
-    
-    /*
-    public void pauseGame(boolean b){
-        if(b){
+    public void pauseGame(boolean paus){
+        if(paus){
             gameTimer.stop();
             gamePaused = true;
         } else {
@@ -59,7 +56,6 @@ public abstract class AbstractGameModel extends Observable implements PropertyCh
         this.setChanged();
         this.notifyObservers();
     }
-    */
     
     public boolean isGamePaused(){
         return gamePaused;
@@ -80,6 +76,9 @@ public abstract class AbstractGameModel extends Observable implements PropertyCh
     
     public String getGameTimeString(){
         return gameTimer.getTimeMin();
+    }
+    public int getFlags(){
+        return gameBoard.getFlags();
     }
     
     public void propertyChange(PropertyChangeEvent evt){

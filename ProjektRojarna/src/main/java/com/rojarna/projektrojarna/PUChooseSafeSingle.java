@@ -23,9 +23,12 @@ public class PUChooseSafeSingle implements PowerupInterface{
     
     public void power(GameBoard gb, int x, int y) {
         if(gb.getSquare(x,y).getItem()==Item.MINE){
-            gb.getSquare(x,y).setMarking(Marking.FLAG);
+            while(!gb.getSquareMarking(x,y).equals(Marking.FLAG)){
+                gb.markSquare(x,y);
+            }
         } else {
-            gb.getSquare(x,y).setMarking(Marking.NONE);
+            if(gb.getSquareMarking(x,y).equals(Marking.FLAG))
+                gb.markSquare(x,y);
             gb.chooseSquare(x,y);
         }
     }

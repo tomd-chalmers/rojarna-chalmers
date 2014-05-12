@@ -94,7 +94,7 @@ public class ClassicModel extends AbstractGameModel{
     }
     
     public void pauseGame(boolean pause){
-        //super.pauseGame(pause);
+        super.pauseGame(pause);
         
         if(pause && state == GameState.PLAYING){
             state = GameState.PAUSED;

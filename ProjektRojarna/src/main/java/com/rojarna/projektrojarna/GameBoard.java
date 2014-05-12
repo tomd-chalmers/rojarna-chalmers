@@ -29,6 +29,7 @@ public class GameBoard{
     private Square[][] board;
     private int mines,width,height;
     private boolean boardClicked = false;
+    private int flagCounter = 0;
 
 
     public GameBoard(){
@@ -125,6 +126,11 @@ public class GameBoard{
 
     public void markSquare(int x, int y){
         board[y][x].markSquare();
+        if(board[y][x].getMarking().equals(Marking.FLAG)){
+            flagCounter++;
+        }else if(board[y][x].getMarking().equals(Marking.QUESTION)){
+            flagCounter--;
+        }
     }
 
     public boolean isAllNumberShown(){
@@ -189,6 +195,9 @@ public class GameBoard{
 
     public Square getSquare(int i, int j){
         return board[j][i];
+    }
+    public int getFlags(){
+        return flagCounter;
     }
         
 	

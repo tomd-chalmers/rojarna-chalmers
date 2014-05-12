@@ -160,7 +160,7 @@ public class CampaignModel extends AbstractGameModel{
     }
     public void pauseGame(boolean paus){
         if(gameState.equals(state.PAUSED)||gameState.equals(state.PLAYING)){
-            //super.pauseGame(paus);   
+            super.pauseGame(paus);   
             if(paus){
                 gameState = state.PAUSED;
             }else{

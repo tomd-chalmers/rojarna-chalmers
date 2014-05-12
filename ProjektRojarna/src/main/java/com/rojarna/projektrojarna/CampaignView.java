@@ -38,7 +38,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         model.addObserver(this);
         board = new GameBoardView(model, this);
         boardCard.add(board);
-        boardCard.setBackground(Color.red);
+        boardCard.setBackground(Color.MAGENTA);
     }
 
     /**
@@ -51,26 +51,29 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     private void initComponents() {
 
         menuPanel = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        timePanel = new javax.swing.JPanel();
         timeLabel = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        levelPanel = new javax.swing.JPanel();
         levelLabel = new javax.swing.JLabel();
         lifePanel = new javax.swing.JPanel();
         lifeLabel1 = new javax.swing.JLabel();
         lifeLabel2 = new javax.swing.JLabel();
         lifeLabel3 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        mineLabel = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        minePanel = new javax.swing.JPanel();
+        nbrOfFlags = new javax.swing.JLabel();
+        flagIconLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        nbrOfMines = new javax.swing.JLabel();
+        mineIconLabel = new javax.swing.JLabel();
+        PUPanel = new javax.swing.JPanel();
         PUButton1 = new javax.swing.JToggleButton();
         PUButton2 = new javax.swing.JToggleButton();
         PUButton3 = new javax.swing.JToggleButton();
-        jPanel8 = new javax.swing.JPanel();
+        StatePanel = new javax.swing.JPanel();
         testLabel = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
+        PausButtonPanel = new javax.swing.JPanel();
         pausButton = new javax.swing.JToggleButton();
-        jPanel10 = new javax.swing.JPanel();
+        ExitButtonPanel = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
         boardCard = new javax.swing.JPanel();
@@ -86,14 +89,14 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
         timeLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         timeLabel.setText("Time");
-        jPanel3.add(timeLabel);
+        timePanel.add(timeLabel);
 
-        menuPanel.add(jPanel3);
+        menuPanel.add(timePanel);
 
         levelLabel.setText("Level");
-        jPanel4.add(levelLabel);
+        levelPanel.add(levelLabel);
 
-        menuPanel.add(jPanel4);
+        menuPanel.add(levelPanel);
 
         lifePanel.add(lifeLabel1);
         lifePanel.add(lifeLabel2);
@@ -101,15 +104,24 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
         menuPanel.add(lifePanel);
 
-        jLabel6.setText("MineIcon");
-        jPanel6.add(jLabel6);
+        nbrOfFlags.setText("Flags");
+        minePanel.add(nbrOfFlags);
 
-        mineLabel.setText("nbrOfMines");
-        jPanel6.add(mineLabel);
+        flagIconLabel.setIcon(new ImageIcon("src/resources/flag.png"));
+        minePanel.add(flagIconLabel);
 
-        menuPanel.add(jPanel6);
+        jLabel2.setText("/");
+        minePanel.add(jLabel2);
 
-        jPanel7.setLayout(new java.awt.GridBagLayout());
+        nbrOfMines.setText("Mines");
+        minePanel.add(nbrOfMines);
+
+        mineIconLabel.setIcon(new ImageIcon("src/resources/mine.16.png"));
+        minePanel.add(mineIconLabel);
+
+        menuPanel.add(minePanel);
+
+        PUPanel.setLayout(new java.awt.GridBagLayout());
 
         PUButton1.setText("PU1");
         PUButton1.setFocusable(false);
@@ -118,7 +130,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
                 PUButton1ActionPerformed(evt);
             }
         });
-        jPanel7.add(PUButton1, new java.awt.GridBagConstraints());
+        PUPanel.add(PUButton1, new java.awt.GridBagConstraints());
 
         PUButton2.setText("PU2");
         PUButton2.setFocusable(false);
@@ -127,7 +139,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
                 PUButton2ActionPerformed(evt);
             }
         });
-        jPanel7.add(PUButton2, new java.awt.GridBagConstraints());
+        PUPanel.add(PUButton2, new java.awt.GridBagConstraints());
 
         PUButton3.setText("PU3");
         PUButton3.setFocusable(false);
@@ -136,14 +148,14 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
                 PUButton3ActionPerformed(evt);
             }
         });
-        jPanel7.add(PUButton3, new java.awt.GridBagConstraints());
+        PUPanel.add(PUButton3, new java.awt.GridBagConstraints());
 
-        menuPanel.add(jPanel7);
+        menuPanel.add(PUPanel);
 
         testLabel.setText("jLabel1");
-        jPanel8.add(testLabel);
+        StatePanel.add(testLabel);
 
-        menuPanel.add(jPanel8);
+        menuPanel.add(StatePanel);
 
         pausButton.setText("Paus");
         pausButton.setFocusable(false);
@@ -153,16 +165,16 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
                 pausButtonActionPerformed(evt);
             }
         });
-        jPanel9.add(pausButton);
+        PausButtonPanel.add(pausButton);
 
-        menuPanel.add(jPanel9);
+        menuPanel.add(PausButtonPanel);
 
         jButton2.setText("Avsluta");
         jButton2.setFocusable(false);
         jButton2.setPreferredSize(new java.awt.Dimension(80, 35));
-        jPanel10.add(jButton2);
+        ExitButtonPanel.add(jButton2);
 
-        menuPanel.add(jPanel10);
+        menuPanel.add(ExitButtonPanel);
 
         add(menuPanel, java.awt.BorderLayout.WEST);
 
@@ -213,32 +225,35 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ExitButtonPanel;
     private javax.swing.JToggleButton PUButton1;
     private javax.swing.JToggleButton PUButton2;
     private javax.swing.JToggleButton PUButton3;
+    private javax.swing.JPanel PUPanel;
+    private javax.swing.JPanel PausButtonPanel;
+    private javax.swing.JPanel StatePanel;
     private javax.swing.JPanel boardCard;
     private javax.swing.JPanel cardPanel;
+    private javax.swing.JLabel flagIconLabel;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel levelLabel;
+    private javax.swing.JPanel levelPanel;
     private javax.swing.JLabel lifeLabel1;
     private javax.swing.JLabel lifeLabel2;
     private javax.swing.JLabel lifeLabel3;
     private javax.swing.JPanel lifePanel;
     private javax.swing.JPanel menuPanel;
-    private javax.swing.JLabel mineLabel;
+    private javax.swing.JLabel mineIconLabel;
+    private javax.swing.JPanel minePanel;
+    private javax.swing.JLabel nbrOfFlags;
+    private javax.swing.JLabel nbrOfMines;
     private javax.swing.JToggleButton pausButton;
     private javax.swing.JPanel pausCard;
     private javax.swing.JLabel testLabel;
     private javax.swing.JLabel timeLabel;
+    private javax.swing.JPanel timePanel;
     // End of variables declaration//GEN-END:variables
 
     public void propertyChange(PropertyChangeEvent evt) {
@@ -284,7 +299,8 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         timeLabel.setText(model.getGameTime()+"");
         levelLabel.setText("Level: "+model.getLevel());
         setLives(model.getLives());
-        mineLabel.setText("NA/"+model.getMines());
+        nbrOfMines.setText(model.getMines()+"");
+        nbrOfFlags.setText(model.getFlags()+"");
         testLabel.setText(model.getState()+"");
         PUButton1.setEnabled(PU1.getCost()<model.getGameTime());
         PUButton2.setEnabled(PU2.getCost()<model.getGameTime());
@@ -315,7 +331,6 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         model.addObserver(this);
         GameBoardView board = new GameBoardView(model, this);
         boardCard.add(board);
-        boardCard.setBackground(Color.red);
         this.board=board;
         revalidate();
 
