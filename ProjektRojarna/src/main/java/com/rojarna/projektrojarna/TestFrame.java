@@ -23,6 +23,7 @@ public class TestFrame extends javax.swing.JFrame {
         
         add(view);
         pack();
+        //detta är en kommentar.
         
     }
 
