@@ -95,7 +95,7 @@ public class CampaignModel extends AbstractGameModel{
          if(getBoard().isAllNumberShown()){
              getGameTimer().stop();
              gameState = state.FINISHED;
-             //nextLevel();
+             getBoard().showMines(true);
              
              this.setChanged();
              this.notifyObservers();
@@ -132,9 +132,9 @@ public class CampaignModel extends AbstractGameModel{
     }
     
     private void gameOver(){
-        System.out.println("GameOver");
         getGameTimer().stop();
         gameState = state.GAMEOVER;
+        getBoard().showMines(true);
         //spara highscore
         //popup
         this.setChanged();
@@ -173,7 +173,9 @@ public class CampaignModel extends AbstractGameModel{
     public int getMines(){
         return mines;
     }
+    @Override
     public void propertyChange(PropertyChangeEvent evt){
+        System.out.println(evt.getPropertyName());
         if(evt.getPropertyName().equals("time")&&getGameTime()<=0){
             gameOver();
         }

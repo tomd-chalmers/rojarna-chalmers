@@ -159,11 +159,11 @@ public class GameBoard{
         return boardClicked;
     }
 
-    public void showMines(){
+    public void showMines(boolean show){
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 if(board[j][i].isMine()){
-                    showSquare(i,j,true);
+                    showSquare(i,j,show);
                 }
             }
         }
@@ -171,6 +171,9 @@ public class GameBoard{
 
     public void showSquare(int x, int y, boolean visible){
         board[y][x].setVisible(visible);
+    }
+    public boolean isVisible(int x,int y){
+        return board[y][x].isVisible();
     }
 
     public Marking getSquareMarking(int x, int y){
