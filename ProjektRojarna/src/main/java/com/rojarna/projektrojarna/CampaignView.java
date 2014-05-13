@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author Oskar
  */
-public class CampaignView extends javax.swing.JPanel implements PropertyChangeListener, Observer, IGameView{
+public class CampaignView extends javax.swing.JPanel implements PropertyChangeListener, Observer{
     
     private CampaignModel model;
     private PowerupInterface PU1 = new PUChooseSafeArea();
@@ -36,7 +36,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         initComponents();
         
         setGameModel(m);
-        model.addObserver(this);
+        
         board = new GameBoardView(model, this);
         boardCard.add(board);
         boardCard.setBackground(Color.MAGENTA);
@@ -338,12 +338,14 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         
     }
 
-    public void setGameModel(AbstractGameModel model) {
+    public void setGameModel(AbstractGameModel m) {
         try{
-            model = (CampaignModel)model;
+            model = (CampaignModel)m;
         }
         catch(ClassCastException e){
             throw new IllegalArgumentException();
         }
+        
+        model.addObserver(this);
     }
 }

@@ -27,8 +27,6 @@ public class GameController implements Observer, PropertyChangeListener{
     public GameController(){
         frame = new GameFrame();
         
-        //frame.add(panel, "Menu");
-        //((CardLayout)panel.getLayout()).show(frame.getContentPane(), "Menu");
         frame.setVisible(true);
         frame.pack();
         frame.addPropertyChangeListener(this);
@@ -44,8 +42,6 @@ public class GameController implements Observer, PropertyChangeListener{
     
     private void newGame(AbstractGameModel model, IGameView view){
         frame.setGamePanel(new ClassicView((ClassicModel)model));
-        
-        frame.show("Game");
         
         gameModel = model;
         model.addObserver(this);
@@ -66,11 +62,22 @@ public class GameController implements Observer, PropertyChangeListener{
     public void propertyChange(PropertyChangeEvent evt) {
         if(evt.getPropertyName().equals("ClassicGame")){
             ClassicModel m = new ClassicModel();
-            newGame(m, new ClassicView(m));
+            m.addObserver(this);
+            
+            ClassicView v = new ClassicView(m);
+            
+            frame.setGamePanel(v);
+            frame.showGameBoard();
+            //gameView = new ClassicView();
         }
         else if(evt.getPropertyName().equals("CampaignGame")){
             CampaignModel m = new CampaignModel();
-            newGame(m, new CampaignView(m));
+            m.addObserver(this);
+            
+            CampaignView v = new CampaignView(m);
+            
+            frame.setGamePanel(v);
+            frame.showGameBoard();
         }
         else if(evt.getPropertyName().equals("ClassicGame")){
             exitProgram();
