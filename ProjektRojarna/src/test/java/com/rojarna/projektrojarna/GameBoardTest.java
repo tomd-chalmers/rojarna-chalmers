@@ -27,10 +27,18 @@ public class GameBoardTest extends TestCase {
     public void testGetBorder() {
         GameBoard gb = new GameBoard(1,5,5);
         List<Point> border = new ArrayList<Point>();
-        border = gb.getBorder(gb.getWidth()-1,gb.getHeight()-1);
-        System.out.println(border.size());
-        assertTrue(border.size()==16);
-        // INTE KLAR.
+        border = gb.getBorder(0,0);
+        assertTrue(border.size()==3);
+        border = gb.getBorder(0, 2);
+        assertTrue(border.size()==5);
+        border = gb.getBorder(0, 4);
+        assertTrue(border.size()==3);
+        border = gb.getBorder(4, 4);
+        assertTrue(border.size()==3);
+        border = gb.getBorder(4, 0);
+        assertTrue(border.size()==3);
+        border = gb.getBorder(2, 2);
+        assertTrue(border.size()==8);
     }
 
     public void testChooseSquare() {

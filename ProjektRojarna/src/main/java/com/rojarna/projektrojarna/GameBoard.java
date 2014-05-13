@@ -71,7 +71,7 @@ public class GameBoard{
             board[p.y][p.x].incValue();
         }
     }
-    // kan jag få en kommentar här? var gör denna metod.
+    
     public List<Point> getBorder(int x,int y){
         ArrayList<Point> tmp = new ArrayList<Point>();
         if(x>0){
