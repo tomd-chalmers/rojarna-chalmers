@@ -39,7 +39,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         model= new CampaignModel();
         model.addObserver(this);
         board = new GameBoardView(model, this);
-        PU2.addPropertyChangeListener("Campaign",model);
+        PU2.addPropertyChangeListener(model);
         boardCard.add(board);
         boardCard.setBackground(Color.CYAN);
     }
@@ -74,8 +74,13 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         PUButton3 = new javax.swing.JToggleButton();
         StatePanel = new javax.swing.JPanel();
         testLabel = new javax.swing.JLabel();
-        PausButtonPanel = new javax.swing.JPanel();
+        buttonCardPanel = new javax.swing.JPanel();
+        PausButtonCard = new javax.swing.JPanel();
         pausButton = new javax.swing.JToggleButton();
+        newGameButtonCard = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        nextLevelButtonCard = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
         ExitButtonPanel = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         cardPanel = new javax.swing.JPanel();
@@ -160,6 +165,8 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
         menuPanel.add(StatePanel);
 
+        buttonCardPanel.setLayout(new java.awt.CardLayout());
+
         pausButton.setText("Paus");
         pausButton.setFocusable(false);
         pausButton.setPreferredSize(new java.awt.Dimension(80, 35));
@@ -168,13 +175,42 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
                 pausButtonActionPerformed(evt);
             }
         });
-        PausButtonPanel.add(pausButton);
+        PausButtonCard.add(pausButton);
 
-        menuPanel.add(PausButtonPanel);
+        buttonCardPanel.add(PausButtonCard, "paus");
+
+        jButton1.setText("Nytt Spel");
+        jButton1.setPreferredSize(new java.awt.Dimension(80, 35));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        newGameButtonCard.add(jButton1);
+
+        buttonCardPanel.add(newGameButtonCard, "newGame");
+
+        jButton3.setText("Fortsätt");
+        jButton3.setPreferredSize(new java.awt.Dimension(80, 35));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        nextLevelButtonCard.add(jButton3);
+
+        buttonCardPanel.add(nextLevelButtonCard, "continue");
+
+        menuPanel.add(buttonCardPanel);
 
         jButton2.setText("Avsluta");
         jButton2.setFocusable(false);
         jButton2.setPreferredSize(new java.awt.Dimension(80, 35));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         ExitButtonPanel.add(jButton2);
 
         menuPanel.add(ExitButtonPanel);
@@ -205,7 +241,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     }//GEN-LAST:event_PUButton1ActionPerformed
 
     private void PUButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PUButton2ActionPerformed
-        model.usePowerup(new PUShowAll(),0,0);
+        model.usePowerup(PU2,0,0);
         PUButton2.setSelected(false);
     }//GEN-LAST:event_PUButton2ActionPerformed
 
@@ -226,6 +262,24 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         }
     }//GEN-LAST:event_pausButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CardLayout tmp = (CardLayout) buttonCardPanel.getLayout();
+        tmp.show(buttonCardPanel,"paus");
+        restart();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JOptionPane.showConfirmDialog(null,
+            "Du ska väl inte sluta än?", "Du ska väl inte sluta än?", JOptionPane.OK_OPTION);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        CardLayout tmp = (CardLayout) buttonCardPanel.getLayout();
+        tmp.show(buttonCardPanel,"paus");
+        model.nextLevel();
+        board.renewBoard(this);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ExitButtonPanel;
@@ -233,12 +287,15 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     private javax.swing.JToggleButton PUButton2;
     private javax.swing.JToggleButton PUButton3;
     private javax.swing.JPanel PUPanel;
-    private javax.swing.JPanel PausButtonPanel;
+    private javax.swing.JPanel PausButtonCard;
     private javax.swing.JPanel StatePanel;
     private javax.swing.JPanel boardCard;
+    private javax.swing.JPanel buttonCardPanel;
     private javax.swing.JPanel cardPanel;
     private javax.swing.JLabel flagIconLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel levelLabel;
@@ -252,6 +309,8 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     private javax.swing.JPanel minePanel;
     private javax.swing.JLabel nbrOfFlags;
     private javax.swing.JLabel nbrOfMines;
+    private javax.swing.JPanel newGameButtonCard;
+    private javax.swing.JPanel nextLevelButtonCard;
     private javax.swing.JToggleButton pausButton;
     private javax.swing.JPanel pausCard;
     private javax.swing.JLabel testLabel;
@@ -284,15 +343,26 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
     public void update(Observable o, Object arg) {
         labelUpdate();
-        if(model.getState().equals(State.GAMEOVER)){
-            JOptionPane.showConfirmDialog(null,
-            "Restart?", "Restart?", JOptionPane.YES_NO_OPTION);
-            restart();
-        }else if(model.getState().equals(State.FINISHED)){
-            JOptionPane.showConfirmDialog(null,
-            "Play next level?", "Play next level?", JOptionPane.YES_NO_OPTION);
-            model.nextLevel();
-            board.renewBoard(this);
+        if(model.getState().equals(State.GAMEOVER)&&!newGameButtonCard.isVisible()){
+            int choise = JOptionPane.showConfirmDialog(null, 
+                "Do you want to restart?", "GAME OVER", JOptionPane.YES_NO_OPTION);
+            if(choise==0){
+                restart();
+            }else{
+                CardLayout tmp = (CardLayout) buttonCardPanel.getLayout();
+                tmp.show(buttonCardPanel,"newGame");
+            }
+        }else if(model.getState().equals(State.FINISHED)&&!nextLevelButtonCard.isVisible()){
+            int choise = JOptionPane.showConfirmDialog(null,
+                "Start level "+(model.getLevel()+1)+"?","Level "+model.getLevel()+" cleared!", JOptionPane.YES_NO_OPTION);
+            if(choise==0){
+                model.nextLevel();
+                board.renewBoard(this);
+            }else{
+                CardLayout tmp = (CardLayout) buttonCardPanel.getLayout();
+                tmp.show(buttonCardPanel,"continue");
+                
+            }
         }
         labelUpdate();
     }
@@ -331,7 +401,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         boardCard.removeAll();
         model= new CampaignModel();
         model.addObserver(this);
-        PU2.addPropertyChangeListener("Campaign",model);
+        PU2.addPropertyChangeListener(model);
         GameBoardView board = new GameBoardView(model, this);
         boardCard.add(board);
         this.board=board;

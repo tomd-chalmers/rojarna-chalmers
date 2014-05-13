@@ -27,18 +27,18 @@ public class PUShowAll implements PowerupInterface{
             System.out.println("error: in PUShowAll, thread interupted");
         }
         gb.showMines(false);
-        prop.firePropertyChange("PU",true, false);
+        prop.firePropertyChange("PU",true,false);
     }
 
     public int getCost() {
         return COST;
     }
-         public void addPropertyChangeListener(String propertyName, PropertyChangeListener l) {
-         prop.addPropertyChangeListener(propertyName,l);
+         public void addPropertyChangeListener(PropertyChangeListener l) {
+         prop.addPropertyChangeListener(l);
      }
 
-     public void removePropertyChangeListener(String propertyName, PropertyChangeListener l) {
-         prop.removePropertyChangeListener(propertyName,l);
+     public void removePropertyChangeListener(PropertyChangeListener l) {
+         prop.removePropertyChangeListener(l);
      }
     
 }

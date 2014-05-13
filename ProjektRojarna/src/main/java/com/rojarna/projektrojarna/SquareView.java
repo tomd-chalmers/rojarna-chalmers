@@ -152,7 +152,6 @@ public class SquareView extends javax.swing.JPanel implements Observer{
 
     public void update(Observable o, Object arg) {
         AbstractGameModel model = (AbstractGameModel)o;
-        
         if(model.getSquare(x,y).isVisible()){
             setContent(model.getSquare(x,y));
             

@@ -175,7 +175,6 @@ public class CampaignModel extends AbstractGameModel{
     }
     @Override
     public void propertyChange(PropertyChangeEvent evt){
-        System.out.println(evt.getPropertyName());
         if(evt.getPropertyName().equals("time")&&getGameTime()<=0){
             gameOver();
         }
