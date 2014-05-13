@@ -17,12 +17,25 @@ public class TestFrame extends javax.swing.JFrame {
      */
     public TestFrame() {
         initComponents();
-        CampaignView view = new CampaignView();
         
-        //ClassicModel game = new ClassicModel();
-        //ClassicView view = new ClassicView(game);
+        ClassicModel game = new ClassicModel();
+        ClassicView view = new ClassicView(game);
+        
         add(view);
         pack();
+        //detta är en kommentar.
+        // många fucking komentarer
+        //dsfdsf
+        //sdfsdf
+        //sdsdf
+        //sdsdöfjsdföj/
+        //sldfsdsdlfj
+        //jddfjgd
+        //cjvdfjghdflgj
+        //sldkslfgdfkg
+        //lkdfgjdlkfgjdlkfgj
+        //ldkfndkfnbdkfjdfklg
+        
     }
 
     /**

@@ -6,22 +6,24 @@
 
 package com.rojarna.projektrojarna;
 
-import java.util.Observable;
-import java.util.Observer;
-
 /**
  *
  * @author Gaming
  */
 public class MenuPanel extends javax.swing.JPanel {
 
+    //PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    
     /**
      * Creates new form MenuPanel
      */
     public MenuPanel() {
         initComponents();
         
+        jLabel1.setAlignmentX(CENTER_ALIGNMENT);
         ClassicButton.setAlignmentX(CENTER_ALIGNMENT);
+        CampaignButton.setAlignmentX(CENTER_ALIGNMENT);
+        ExitButton.setAlignmentX(CENTER_ALIGNMENT);
     }
 
     /**
@@ -49,12 +51,13 @@ public class MenuPanel extends javax.swing.JPanel {
 
         ButtonPanel.setLayout(new javax.swing.BoxLayout(ButtonPanel, javax.swing.BoxLayout.PAGE_AXIS));
 
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Röj");
         ButtonPanel.add(jLabel1);
         ButtonPanel.add(filler2);
 
         ClassicButton.setText("New Classic Game");
-        ClassicButton.setMaximumSize(new java.awt.Dimension(119, 23));
         ClassicButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ClassicButtonActionPerformed(evt);
@@ -85,15 +88,15 @@ public class MenuPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ClassicButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClassicButtonActionPerformed
-        this.firePropertyChange("ClassicGame", 0, 0);
+        this.firePropertyChange("ClassicGame", false, true);
     }//GEN-LAST:event_ClassicButtonActionPerformed
 
     private void CampaignButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampaignButtonActionPerformed
-        this.firePropertyChange("CampaignGame", 0, 0);
+        this.firePropertyChange("CampaignGame", false, true);
     }//GEN-LAST:event_CampaignButtonActionPerformed
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
-        this.firePropertyChange("ExitGame", 0, 0);
+        this.firePropertyChange("ExitGame", false, true);
     }//GEN-LAST:event_ExitButtonActionPerformed
 
 

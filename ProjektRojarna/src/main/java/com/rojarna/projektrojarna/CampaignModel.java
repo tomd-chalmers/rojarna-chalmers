@@ -8,6 +8,7 @@ package com.rojarna.projektrojarna;
 
 import java.beans.PropertyChangeEvent;
 
+
 /**
  *
  * @author Joakim
@@ -15,9 +16,9 @@ import java.beans.PropertyChangeEvent;
 public class CampaignModel extends AbstractGameModel{
       
     private int mines, width, height, currentLives= 3, level = 1;
-    private state gameState;
+    private State gameState;
     
-    public enum state{
+    public enum State{
         PLAYING,PAUSED,FINISHED,GAMEOVER;
     }
     public CampaignModel(){
@@ -28,7 +29,7 @@ public class CampaignModel extends AbstractGameModel{
     }
     
     public void chooseSquare(int xPos, int yPos){
-        if(gameState.equals(state.PLAYING)){
+        if(gameState.equals(State.PLAYING)){
             if(xPos < 0 || yPos < 0)
                 throw new IllegalArgumentException();
 
@@ -65,7 +66,7 @@ public class CampaignModel extends AbstractGameModel{
     }
     
      public void markSquare(int xPos, int yPos){
-         if(gameState.equals(state.PLAYING)){
+         if(gameState.equals(State.PLAYING)){
             if(xPos < 0 || yPos < 0)
                throw new IllegalArgumentException();
 
@@ -78,7 +79,7 @@ public class CampaignModel extends AbstractGameModel{
      
     public void usePowerup(PowerupInterface pu, int x, int y){
         //Bättre att ha koll på om den har råd här istället för i getCost?
-        if(getGameTimer().afford(pu.getCost())&&gameState.equals(state.PLAYING)){
+        if(getGameTimer().afford(pu.getCost())&&gameState.equals(State.PLAYING)){
             getGameTimer().removeTime(pu.getCost());
             
             pu.power(getBoard(), x, y);
@@ -94,9 +95,9 @@ public class CampaignModel extends AbstractGameModel{
      private void finishLevel(){
          if(getBoard().isAllNumberShown()){
              getGameTimer().stop();
-             gameState = state.FINISHED;
+             gameState = State.FINISHED;
              getBoard().showMines(true);
-             
+
              this.setChanged();
              this.notifyObservers();
          }
@@ -106,7 +107,7 @@ public class CampaignModel extends AbstractGameModel{
      }
      
     public void nextLevel(){
-        if(gameState.equals(state.FINISHED)){
+        if(gameState.equals(State.FINISHED)){
             level++;
             width=width+2;
             height=height+2;
@@ -124,7 +125,7 @@ public class CampaignModel extends AbstractGameModel{
         if(level == 1){
             setGameTimer(new GameTimer(120));
         }
-        gameState = state.PLAYING;
+        gameState = State.PLAYING;
         setBoard(new GameBoard(mines, height, width));
         
         this.setChanged();
@@ -133,10 +134,9 @@ public class CampaignModel extends AbstractGameModel{
     
     private void gameOver(){
         getGameTimer().stop();
-        gameState = state.GAMEOVER;
+        gameState = State.GAMEOVER;
         getBoard().showMines(true);
         //spara highscore
-        //popup
         this.setChanged();
         this.notifyObservers();
     }
@@ -155,16 +155,16 @@ public class CampaignModel extends AbstractGameModel{
     public boolean isGameOver(){
         return currentLives>0;
     }
-    public state getState(){
+    public State getState(){
         return gameState;
     }
     public void pauseGame(boolean paus){
-        if(gameState.equals(state.PAUSED)||gameState.equals(state.PLAYING)){
+        if(gameState.equals(State.PAUSED)||gameState.equals(State.PLAYING)){
             super.pauseGame(paus);   
             if(paus){
-                gameState = state.PAUSED;
+                gameState = State.PAUSED;
             }else{
-                gameState = state.PLAYING;
+                gameState = State.PLAYING;
             }
             this.setChanged();
             this.notifyObservers();

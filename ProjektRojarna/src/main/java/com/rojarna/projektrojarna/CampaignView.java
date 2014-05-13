@@ -6,7 +6,7 @@
 
 package com.rojarna.projektrojarna;
 
-import com.rojarna.projektrojarna.CampaignModel.state;
+import com.rojarna.projektrojarna.CampaignModel.State;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author Oskar
  */
-public class CampaignView extends javax.swing.JPanel implements PropertyChangeListener,Observer{
+public class CampaignView extends javax.swing.JPanel implements PropertyChangeListener, Observer, IGameView{
     
     private CampaignModel model;
     private PowerupInterface PU1 = new PUChooseSafeArea();
@@ -284,11 +284,11 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
     public void update(Observable o, Object arg) {
         labelUpdate();
-        if(model.getState().equals(state.GAMEOVER)){
+        if(model.getState().equals(State.GAMEOVER)){
             JOptionPane.showConfirmDialog(null,
             "Restart?", "Restart?", JOptionPane.YES_NO_OPTION);
             restart();
-        }else if(model.getState().equals(state.FINISHED)){
+        }else if(model.getState().equals(State.FINISHED)){
             JOptionPane.showConfirmDialog(null,
             "Play next level?", "Play next level?", JOptionPane.YES_NO_OPTION);
             model.nextLevel();
@@ -338,5 +338,14 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         revalidate();
 
         
+    }
+
+    public void setGameModel(AbstractGameModel model) {
+        try{
+            model = (CampaignModel)model;
+        }
+        catch(ClassCastException e){
+            throw new IllegalArgumentException();
+        }
     }
 }

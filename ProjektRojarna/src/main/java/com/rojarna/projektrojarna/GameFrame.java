@@ -6,17 +6,32 @@
 
 package com.rojarna.projektrojarna;
 
+import java.awt.CardLayout;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Gaming
  */
-public class GameFrame extends javax.swing.JFrame {
+public class GameFrame extends javax.swing.JFrame{
 
+    MenuPanel menuPanel;
+    GameBoardView boardViewPanel;
+    
     /**
      * Creates new form GameFrame
      */
     public GameFrame() {
         initComponents();
+        
+        getContentPane().setLayout(new CardLayout());
+        
+        menuPanel = new MenuPanel();
+        add(menuPanel, "Menu");
+        
+        ((CardLayout)getContentPane().getLayout()).show(getContentPane(), "Menu");
     }
 
     /**
@@ -83,4 +98,21 @@ public class GameFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+    public void setGamePanel(JPanel game){
+        getContentPane().add(game, "Game");
+    }
+    
+    public void show(String s){
+        ((CardLayout)getContentPane().getLayout()).show(getContentPane(), s);
+    }
+    
+    @Override
+    public void addPropertyChangeListener(PropertyChangeListener listener){
+        menuPanel.addPropertyChangeListener(listener);
+    }
+    
+    @Override
+    public void removePropertyChangeListener(PropertyChangeListener listener){
+        menuPanel.removePropertyChangeListener(listener);
+    }
 }

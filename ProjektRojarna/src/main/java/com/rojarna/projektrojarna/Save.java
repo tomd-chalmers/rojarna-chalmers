@@ -148,19 +148,23 @@ public class Save {
 	}
 	
 	public static void clearClassic(){
-		if(fileClassic.exists()){
-			if(fileClassic.delete()){	
-			}else{
-				System.out.println("ERROR: could not delete the save!");
-			}
+            try{
+                if(fileClassic.exists()){
+                    fileClassic.delete();
 		}
+            }
+          catch(Exception e){
+              e.printStackTrace();
+            }
 	}
 	public static void clearCampaign(){
-		if(fileCampaign.exists()){
-			if(fileClassic.delete()){
-			}else{
-				System.out.println("ERROR: could not delete the save!");
-			}
+            try{
+                if(fileCampaign.exists()){
+                    fileCampaign.delete();
 		}
+            }
+          catch(Exception e){
+              e.printStackTrace();
+            }
 	}
 }
