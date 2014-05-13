@@ -24,6 +24,17 @@ public class TestFrame extends javax.swing.JFrame {
         add(view);
         pack();
         //detta är en kommentar.
+        // många fucking komentarer
+        //dsfdsf
+        //sdfsdf
+        //sdsdf
+        //sdsdöfjsdföj/
+        //sldfsdsdlfj
+        //jddfjgd
+        //cjvdfjghdflgj
+        //sldkslfgdfkg
+        //lkdfgjdlkfgjdlkfgj
+        //ldkfndkfnbdkfjdfklg
         
     }
 
