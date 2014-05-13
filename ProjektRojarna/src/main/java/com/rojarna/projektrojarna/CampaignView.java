@@ -25,7 +25,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     
     private CampaignModel model;
     private PowerupInterface PU1 = new PUChooseSafeArea();
-    private PowerupInterface PU2 = new PUShowAll();
+    private PUShowAll PU2;
     private PowerupInterface PU3 = new PUChooseSafeSingle();
     GameBoardView board;
 
@@ -35,11 +35,15 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     public CampaignView(CampaignModel m) {
         initComponents();
         
+        PU2 = new PUShowAll();
+        PU2.addPropertyChangeListener("Campaign",model);
+        
         setGameModel(m);
         
         board = new GameBoardView(model, this);
+        
         boardCard.add(board);
-        boardCard.setBackground(Color.MAGENTA);
+        boardCard.setBackground(Color.CYAN);
     }
 
     /**
@@ -286,8 +290,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
             JOptionPane.showConfirmDialog(null,
             "Restart?", "Restart?", JOptionPane.YES_NO_OPTION);
             restart();
-        }
-        if(model.getState().equals(State.FINISHED)){
+        }else if(model.getState().equals(State.FINISHED)){
             JOptionPane.showConfirmDialog(null,
             "Play next level?", "Play next level?", JOptionPane.YES_NO_OPTION);
             model.nextLevel();
@@ -330,6 +333,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         boardCard.removeAll();
         model= new CampaignModel();
         model.addObserver(this);
+        PU2.addPropertyChangeListener("Campaign",model);
         GameBoardView board = new GameBoardView(model, this);
         boardCard.add(board);
         this.board=board;

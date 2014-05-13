@@ -6,45 +6,39 @@
 
 package com.rojarna.projektrojarna;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 /**
  *
  * @author Tom
  */
 public class PUShowAll implements PowerupInterface{
-    private final int COST=100;
-    private List<Boolean> listOfShown = new ArrayList<Boolean>();
+    private final int COST=10;
+    private final PropertyChangeSupport prop = new PropertyChangeSupport(this);
+
+    //private List<Boolean> listOfShown = new ArrayList<Boolean>();
     public void power(GameBoard gb, int x, int y) {
-        for(int i = 0; i<gb.getHeight();i++){
-            for(int j = 0; j<gb.getWidth();j++){
-                listOfShown.add(gb.getSquare(i,j).isVisible());
-                if(!gb.getSquare(i,j).isVisible()){
-                    gb.getSquare(i, j).setVisible(true);
-                }
-            }
-        }
-        //wait a few sec here...
+        gb.showMines(true);
+        prop.firePropertyChange("PU",true,false);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException ex) {
             System.out.println("error: in PUShowAll, thread interupted");
         }
-        // no idea if this works...
-        int k = 0;
-        for(int i = 0;i<gb.getHeight();i++){
-            for(int j = 0; j<gb.getWidth();j++){
-                if(!listOfShown.get(k)){
-                    gb.getSquare(i,j).setVisible(false);
-                }
-                k++;
-            }
-        }
+        gb.showMines(false);
+        prop.firePropertyChange("PU",true, false);
     }
 
     public int getCost() {
         return COST;
     }
+         public void addPropertyChangeListener(String propertyName, PropertyChangeListener l) {
+         prop.addPropertyChangeListener(propertyName,l);
+     }
+
+     public void removePropertyChangeListener(String propertyName, PropertyChangeListener l) {
+         prop.removePropertyChangeListener(propertyName,l);
+     }
     
 }

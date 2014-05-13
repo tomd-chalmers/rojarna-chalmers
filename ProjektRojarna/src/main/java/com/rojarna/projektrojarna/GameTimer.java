@@ -30,6 +30,7 @@ public class GameTimer {
     private int time;
     
     private final Timer timer = new Timer(SEC, new ActionListener() {
+        
             @Override
         public void actionPerformed(ActionEvent e) {
             if(dec){
