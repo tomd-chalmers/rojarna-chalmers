@@ -17,8 +17,8 @@ import javax.swing.JPanel;
  */
 public class GameFrame extends javax.swing.JFrame{
 
-    MenuPanel menuPanel;
-    GameBoardView boardViewPanel;
+    private final MenuPanel menuPanel;
+    private final JPanel gameBoardPanel;
     
     /**
      * Creates new form GameFrame
@@ -30,6 +30,9 @@ public class GameFrame extends javax.swing.JFrame{
         
         menuPanel = new MenuPanel();
         add(menuPanel, "Menu");
+        
+        gameBoardPanel = new JPanel();
+        add(gameBoardPanel, "Board");
         
         ((CardLayout)getContentPane().getLayout()).show(getContentPane(), "Menu");
     }
@@ -99,11 +102,16 @@ public class GameFrame extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
     public void setGamePanel(JPanel game){
-        getContentPane().add(game, "Game");
+        gameBoardPanel.removeAll();
+        gameBoardPanel.add(game, "Board");
     }
     
-    public void show(String s){
-        ((CardLayout)getContentPane().getLayout()).show(getContentPane(), s);
+    public void showGameMenu(){
+        ((CardLayout)getContentPane().getLayout()).show(getContentPane(), "Menu");
+    }
+    
+    public void showGameBoard(){
+        ((CardLayout)getContentPane().getLayout()).show(getContentPane(), "Board");
     }
     
     @Override
