@@ -21,7 +21,6 @@ public class TestFrame extends javax.swing.JFrame {
         /*ClassicModel game = new ClassicModel();
         ClassicView view = new ClassicView(game);*/
         CampaignView view = new CampaignView();
-        
         add(view);
         pack();
         //detta är en kommentar.
