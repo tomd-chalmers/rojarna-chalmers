@@ -18,9 +18,7 @@ import java.util.Observer;
  */
 public class GameController implements Observer, PropertyChangeListener{
     
-    private AbstractGameModel gameModel = null;
-    private IGameView gameView = null;
-    
+    private AbstractGameModel gameModel = null;    
     private GameFrame frame = null;
     private MenuPanel panel = null;
     
@@ -32,22 +30,9 @@ public class GameController implements Observer, PropertyChangeListener{
         frame.addPropertyChangeListener(this);
     }
     
-    public GameController(AbstractGameModel model, IGameView view){
+    public GameController(AbstractGameModel model){
         gameModel = model;
         model.addObserver(this);
-        
-        gameView = view;
-        view.setGameModel(model);
-    }
-    
-    private void newGame(AbstractGameModel model, IGameView view){
-        frame.setGamePanel(new ClassicView((ClassicModel)model));
-        
-        gameModel = model;
-        model.addObserver(this);
-        
-        gameView = view;
-        view.setGameModel(model);
     }
     
     private void exitProgram(){
@@ -78,5 +63,5 @@ public class GameController implements Observer, PropertyChangeListener{
         else if(evt.getPropertyName().equals("ClassicGame")){
             exitProgram();
         }
-    }
+    }       
 }

@@ -219,7 +219,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         add(menuPanel, java.awt.BorderLayout.WEST);
 
         cardPanel.setMinimumSize(new java.awt.Dimension(100, 408));
-        cardPanel.setPreferredSize(new java.awt.Dimension(200, 408));
+        cardPanel.setPreferredSize(new java.awt.Dimension(500, 500));
         cardPanel.setLayout(new java.awt.CardLayout());
         cardPanel.add(boardCard, "card2");
 
@@ -406,6 +406,9 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         GameBoardView board = new GameBoardView(model, this);
         boardCard.add(board);
         this.board=board;
+        CardLayout tmp = (CardLayout) cardPanel.getLayout();
+        tmp.first(cardPanel);
+        
         revalidate();
 
         
