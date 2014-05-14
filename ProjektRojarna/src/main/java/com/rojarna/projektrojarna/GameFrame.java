@@ -7,6 +7,7 @@
 package com.rojarna.projektrojarna;
 
 import java.awt.CardLayout;
+import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.JPanel;
@@ -32,6 +33,7 @@ public class GameFrame extends javax.swing.JFrame{
         add(menuPanel, "Menu");
         
         gameBoardPanel = new JPanel();
+        gameBoardPanel.setLayout(new GridLayout(1,1));
         add(gameBoardPanel, "Board");
         
         ((CardLayout)getContentPane().getLayout()).show(getContentPane(), "Menu");

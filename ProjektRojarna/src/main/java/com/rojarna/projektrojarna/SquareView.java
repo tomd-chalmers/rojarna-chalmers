@@ -123,7 +123,7 @@ public class SquareView extends javax.swing.JPanel implements Observer{
         button.setFocusable(false);
         button.setMaximumSize(new java.awt.Dimension(40, 40));
         button.setMinimumSize(new java.awt.Dimension(40, 40));
-        button.setPreferredSize(new java.awt.Dimension(40, 40));
+        button.setPreferredSize(new java.awt.Dimension(37, 37));
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 buttonMousePressed(evt);
