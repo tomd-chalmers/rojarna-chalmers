@@ -406,6 +406,9 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         GameBoardView board = new GameBoardView(model, this);
         boardCard.add(board);
         this.board=board;
+        CardLayout tmp = (CardLayout) cardPanel.getLayout();
+        tmp.first(cardPanel);
+        
         revalidate();
 
         
