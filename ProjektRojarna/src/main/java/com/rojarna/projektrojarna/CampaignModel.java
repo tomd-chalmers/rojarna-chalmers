@@ -109,10 +109,11 @@ public class CampaignModel extends AbstractGameModel{
     public void nextLevel(){
         if(gameState.equals(State.FINISHED)){
             level++;
-            width=width+2;
-            height=height+2;
-
-            mines = (int) ((int) (width*height)*(0.1+0.05*level));
+            if(level<5){
+                width=width+2;
+                height=height+4;
+            }
+            mines = (int) ((int) (width*height)*(0.1+0.02*level));
             getGameTimer().addTime(120);
             newGame(mines,height,width);
         }
