@@ -78,7 +78,6 @@ public class CampaignModel extends AbstractGameModel{
      }
      
     public void usePowerup(PowerupInterface pu, int x, int y){
-        //Bättre att ha koll på om den har råd här istället för i getCost?
         if(getGameTimer().afford(pu.getCost())&&gameState.equals(State.PLAYING)){
             getGameTimer().removeTime(pu.getCost());
             
@@ -154,7 +153,7 @@ public class CampaignModel extends AbstractGameModel{
         return currentLives;
     }
     public boolean isGameOver(){
-        return currentLives>0;
+        return currentLives<1;
     }
     public State getState(){
         return gameState;

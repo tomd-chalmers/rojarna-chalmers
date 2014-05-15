@@ -62,18 +62,19 @@ public class ClassicModelTest extends TestCase {
 
     public void testRestartGame() {
         ClassicModel m = new ClassicModel();
-        for(int i = 0; i < 7; i++){
-            m.chooseSquare(i, i);
-            m.markSquare(i, i);
+        m.chooseSquare(7, 0);
+        for(int i = 0; i < 6; i++){
+            m.markSquare(i+1, i+1);
+            m.getBoard().getSquare(i, i).setVisible(true);
         }
-        for(int i = 0; i < 7; i++){
-            assertFalse(m.getBoard().getSquare(i, i).isVisible());
-            assertTrue(m.getBoard().getSquare(i, i).getMarking() == Marking.FLAG);
+        for(int i = 0; i < 6; i++){
+            assertTrue(m.getBoard().getSquare(i, i).isVisible());
+            assertTrue(m.getBoard().getSquare(i+1, i+1).getMarking() == Marking.FLAG);
         }
         m.restartGame();
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
-                assertTrue(m.getBoard().getSquare(i, j).isVisible());
+                assertFalse(m.getBoard().getSquare(i, j).isVisible());
                 assertTrue(m.getBoard().getSquare(i, j).getMarking() == Marking.NONE);
             }
         }

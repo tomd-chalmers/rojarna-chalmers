@@ -202,47 +202,4 @@ public class GameBoard{
     public int getFlags(){
         return flagCounter;
     }
-        
-	
-    public void systemPrint(){
-        System.out.println();
-        
-        for(int i=0;i<board.length;i++){
-            for(int j=0;j<board[i].length;j++){
-                if(board[i][j].isVisible()){
-                    if(board[i][j].isMine()){
-                        System.out.print("[*]");
-                    }else{
-                        System.out.print("["+board[i][j].getValue()+"]");
-                    }
-                }else if(board[i][j].getMarking() == Marking.FLAG){
-                    System.out.print("[F]");
-                }else if(board[i][j].getMarking() == Marking.QUESTION){
-                    System.out.print("[?]");
-                } else {
-                    System.out.print("[ ]");
-                }
-            }
-
-            System.out.println("");
-        }
-    }
-	
-    public static void main(String[]args){
-        GameBoard g = new GameBoard();
-        Scanner sc = new Scanner(System.in);
-        g.systemPrint();
-
-        while(true){
-            if(sc.next().equals("F")){
-                g.markSquare(sc.nextInt(), sc.nextInt());
-            } else {
-                g.chooseSquare(sc.nextInt(),sc.nextInt());
-            }
-            g.systemPrint();
-            if(g.isAllNumberShown()){
-                System.out.println("Victory");
-            }
-        }
-    }
 }
