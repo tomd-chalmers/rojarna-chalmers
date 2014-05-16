@@ -11,6 +11,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 /**
  *
@@ -28,11 +30,20 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         initComponents();
         
         gamePanel.setLayout(new FlowLayout());
-        setGameModel(m);
+        
+        model = m;//setGameModel(m);
         this.gameBoard=new GameBoardView(this.model, this);
         gamePanel.add(gameBoard);
         //gamePanel.add(new JLabel("test"));
         showHighscore();
+    }
+    public void newGame(){
+        //setGameModel(new ClassicModel());
+        gamePanel.remove(gameBoard);
+        model = new ClassicModel();
+        this.gameBoard=new GameBoardView(this.model, this);
+        gamePanel.add(gameBoard);
+        gamePanel.updateUI();
     }
 
     /**
@@ -196,12 +207,36 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
     
+    
     public void propertyChange(PropertyChangeEvent evt) {
         String command = evt.getPropertyName();
         //timeLabel.setText(model.getGameTime()+"");
+        System.out.println("någon rör gamebordet!");
         if(command.equals("leftClick")){
             SquareView view = (SquareView)evt.getNewValue();
-            model.chooseSquare(view.getXPos(), view.getYPos());                
+            model.chooseSquare(view.getXPos(), view.getYPos());
+            if(model.getBoard().isAllNumberShown()){
+                Save.saveClassic(model.getGameTime());
+                int gameWinOption = JOptionPane.showConfirmDialog(null,"ConGratzUWin\nPlay another "
+                        + "game?","Game Over",YES_NO_OPTION);
+                if(gameWinOption == JOptionPane.YES_OPTION){
+                    newGame();
+                }else{
+                    //exit?
+                }
+            }
+            if(model.getSquare(view.getXPos(), view.getYPos()).isMine()){
+                System.out.println("U LOOOOOSE!");
+                //this.newGame();
+                int gameOverOption = JOptionPane.showConfirmDialog(null,"Game Over!\nPlay another "
+                        + "game?","Game Over",YES_NO_OPTION);
+                if(gameOverOption == JOptionPane.YES_OPTION){
+                    newGame();
+                    // maybe resert time dont know.
+                }else{
+                    // exit to main menu?
+                }
+            }
         }else if(command.equals("rightClick")){
             SquareView view = (SquareView)evt.getNewValue();
             model.markSquare(view.getXPos(), view.getYPos());
