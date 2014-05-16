@@ -40,7 +40,6 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         model.addObserver(this);
         board = new GameBoardView(model, this);
         PU2.addPropertyChangeListener(model);
-
         boardCard.add(board);
         boardCard.setBackground(Color.CYAN);
     }
@@ -87,7 +86,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         cardPanel = new javax.swing.JPanel();
         boardCard = new javax.swing.JPanel();
         pausCard = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        pausLabel = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -225,10 +224,10 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
         pausCard.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Game Paused");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        pausCard.add(jLabel1, java.awt.BorderLayout.CENTER);
+        pausLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pausLabel.setIcon(new ImageIcon("src/resources/paus.png"));
+        pausLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        pausCard.add(pausLabel, java.awt.BorderLayout.CENTER);
 
         cardPanel.add(pausCard, "card3");
 
@@ -254,7 +253,6 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
 
     private void pausButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pausButtonActionPerformed
         model.pauseGame(pausButton.isSelected());
-        pausButton.setSelected(model.isGamePaused());
         CardLayout tmp = (CardLayout) cardPanel.getLayout();
         if(model.isGamePaused()){
             tmp.last(cardPanel);
@@ -270,8 +268,8 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JOptionPane.showConfirmDialog(null,
-            "Du ska väl inte sluta än?", "Du ska väl inte sluta än?", JOptionPane.OK_OPTION);
+        JOptionPane.showMessageDialog(null,"Du ska väl inte sluta än?",
+                "Varning", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -297,7 +295,6 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel levelLabel;
     private javax.swing.JPanel levelPanel;
@@ -314,6 +311,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     private javax.swing.JPanel nextLevelButtonCard;
     private javax.swing.JToggleButton pausButton;
     private javax.swing.JPanel pausCard;
+    private javax.swing.JLabel pausLabel;
     private javax.swing.JLabel testLabel;
     private javax.swing.JLabel timeLabel;
     private javax.swing.JPanel timePanel;
@@ -346,7 +344,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         labelUpdate();
         if(model.getState().equals(State.GAMEOVER)&&!newGameButtonCard.isVisible()){
             int choise = JOptionPane.showConfirmDialog(null, 
-                "Do you want to restart?", "GAME OVER", JOptionPane.YES_NO_OPTION);
+                "Do you want to restart?", "GAME OVER", JOptionPane.YES_NO_OPTION,0,new ImageIcon("src/resources/boom.png"));
             if(choise==0){
                 restart();
             }else{
@@ -355,7 +353,8 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
             }
         }else if(model.getState().equals(State.FINISHED)&&!nextLevelButtonCard.isVisible()){
             int choise = JOptionPane.showConfirmDialog(null,
-                "Start level "+(model.getLevel()+1)+"?","Level "+model.getLevel()+" cleared!", JOptionPane.YES_NO_OPTION);
+                "Start level "+(model.getLevel()+1)+"?","Level "+model.getLevel()+" cleared!"
+                    , JOptionPane.YES_NO_OPTION,0,new ImageIcon("src/resources/win.png"));
             if(choise==0){
                 model.nextLevel();
                 board.renewBoard(this);

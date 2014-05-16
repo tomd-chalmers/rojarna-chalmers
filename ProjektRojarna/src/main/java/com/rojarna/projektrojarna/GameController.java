@@ -6,7 +6,6 @@
 
 package com.rojarna.projektrojarna;
 
-import java.awt.CardLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Observable;
@@ -20,7 +19,6 @@ public class GameController implements Observer, PropertyChangeListener{
     
     private AbstractGameModel gameModel = null;    
     private GameFrame frame = null;
-    private MenuPanel panel = null;
     
     public GameController(){
         frame = new GameFrame();
@@ -41,7 +39,6 @@ public class GameController implements Observer, PropertyChangeListener{
     }
 
     public void update(Observable o, Object arg) {
-        System.out.println("Served!");
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
@@ -56,12 +53,17 @@ public class GameController implements Observer, PropertyChangeListener{
             //gameView = new ClassicView();
         }
         else if(evt.getPropertyName().equals("CampaignGame")){
-            CampaignView v = new CampaignView();  
+            CampaignView v = new CampaignView();
+            
             frame.setGamePanel(v);
             frame.showGameBoard();
         }
         else if(evt.getPropertyName().equals("ClassicGame")){
             exitProgram();
         }
-    }       
+        else if(evt.getPropertyName().equals("MainMenu")){
+            gameModel.pauseGame(true);
+            frame.showGameMenu();
+        }
+    }
 }

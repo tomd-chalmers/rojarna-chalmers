@@ -34,40 +34,44 @@ public class ClassicModel extends AbstractGameModel{
             throw new IllegalArgumentException();
         
         setBoard(new GameBoard(mines, width, heigth));
-        setGameState(GameState.PLAYING);
+        state = GameState.PLAYING;
         
         this.setChanged();
         this.notifyObservers();
     }
     
     public void chooseSquare(int xPos, int yPos){
-        
-        if(xPos < 0 || yPos < 0)
-            throw new IllegalArgumentException();
-        
-        if(!getBoard().isClicked()){
-            setGameTimer(new GameTimer());
+        if(state.equals(GameState.PLAYING)){
+            if(xPos < 0 || yPos < 0)
+                throw new IllegalArgumentException();
+
+            if(!getBoard().isClicked()){
+                setGameTimer(new GameTimer());
+            }
+            if(getBoard().chooseSquare(xPos, yPos) == Item.MINE &&
+                    !getBoard().getSquareMarking(xPos, yPos).equals(Square.Marking.FLAG)){
+                gameOver(false);
+                pauseGame(true);
+            } else if( getBoard().isAllNumberShown() ){
+                gameOver(true);
+                pauseGame(true);
+            }
+
+            this.setChanged();
+            this.notifyObservers();
         }
-        if(getBoard().chooseSquare(xPos, yPos) == Item.MINE){
-            gameOver(false);
-            pauseGame(true);
-        } else if( getBoard().isAllNumberShown() ){
-            gameOver(true);
-            pauseGame(true);
-        }
-        
-        this.setChanged();
-        this.notifyObservers();
     }
     
     public void markSquare(int xPos, int yPos){
-        if(xPos < 0 || yPos < 0)
-            throw new IllegalArgumentException();
-        
-        getBoard().markSquare(xPos, yPos);
-        
-        this.setChanged();
-        this.notifyObservers();
+        if(state.equals(GameState.PLAYING)){
+            if(xPos < 0 || yPos < 0)
+                throw new IllegalArgumentException();
+
+            getBoard().markSquare(xPos, yPos);
+
+            this.setChanged();
+            this.notifyObservers();
+        }
     }
     
     public void gameOver(boolean gameWon){
@@ -80,12 +84,12 @@ public class ClassicModel extends AbstractGameModel{
             getBoard().showMines(true);
             setGameState(GameState.GAMELOST);
         }
-        
         this.setChanged();
         this.notifyObservers();
     }
     
     public void restartGame(){
+        state = GameState.PLAYING;
         getBoard().reset();
         getGameTimer().stop();
         
@@ -93,12 +97,15 @@ public class ClassicModel extends AbstractGameModel{
         this.notifyObservers();
     }
     
+    @Override
     public void pauseGame(boolean pause){
-        super.pauseGame(pause);
-        
-        if(pause && state == GameState.PLAYING){
-            state = GameState.PAUSED;
-            
+        if(state.equals(GameState.PAUSED)||state.equals(GameState.PLAYING)){
+            super.pauseGame(pause);
+            if(pause){
+                state = GameState.PAUSED;
+            }else{
+                state = GameState.PLAYING;
+            }
             this.setChanged();
             this.notifyObservers();
         }
@@ -108,7 +115,7 @@ public class ClassicModel extends AbstractGameModel{
         return getBoard().getSquare(x, y);
     }
     
-    public void setGameState(GameState gameState){
+    private void setGameState(GameState gameState){
         state = gameState;
     }
     
