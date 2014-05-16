@@ -91,7 +91,7 @@ public class GameBoardTest extends TestCase {
     public void testShowMines() {
         GameBoard gb = new GameBoard(10,5,5);
         gb.chooseSquare(2, 2);
-        gb.showMines();
+        gb.showMines(true);
         int mineCounter=0;
         int x =0;
         int y =0;

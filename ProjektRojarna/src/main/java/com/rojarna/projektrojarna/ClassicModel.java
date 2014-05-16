@@ -73,6 +73,7 @@ public class ClassicModel extends AbstractGameModel{
             this.notifyObservers();
         }
     }
+    
     public void gameOver(boolean gameWon){
         getGameTimer().stop();
         
