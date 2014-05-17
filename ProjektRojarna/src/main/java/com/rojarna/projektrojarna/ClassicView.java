@@ -6,13 +6,13 @@
 
 package com.rojarna.projektrojarna;
 
-import com.rojarna.projektrojarna.ClassicModel.GameState;
-import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 /**
  *
@@ -29,12 +29,21 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     public ClassicView(ClassicModel m) {
         initComponents();
         
-        boardCard.setLayout(new FlowLayout());
-        setGameModel(m);
+        gamePanel.setLayout(new FlowLayout());
+        
+        model = m;//setGameModel(m);
         this.gameBoard=new GameBoardView(this.model, this);
-        boardCard.add(gameBoard);
+        gamePanel.add(gameBoard);
         //gamePanel.add(new JLabel("test"));
         showHighscore();
+    }
+    public void newGame(){
+        //setGameModel(new ClassicModel());
+        gamePanel.remove(gameBoard);
+        model = new ClassicModel();
+        this.gameBoard=new GameBoardView(this.model, this);
+        gamePanel.add(gameBoard);
+        gamePanel.updateUI();
     }
 
     /**
@@ -47,10 +56,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     private void initComponents() {
 
         gamePanel = new javax.swing.JPanel();
-        boardCard = new javax.swing.JPanel();
-        pausCard = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        sideMenu = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         timeLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -63,30 +69,30 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         secondPlaceLabel = new javax.swing.JLabel();
         thirdPlaceLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        pausButton = new javax.swing.JToggleButton();
+        PauseButton = new javax.swing.JButton();
         ExitButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setPreferredSize(new java.awt.Dimension(400, 340));
         setLayout(new java.awt.BorderLayout());
 
-        gamePanel.setLayout(new java.awt.CardLayout());
-        gamePanel.add(boardCard, "card2");
-
-        pausCard.setLayout(new java.awt.BorderLayout());
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Game Paused");
-        pausCard.add(jLabel1, java.awt.BorderLayout.CENTER);
-
-        gamePanel.add(pausCard, "card3");
+        javax.swing.GroupLayout gamePanelLayout = new javax.swing.GroupLayout(gamePanel);
+        gamePanel.setLayout(gamePanelLayout);
+        gamePanelLayout.setHorizontalGroup(
+            gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 319, Short.MAX_VALUE)
+        );
+        gamePanelLayout.setVerticalGroup(
+            gamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 340, Short.MAX_VALUE)
+        );
 
         add(gamePanel, java.awt.BorderLayout.CENTER);
 
-        sideMenu.setMaximumSize(new java.awt.Dimension(100, 138));
-        sideMenu.setMinimumSize(new java.awt.Dimension(100, 138));
-        sideMenu.setPreferredSize(new java.awt.Dimension(100, 138));
-        sideMenu.setLayout(new java.awt.GridLayout(3, 1));
+        jPanel1.setMaximumSize(new java.awt.Dimension(100, 138));
+        jPanel1.setMinimumSize(new java.awt.Dimension(100, 138));
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 138));
+        jPanel1.setLayout(new java.awt.GridLayout(3, 1));
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -94,7 +100,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         timeLabel.setText("Time");
         jPanel2.add(timeLabel, new java.awt.GridBagConstraints());
 
-        sideMenu.add(jPanel2);
+        jPanel1.add(jPanel2);
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
@@ -162,69 +168,75 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
 
         jPanel3.add(highScorePanel, new java.awt.GridBagConstraints());
 
-        sideMenu.add(jPanel3);
+        jPanel1.add(jPanel3);
 
         jPanel4.setLayout(new java.awt.GridLayout(2, 1));
 
-        pausButton.setText("Paus");
-        pausButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pausButtonActionPerformed(evt);
-            }
-        });
-        jPanel4.add(pausButton);
+        PauseButton.setText("PAUSE");
+        jPanel4.add(PauseButton);
 
         ExitButton.setText("EXIT");
         jPanel4.add(ExitButton);
 
-        sideMenu.add(jPanel4);
+        jPanel1.add(jPanel4);
 
-        add(sideMenu, java.awt.BorderLayout.WEST);
+        add(jPanel1, java.awt.BorderLayout.WEST);
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         add(jSeparator1, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pausButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pausButtonActionPerformed
-        model.pauseGame(pausButton.isSelected());
-        CardLayout tmp = (CardLayout) gamePanel.getLayout();
-        if(model.isGamePaused()){
-            tmp.last(gamePanel);
-        }else{
-            tmp.first(gamePanel);
-        }
-    }//GEN-LAST:event_pausButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExitButton;
-    private javax.swing.JPanel boardCard;
+    private javax.swing.JButton PauseButton;
     private javax.swing.JLabel firstPlaceLabel;
     private javax.swing.JPanel gamePanel;
     private javax.swing.JPanel highScorePanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JToggleButton pausButton;
-    private javax.swing.JPanel pausCard;
     private javax.swing.JLabel secondPlaceLabel;
-    private javax.swing.JPanel sideMenu;
     private javax.swing.JLabel thirdPlaceLabel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
     
+    
     public void propertyChange(PropertyChangeEvent evt) {
         String command = evt.getPropertyName();
         //timeLabel.setText(model.getGameTime()+"");
+        System.out.println("någon rör gamebordet!");
         if(command.equals("leftClick")){
             SquareView view = (SquareView)evt.getNewValue();
-            model.chooseSquare(view.getXPos(), view.getYPos());                
+            model.chooseSquare(view.getXPos(), view.getYPos());
+            if(model.getBoard().isAllNumberShown()){
+                Save.saveClassic(model.getGameTime());
+                int gameWinOption = JOptionPane.showConfirmDialog(null,"ConGratzUWin\nPlay another "
+                        + "game?","Game Over",YES_NO_OPTION);
+                if(gameWinOption == JOptionPane.YES_OPTION){
+                    newGame();
+                }else{
+                    //exit?
+                }
+            }
+            if(model.getSquare(view.getXPos(), view.getYPos()).isMine()){
+                System.out.println("U LOOOOOSE!");
+                //this.newGame();
+                int gameOverOption = JOptionPane.showConfirmDialog(null,"Game Over!\nPlay another "
+                        + "game?","Game Over",YES_NO_OPTION);
+                if(gameOverOption == JOptionPane.YES_OPTION){
+                    newGame();
+                    // maybe resert time dont know.
+                }else{
+                    // exit to main menu?
+                }
+            }
         }else if(command.equals("rightClick")){
             SquareView view = (SquareView)evt.getNewValue();
             model.markSquare(view.getXPos(), view.getYPos());
