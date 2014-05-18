@@ -267,13 +267,4 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
                     
         }
     }
-
-    public void setGameModel(AbstractGameModel m) {
-        try{
-            model = (ClassicModel)m;
-        }
-        catch(ClassCastException e){
-            throw new IllegalArgumentException();
-        }
-    }
 }

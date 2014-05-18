@@ -47,6 +47,8 @@ public class ClassicModel extends AbstractGameModel{
 
             if(!getBoard().isClicked()){
                 setGameTimer(new GameTimer());
+                getGameTimer().start();
+                
             }
             if(getBoard().chooseSquare(xPos, yPos) == Item.MINE &&
                     !getBoard().getSquareMarking(xPos, yPos).equals(Square.Marking.FLAG)){
@@ -84,6 +86,7 @@ public class ClassicModel extends AbstractGameModel{
             getBoard().showMines(true);
             setGameState(GameState.GAMELOST);
         }
+        
         this.setChanged();
         this.notifyObservers();
     }
