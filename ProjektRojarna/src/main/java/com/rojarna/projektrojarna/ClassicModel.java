@@ -55,6 +55,9 @@ public class ClassicModel extends AbstractGameModel{
                 setGameTimer(new GameTimer());
                 getGameTimer().start();
                 
+<<<<<<< HEAD
+>>>>>>> 765a106002a8b5b78231bee7e7e69d335dab774a
+=======
 >>>>>>> 765a106002a8b5b78231bee7e7e69d335dab774a
             }
             if(getBoard().chooseSquare(xPos, yPos) == Item.MINE &&

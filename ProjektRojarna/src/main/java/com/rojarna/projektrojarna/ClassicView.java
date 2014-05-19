@@ -327,6 +327,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     public void setGameModel(AbstractGameModel m) {
         try{
@@ -340,6 +341,8 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     public void update(Observable o, Object arg) {
          timeLabel.setText(model.getGameTime()+"");
     }
+=======
+>>>>>>> 765a106002a8b5b78231bee7e7e69d335dab774a
 =======
 >>>>>>> 765a106002a8b5b78231bee7e7e69d335dab774a
 }
