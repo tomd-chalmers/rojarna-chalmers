@@ -92,7 +92,7 @@ public class Save {
 		try
 		{
 		    FileWriter fw = new FileWriter(pathClassic,true); 
-		    fw.write(score+"\n");
+		    fw.write(score+System.getProperty("line.separator"));
 		    fw.close();
 		}
 		catch(IOException e)
@@ -111,7 +111,7 @@ public class Save {
 	                intList.add(Integer.parseInt(line));
 	            }
 	            Collections.sort(intList);
-	            Collections.reverse(intList);
+	            //Collections.reverse(intList);
 	        } 
 		 catch (IOException e) {
 	            System.err.println("IOException: " + e.getMessage());

@@ -62,7 +62,7 @@ public class ClassicModelTest extends TestCase {
 
     public void testRestartGame() {
         ClassicModel m = new ClassicModel();
-        m.chooseSquare(7, 0);
+        m.setGameTimer(new GameTimer());
         for(int i = 0; i < 6; i++){
             m.markSquare(i+1, i+1);
             m.getBoard().getSquare(i, i).setVisible(true);
@@ -83,6 +83,7 @@ public class ClassicModelTest extends TestCase {
 
     public void testPauseGame() {
         ClassicModel m = new ClassicModel();
+
     }
 
     public void testGetSquare() {
@@ -98,15 +99,8 @@ public class ClassicModelTest extends TestCase {
         
     }
 
-    public void testSetGameState() {
-        ClassicModel m = new ClassicModel();
-        m.setGameState(GameState.PLAYING);
-        assertTrue(m.getGameState() == GameState.PLAYING);
-    }
-
     public void testGetGameState() {
         ClassicModel m = new ClassicModel();
-        m.setGameState(GameState.PLAYING);
         assertTrue(m.getGameState() == GameState.PLAYING);
     }
     

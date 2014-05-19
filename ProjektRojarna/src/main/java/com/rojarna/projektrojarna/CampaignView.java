@@ -32,11 +32,11 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     /**
      * Creates new form ModelView
      */
-    public CampaignView() {
+    public CampaignView(CampaignModel m) {
         initComponents();
         
         PU2 = new PUShowAll();
-        model= new CampaignModel();
+        model= m;
         model.addObserver(this);
         board = new GameBoardView(model, this);
         PU2.addPropertyChangeListener(model);
@@ -268,8 +268,14 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JOptionPane.showMessageDialog(null,"Du ska väl inte sluta än?",
-                "Varning", JOptionPane.PLAIN_MESSAGE);
+        //JOptionPane.showMessageDialog(null,"Du ska väl inte sluta än?",
+        //        "Varning", JOptionPane.PLAIN_MESSAGE);
+        int answer = JOptionPane.showConfirmDialog(this, "Du ska väl inte sluta än?",
+                "Varning", JOptionPane.OK_CANCEL_OPTION);
+        
+        if(answer == JOptionPane.OK_OPTION){
+            this.firePropertyChange("MainMenu", false, true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

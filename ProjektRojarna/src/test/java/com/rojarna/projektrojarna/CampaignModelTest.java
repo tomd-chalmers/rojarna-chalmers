@@ -63,6 +63,27 @@ public class CampaignModelTest extends TestCase {
 
     public void testUsePowerup() {
         CampaignModel m = new CampaignModel();
+        PUChooseSafeSingle pu1 = new PUChooseSafeSingle();
+        PUChooseSafeArea pu2 = new PUChooseSafeArea();
+        int time = m.getGameTime();
+        m.usePowerup(pu1, 2, 2);
+        
+        assertTrue(m.getGameTime() == (time - pu1.getCost()));
+        assertTrue(m.getBoard().getSquare(2, 2).isVisible());
+        
+        time = m.getGameTime();
+        m.usePowerup(pu2, 5, 5);
+        
+        assertTrue(m.getGameTime() == (time - pu2.getCost()));
+        for(int i = 4; i < 7; i++){
+            for(int j = 4; j < 7; j++){
+                if(m.getBoard().getSquareItem(i,j) == Item.NUMBER){
+                    assertTrue(m.getBoard().getSquare(i, j).isVisible());
+                } else{
+                    assertFalse(m.getBoard().getSquare(i, j).isVisible());
+                }
+            }
+        }
     }
 
     public void testIsLvlComplete() {
@@ -126,6 +147,7 @@ public class CampaignModelTest extends TestCase {
 
     public void testPauseGame() {
         CampaignModel m = new CampaignModel();
+
     }
 
     public void testGetMines() {
