@@ -48,17 +48,9 @@ public class ClassicModel extends AbstractGameModel{
                 throw new IllegalArgumentException();
 
             if(!getBoard().isClicked()){
-<<<<<<< HEAD
-                //setGameTimer(new GameTimer());
-                getGameTimer().start();
-=======
                 setGameTimer(new GameTimer());
                 getGameTimer().start();
-                
-<<<<<<< HEAD
->>>>>>> 765a106002a8b5b78231bee7e7e69d335dab774a
-=======
->>>>>>> 765a106002a8b5b78231bee7e7e69d335dab774a
+
             }
             if(getBoard().chooseSquare(xPos, yPos) == Item.MINE &&
                     !getBoard().getSquareMarking(xPos, yPos).equals(Square.Marking.FLAG)){
