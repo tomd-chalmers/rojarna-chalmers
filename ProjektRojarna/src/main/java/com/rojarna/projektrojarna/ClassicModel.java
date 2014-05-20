@@ -82,7 +82,7 @@ public class ClassicModel extends AbstractGameModel{
         getGameTimer().stop();
         
         if(gameWon){
-            Save.saveClassic(getMines());
+            //Save.saveClassic(getMines());
             setGameState(GameState.GAMEWON);
         } else{
             getBoard().showMines(true);
