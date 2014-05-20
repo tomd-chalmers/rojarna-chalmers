@@ -83,7 +83,7 @@ public class ClassicModelTest extends TestCase {
 
     public void testPauseGame() {
         ClassicModel m = new ClassicModel();
-
+        
     }
 
     public void testGetSquare() {

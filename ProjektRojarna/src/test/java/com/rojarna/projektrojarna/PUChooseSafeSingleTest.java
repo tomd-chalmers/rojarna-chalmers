@@ -35,6 +35,7 @@ public class PUChooseSafeSingleTest extends TestCase {
         PUChooseSafeSingle p = new PUChooseSafeSingle();
         //try power on a square with Item == Mine
         GameBoard gb = new GameBoard();
+        gb.chooseSquare(7,7);
         gb.getSquare(2, 2).setItem(Item.MINE);
         assertTrue(gb.getSquare(2, 2).getMarking() == Marking.NONE);
         assertFalse(gb.getSquare(2, 2).isVisible());
@@ -43,6 +44,7 @@ public class PUChooseSafeSingleTest extends TestCase {
         assertFalse(gb.getSquare(2, 2).isVisible());
         //try power on a square with Item == Number and Marking = Flag
         gb = new GameBoard();
+        gb.chooseSquare(7,7);
         gb.getSquare(2, 2).setItem(Item.NUMBER);
         gb.getSquare(2, 2).setMarking(Marking.FLAG);
         p.power(gb, 2, 2);
@@ -50,6 +52,7 @@ public class PUChooseSafeSingleTest extends TestCase {
         assertTrue(gb.getSquare(2, 2).isVisible());
         //try power on a square with Item == Number and Marking = None
         gb = new GameBoard();
+        gb.chooseSquare(7,7);
         gb.getSquare(2, 2).setItem(Item.NUMBER);
         gb.getSquare(2, 2).setMarking(Marking.NONE);
         p.power(gb, 2, 2);
