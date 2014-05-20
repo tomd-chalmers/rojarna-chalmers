@@ -26,6 +26,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     
     private ClassicModel model;
     private GameBoardView gameBoard;
+    private String boardSize="small";
     /**
      * Creates new form ClassicView
      */
@@ -40,17 +41,30 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         boardCard.add(gameBoard);
         gamePanel.add(boardCard,"board");
         gamePanel.add(pausCard,"pause");
+        smallRadio.setSelected(true);
         //gamePanel.add(new JLabel("test"));
         showHighscore();
     }
     public void newGame(){
         //setGameModel(new ClassicModel());
         boardCard.remove(gameBoard);
-        model = new ClassicModel();
+        if(boardSize.equals("small")){
+            model = new ClassicModel();
+        }else if(boardSize.equals("medium")){
+            model = new ClassicModel(15,20,20);
+        }else if(boardSize.equals("large")){
+            model = new ClassicModel(20,30,30);
+        }else{
+            System.out.println("error in size.");
+        }
         this.gameBoard=new GameBoardView(this.model, this);
         boardCard.add(gameBoard);
         model.addObserver(this);
         showHighscore();
+        gamePanel.updateUI();
+    }
+    public void restartGame(){
+        model.restartGame();
         gamePanel.updateUI();
     }
 
@@ -80,11 +94,11 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         secondPlaceLabel = new javax.swing.JLabel();
         thirdPlaceLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jPanel5 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        smallRadio = new javax.swing.JRadioButton();
+        mediumRadio = new javax.swing.JRadioButton();
+        largeRadio = new javax.swing.JRadioButton();
+        newGameButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         pausButton = new javax.swing.JToggleButton();
         ExitButton = new javax.swing.JButton();
@@ -189,21 +203,41 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
 
         jPanel4.setLayout(new java.awt.GridLayout(2, 1));
 
-        jToggleButton1.setText("New Game");
-        jPanel4.add(jToggleButton1);
-
         jPanel5.setLayout(new java.awt.GridLayout(3, 1));
 
-        jRadioButton1.setText("Small");
-        jPanel5.add(jRadioButton1);
+        smallRadio.setText("Small");
+        smallRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smallRadioActionPerformed(evt);
+            }
+        });
+        jPanel5.add(smallRadio);
 
-        jRadioButton2.setText("Medium");
-        jPanel5.add(jRadioButton2);
+        mediumRadio.setText("Medium");
+        mediumRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mediumRadioActionPerformed(evt);
+            }
+        });
+        jPanel5.add(mediumRadio);
 
-        jRadioButton3.setText("Large");
-        jPanel5.add(jRadioButton3);
+        largeRadio.setText("Large");
+        largeRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                largeRadioActionPerformed(evt);
+            }
+        });
+        jPanel5.add(largeRadio);
 
         jPanel4.add(jPanel5);
+
+        newGameButton.setText("New Game");
+        newGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newGameButtonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(newGameButton);
 
         sideMenu.add(jPanel4);
 
@@ -240,6 +274,40 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         }
     }//GEN-LAST:event_pausButtonActionPerformed
 
+    private void smallRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallRadioActionPerformed
+        if(mediumRadio.isSelected()){
+            mediumRadio.setSelected(false);
+        }
+        if(largeRadio.isSelected()){
+            largeRadio.setSelected(false);
+        }
+        boardSize="small";
+    }//GEN-LAST:event_smallRadioActionPerformed
+
+    private void mediumRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mediumRadioActionPerformed
+        if(smallRadio.isSelected()){
+            smallRadio.setSelected(false);
+        }
+        if(largeRadio.isSelected()){
+            largeRadio.setSelected(false);
+        }
+        boardSize="medium";
+    }//GEN-LAST:event_mediumRadioActionPerformed
+
+    private void largeRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeRadioActionPerformed
+        if(mediumRadio.isSelected()){
+            mediumRadio.setSelected(false);
+        }
+        if(smallRadio.isSelected()){
+            smallRadio.setSelected(false);
+        }
+        boardSize="large";
+    }//GEN-LAST:event_largeRadioActionPerformed
+
+    private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
+        newGame();
+    }//GEN-LAST:event_newGameButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExitButton;
     private javax.swing.JPanel boardCard;
@@ -256,15 +324,15 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JRadioButton largeRadio;
+    private javax.swing.JRadioButton mediumRadio;
+    private javax.swing.JButton newGameButton;
     private javax.swing.JToggleButton pausButton;
     private javax.swing.JPanel pausCard;
     private javax.swing.JLabel secondPlaceLabel;
     private javax.swing.JPanel sideMenu;
+    private javax.swing.JRadioButton smallRadio;
     private javax.swing.JLabel thirdPlaceLabel;
     private javax.swing.JLabel timeLabel;
     // End of variables declaration//GEN-END:variables
@@ -315,14 +383,14 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
             secondPlaceLabel.setText(list.get(1)+"");
         }
         else{
-            secondPlaceLabel.setText("1");
+            secondPlaceLabel.setText("0");
                     
         }
         if(list.size()>2){
             thirdPlaceLabel.setText(list.get(2)+"");
         }
         else{
-            thirdPlaceLabel.setText("2");
+            thirdPlaceLabel.setText("0");
                     
         }
     }
