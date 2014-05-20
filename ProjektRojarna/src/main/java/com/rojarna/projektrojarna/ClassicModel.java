@@ -54,6 +54,7 @@ public class ClassicModel extends AbstractGameModel{
             }
             if(getBoard().chooseSquare(xPos, yPos) == Item.MINE &&
                     !getBoard().getSquareMarking(xPos, yPos).equals(Square.Marking.FLAG)){
+                
                 gameOver(false);
                 pauseGame(true);
             } else if( getBoard().isAllNumberShown() ){
@@ -106,11 +107,13 @@ public class ClassicModel extends AbstractGameModel{
     public void pauseGame(boolean pause){
         if(state.equals(GameState.PAUSED)||state.equals(GameState.PLAYING)){
             super.pauseGame(pause);
+            
             if(pause){
                 state = GameState.PAUSED;
             }else{
                 state = GameState.PLAYING;
             }
+            
             this.setChanged();
             this.notifyObservers();
         }
