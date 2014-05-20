@@ -33,21 +33,22 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     public ClassicView(ClassicModel m) {
         initComponents();
         
-        //gamePanel.setLayout(new FlowLayout());
-        
-        model = m;//setGameModel(m);
+        model = m;
         model.addObserver(this);
+        
         this.gameBoard=new GameBoardView(this.model, this);
         boardCard.add(gameBoard);
+        
         gamePanel.add(boardCard,"board");
         gamePanel.add(pausCard,"pause");
+        
         smallRadio.setSelected(true);
-        //gamePanel.add(new JLabel("test"));
+        
         showHighscore();
     }
-    public void newGame(){
-        //setGameModel(new ClassicModel());
+    private void newGame(){
         boardCard.remove(gameBoard);
+        
         if(boardSize.equals("small")){
             model = new ClassicModel();
         }else if(boardSize.equals("medium")){
@@ -57,15 +58,28 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         }else{
             System.out.println("error in size.");
         }
+        
         this.gameBoard=new GameBoardView(this.model, this);
         boardCard.add(gameBoard);
+        
         model.addObserver(this);
+        
         showHighscore();
         gamePanel.updateUI();
     }
+    
     public void restartGame(){
         model.restartGame();
         gamePanel.updateUI();
+    }
+    
+    private void exitGame(){
+        int answer = JOptionPane.showConfirmDialog(this, "Du ska väl inte sluta än?",
+                "Varning", JOptionPane.OK_CANCEL_OPTION);
+        
+        if(answer == JOptionPane.OK_OPTION){
+            this.firePropertyChange("MainMenu", false, true);
+        }
     }
 
     /**
@@ -252,6 +266,11 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         jPanel1.add(pausButton);
 
         ExitButton.setText("EXIT");
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(ExitButton);
 
         sideMenu.add(jPanel1);
@@ -263,12 +282,14 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     }// </editor-fold>//GEN-END:initComponents
 
     private void pausButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pausButtonActionPerformed
-        if(pausButton.isSelected()==true){//pausa
+        if(pausButton.isSelected()==true){ // pause!
             model.pauseGame(true);
+            
             CardLayout cardLayout = (CardLayout) gamePanel.getLayout();
             cardLayout.show(gamePanel,"pause");
-        }else if(pausButton.isSelected()==false){ //unPause!
+        }else if(pausButton.isSelected()==false){ //unpause!
             model.pauseGame(false);
+            
             CardLayout cardLayout = (CardLayout) gamePanel.getLayout();
             cardLayout.show(gamePanel,"board");
         }
@@ -281,6 +302,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         if(largeRadio.isSelected()){
             largeRadio.setSelected(false);
         }
+        
         boardSize="small";
     }//GEN-LAST:event_smallRadioActionPerformed
 
@@ -291,6 +313,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         if(largeRadio.isSelected()){
             largeRadio.setSelected(false);
         }
+        
         boardSize="medium";
     }//GEN-LAST:event_mediumRadioActionPerformed
 
@@ -301,12 +324,17 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         if(smallRadio.isSelected()){
             smallRadio.setSelected(false);
         }
+        
         boardSize="large";
     }//GEN-LAST:event_largeRadioActionPerformed
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         newGame();
     }//GEN-LAST:event_newGameButtonActionPerformed
+
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+        exitGame();
+    }//GEN-LAST:event_ExitButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExitButton;
@@ -340,28 +368,32 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
     
     public void propertyChange(PropertyChangeEvent evt) {
         String command = evt.getPropertyName();
+        
         if(command.equals("leftClick")){
             SquareView view = (SquareView)evt.getNewValue();
             model.chooseSquare(view.getXPos(), view.getYPos());
+            
             if(model.getBoard().isAllNumberShown()){
                 Save.saveClassic(model.getGameTime());
-                int gameWinOption = JOptionPane.showConfirmDialog(null,"ConGratzUWin\nPlay another "
-                        + "game?","Game Over",YES_NO_OPTION);
+                int gameWinOption = JOptionPane.showConfirmDialog(null,"Congratulations, "
+                        + "you won this round.\nPlay another one?","Game Over",YES_NO_OPTION);
+                
                 if(gameWinOption == JOptionPane.YES_OPTION){
                     newGame();
                 }else{
-                    //exit?
+                    exitGame();
                 }
             }
+            
             if(model.getSquare(view.getXPos(), view.getYPos()).isMine()){
-                //this.newGame();
                 int gameOverOption = JOptionPane.showConfirmDialog(null,"Game Over!\nPlay another "
                         + "game?","Game Over",YES_NO_OPTION);
+                
                 if(gameOverOption == JOptionPane.YES_OPTION){
                     newGame();
                     // maybe resert time dont know.
                 }else{
-                    // exit to main menu?
+                    exitGame();
                 }
             }
         }else if(command.equals("rightClick")){
@@ -370,8 +402,8 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         }
     }
     private void showHighscore(){
-        
         List<Integer> list = Save.getHighscore();
+        
         if(list.size()>0){
             firstPlaceLabel.setText(list.get(0)+"");
         }
