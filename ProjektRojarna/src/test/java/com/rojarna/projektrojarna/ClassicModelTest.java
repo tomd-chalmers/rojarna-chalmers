@@ -38,7 +38,6 @@ public class ClassicModelTest extends TestCase {
 
     public void testChooseSquare() {
         ClassicModel m = new ClassicModel();
-        assertTrue(m.getGameTimer() == null);
         m.chooseSquare(2, 2);
         assertTrue(m.getGameTimer() != null);
         assertTrue(m.getBoard().getSquare(2, 2).isVisible());

@@ -36,28 +36,29 @@ public class PUChooseSafeSingleTest extends TestCase {
         //try power on a square with Item == Mine
         GameBoard gb = new GameBoard();
         gb.chooseSquare(7,7);
-        gb.getSquare(2, 2).setItem(Item.MINE);
-        assertTrue(gb.getSquare(2, 2).getMarking() == Marking.NONE);
-        assertFalse(gb.getSquare(2, 2).isVisible());
-        p.power(gb, 2, 2);
-        assertTrue(gb.getSquare(2, 2).getMarking() == Marking.FLAG);
-        assertFalse(gb.getSquare(2, 2).isVisible());
+        gb.getSquare(0, 0).setItem(Item.MINE);
+        gb.getSquare(0, 0).setVisible(false);
+        p.power(gb, 0, 0);
+        assertTrue(gb.getSquare(0, 0).getMarking() == Marking.FLAG);
+        assertFalse(gb.getSquare(0, 0).isVisible());
         //try power on a square with Item == Number and Marking = Flag
         gb = new GameBoard();
         gb.chooseSquare(7,7);
-        gb.getSquare(2, 2).setItem(Item.NUMBER);
-        gb.getSquare(2, 2).setMarking(Marking.FLAG);
-        p.power(gb, 2, 2);
-        assertTrue(gb.getSquare(2, 2).getMarking() == Marking.NONE);
-        assertTrue(gb.getSquare(2, 2).isVisible());
+        gb.getSquare(0, 0).setItem(Item.NUMBER);
+        gb.getSquare(0, 0).setMarking(Marking.FLAG);
+        gb.getSquare(0, 0).setVisible(false);
+        p.power(gb, 0, 0);
+        assertTrue(gb.getSquare(0, 0).getMarking() != Marking.FLAG);
+        assertTrue(gb.getSquare(0, 0).isVisible());
         //try power on a square with Item == Number and Marking = None
         gb = new GameBoard();
         gb.chooseSquare(7,7);
-        gb.getSquare(2, 2).setItem(Item.NUMBER);
-        gb.getSquare(2, 2).setMarking(Marking.NONE);
-        p.power(gb, 2, 2);
-        assertTrue(gb.getSquare(2, 2).getMarking() == Marking.NONE);
-        assertTrue(gb.getSquare(2, 2).isVisible());
+        gb.getSquare(0, 0).setItem(Item.NUMBER);
+        gb.getSquare(0, 0).setMarking(Marking.NONE);
+        gb.getSquare(0, 0).setVisible(false);
+        p.power(gb, 0, 0);
+        assertTrue(gb.getSquare(0, 0).getMarking() == Marking.NONE);
+        assertTrue(gb.getSquare(0, 0).isVisible());
         
     }
 

@@ -32,13 +32,20 @@ public class PUChooseSafeAreaTest extends TestCase {
 
     public void testPower() {
         GameBoard gb = new GameBoard();
-        PUChooseSafeArea p = new PUChooseSafeArea();
+        PUChooseSafeArea pu = new PUChooseSafeArea();
+        gb.chooseSquare(7, 7);
         for(int i = 0; i < 8; i++){
-            gb.getSquare(i, i).setItem(Square.Item.MINE);
-            gb.getSquare(i, i).setVisible(false);
+            for(int j = 0; j < 8; j++){
+                if(i == j){
+                    gb.getSquare(i, i).setItem(Item.MINE);
+                } else {
+                    gb.getSquare(i, j).setItem(Item.NUMBER);
+                }
+                gb.getSquare(i, j).setVisible(false);
+            }
         }
         
-        p.power(gb, 1, 1);
+        pu.power(gb, 1, 1);
         
         for(int i = 0; i < 2; i++){
             for(int j = 0; j < 2; j++){
