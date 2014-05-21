@@ -81,6 +81,10 @@ public class CampaignModel extends AbstractGameModel{
         if(getGameTimer().afford(pu.getCost())&&gameState.equals(State.PLAYING)){
             getGameTimer().removeTime(pu.getCost());
             
+            if(!getBoard().isClicked()){
+                getGameTimer().start();
+            }
+            
             pu.power(getBoard(), x, y);
             
             if(isLvlComplete()){
