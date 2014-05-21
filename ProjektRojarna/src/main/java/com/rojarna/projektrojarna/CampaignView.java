@@ -332,7 +332,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
                 model.usePowerup(PU3, view.getXPos(),view.getYPos());
                 PUButton3.setSelected(false);
             }else{
-            model.chooseSquare(view.getXPos(), view.getYPos());                
+                model.chooseSquare(view.getXPos(), view.getYPos());                
             }
             
         }else if(command.equals("rightClick")){

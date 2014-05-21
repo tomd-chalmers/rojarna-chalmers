@@ -23,16 +23,7 @@ public class PUChooseRandomFour implements PowerupInterface{
 
 
     public void power(GameBoard gb, int x, int y) {
-        invisible = 0;
-        for(int i = 0; i < gb.getHeight(); i++){
-            for(int j = 0; j < gb.getWidth(); j++){
-                if(!gb.getSquare(i, j).isVisible()){
-                    if(!(gb.getSquareItem(i, j) == Item.MINE && gb.getSquareMarking(i, j) == Marking.FLAG)){
-                        invisible++;
-                    }
-                }
-            }
-        }
+        invisible = getInvisible(gb);
         
         if(invisible > 4){
             invisible = 4;
@@ -55,6 +46,20 @@ public class PUChooseRandomFour implements PowerupInterface{
                 gb.chooseSquare(x, y);
             }
         }
+    }
+    
+    public int getInvisible(GameBoard gb){
+        int a = 0;
+        for(int i = 0; i < gb.getWidth(); i++){
+            for(int j = 0; j < gb.getHeight(); j++){
+                if(!gb.getSquare(i, j).isVisible()){
+                    if(!(gb.getSquareItem(i, j) == Item.MINE && gb.getSquareMarking(i, j) == Marking.FLAG)){
+                        a++;
+                    }
+                }
+            }
+        }
+        return a;
     }
 
     public int getCost() {
