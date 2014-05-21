@@ -10,6 +10,8 @@ import junit.framework.TestCase;
 import com.rojarna.projektrojarna.Square.Item;
 import com.rojarna.projektrojarna.Square.Marking;
 import com.rojarna.projektrojarna.ClassicModel.GameState;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,9 +32,49 @@ public class ClassicModelTest extends TestCase {
     protected void tearDown() throws Exception {
         super.tearDown();
     }
+    
+    public void testGetWidth(){
+        ClassicModel m = new ClassicModel();
+        assertTrue(m.getWidth() == 8);
+    }
+    
+    public void testGetHeight(){
+        ClassicModel m = new ClassicModel();
+        assertTrue(m.getWidth() == 8);
+    }
+    
+    public void testGetMines(){
+        ClassicModel m = new ClassicModel();
+        assertTrue(m.getMines() == 10);
+    }
+    
+    public void testIsGamePaused(){
+        ClassicModel m = new ClassicModel();
+        m.pauseGame(true);
+        assertTrue(m.isGamePaused());
+    }
+    
+    public void testGetGameTimeString(){
+        ClassicModel m = new ClassicModel();
+        m.setGameTimer(new GameTimer(121));
+        assertTrue(m.getGameTimeString().equals("02:01"));
+    }
+    
+    public void testGetFlags(){
+        ClassicModel m = new ClassicModel();
+        for(int i = 0; i < 8; i++){
+            m.markSquare(i, i);
+        }
+        assertTrue(m.getFlags() == 8);
+    }
 
     public void testNewGame() {
         ClassicModel m = new ClassicModel();
+        m.newGame(15, 10, 10);
+        assertTrue(m.getGameState() == ClassicModel.GameState.PLAYING);
+        assertTrue(m.getBoard().getMines() == 15);
+        assertTrue(m.getBoard().getHeight() == 10);
+        assertTrue(m.getBoard().getWidth() == 10);
         
     }
 
@@ -57,6 +99,15 @@ public class ClassicModelTest extends TestCase {
 
     public void testGameOver() {
         ClassicModel m = new ClassicModel();
+        m.chooseSquare(2, 2);
+        int time = m.getGameTime();
+        m.gameOver(true);
+        
+        try {
+            sleep();
+        } catch (Exception ex){}
+        
+        assertTrue(time == m.getGameTime());
     }
 
     public void testRestartGame() {
@@ -82,7 +133,28 @@ public class ClassicModelTest extends TestCase {
 
     public void testPauseGame() {
         ClassicModel m = new ClassicModel();
+        m.chooseSquare(2, 2);
+        m.pauseGame(true);
+        int time = m.getGameTime();
+        try {
+            sleep();
+        } catch (Exception ex){}
         
+        assertTrue(m.getGameTime() == time);
+        
+        m.pauseGame(false);
+        
+        try {
+            sleep();
+        } catch (Exception ex){}
+        
+        assertTrue(m.getGameTime() > time);
+        
+        
+    }
+    
+    public void sleep() throws Exception{
+        Thread.sleep(2000);
     }
 
     public void testGetSquare() {

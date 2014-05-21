@@ -34,24 +34,14 @@ public class PUChooseSafeAreaTest extends TestCase {
         GameBoard gb = new GameBoard();
         PUChooseSafeArea pu = new PUChooseSafeArea();
         gb.chooseSquare(7, 7);
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
-                if(i == j){
-                    gb.getSquare(i, i).setItem(Item.MINE);
-                } else {
-                    gb.getSquare(i, j).setItem(Item.NUMBER);
-                }
-                gb.getSquare(i, j).setVisible(false);
-            }
-        }
         
         pu.power(gb, 1, 1);
         
-        for(int i = 0; i < 2; i++){
-            for(int j = 0; j < 2; j++){
-                if(i == j){
-                    assertTrue(gb.getSquareMarking(i, i) == Marking.FLAG);
-                    assertFalse(gb.isVisible(i, i));
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(gb.getSquareItem(i, j) == Item.MINE && !gb.getSquare(i, j).isVisible()){
+                    assertTrue(gb.getSquareMarking(i, j) == Marking.FLAG);
+                    assertFalse(gb.isVisible(i, j));
                 } else {
                     assertTrue(gb.getSquareMarking(i, j) != Marking.FLAG);
                     assertTrue(gb.isVisible(i, j));
