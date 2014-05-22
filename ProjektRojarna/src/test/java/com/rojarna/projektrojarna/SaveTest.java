@@ -38,7 +38,7 @@ public class SaveTest extends TestCase {
         assertTrue(Save.getHighscore().isEmpty());
         Save.saveClassic(1);
         Save.saveClassic(2);
-        assertTrue(Save.getHighscore().get(0)==2);
+        assertTrue(Save.getHighscore().get(0)==1);
     }
 
     public void testGetHighscore() {

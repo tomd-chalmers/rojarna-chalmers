@@ -7,6 +7,7 @@
 package com.rojarna.projektrojarna;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.beans.PropertyChangeEvent;
@@ -41,6 +42,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         boardCard.add(gameBoard);
         
         gamePanel.add(boardCard,"board");
+        boardCard.setBackground(Color.red);
         gamePanel.add(pausCard,"pause");
         
         smallRadio.setSelected(true);

@@ -28,7 +28,7 @@ public class GameBoard{
 	
     private Square[][] board;
     private int mines,width,height;
-    private boolean boardClicked, boardReset = false;
+    private boolean boardClicked, boardReset = false, boardInit = false;
     private int flagCounter = 0;
 
     public GameBoard(){
@@ -49,6 +49,7 @@ public class GameBoard{
     }
 
     private void initBoard(int x,int y){
+        boardInit = true;
         List<Point> tmp = getBorder(x,y);
         for(int i=0; i<mines; i++){
             int randX;
@@ -104,7 +105,7 @@ public class GameBoard{
 
     public Item chooseSquare(int x, int y){
         if(!boardClicked){
-            if(!boardReset){
+            if(!boardReset || !boardInit){
                 initBoard(x,y);
             } else{
                 boardReset = false;
