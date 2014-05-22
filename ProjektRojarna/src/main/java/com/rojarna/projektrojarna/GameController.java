@@ -35,6 +35,7 @@ public class GameController implements Observer, PropertyChangeListener{
     
     private void exitProgram(){
         frame.setEnabled(false);
+        frame.dispose();
         System.exit(0);
     }
 
@@ -63,12 +64,11 @@ public class GameController implements Observer, PropertyChangeListener{
             frame.setGamePanel(v);
             frame.showGameBoard();
         }
-        else if(evt.getPropertyName().equals("ClassicGame")){
+        else if(evt.getPropertyName().equals("ExitGame")){
             exitProgram();
         }
         else if(evt.getPropertyName().equals("MainMenu")){
             gameModel.pauseGame(true);
-            this.
             frame.showGameMenu();
         }
     }

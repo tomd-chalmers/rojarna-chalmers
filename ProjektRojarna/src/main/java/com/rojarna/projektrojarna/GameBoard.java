@@ -42,6 +42,7 @@ public class GameBoard{
                 board[i][j]=new Square();
             }
         }
+        
         this.mines = mines;
         this.height = height;
         this.width = width;
@@ -166,7 +167,9 @@ public class GameBoard{
 
     public void showMines(boolean show){
         for(int i = 0; i < width; i++){
+            
             for(int j = 0; j < height; j++){
+                
                 if(board[j][i].isMine()){
                     showSquare(i,j,show);
                 }

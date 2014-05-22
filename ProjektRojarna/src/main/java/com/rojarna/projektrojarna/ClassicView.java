@@ -7,6 +7,7 @@
 package com.rojarna.projektrojarna;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -82,6 +83,31 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         }
     }
 
+    private void showHighscore(){
+        List<Integer> list = Save.getHighscore();
+        
+        if(list.size()>0){
+            firstPlaceLabel.setText(list.get(0)+"");
+        }
+        else{
+            firstPlaceLabel.setText("0");
+                    
+        }
+        if(list.size()>1){
+            secondPlaceLabel.setText(list.get(1)+"");
+        }
+        else{
+            secondPlaceLabel.setText("0");
+                    
+        }
+        if(list.size()>2){
+            thirdPlaceLabel.setText(list.get(2)+"");
+        }
+        else{
+            thirdPlaceLabel.setText("0");
+                    
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,9 +122,9 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         pausCard = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         sideMenu = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 25), new java.awt.Dimension(0, 25), new java.awt.Dimension(32767, 25));
         timeLabel = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 30), new java.awt.Dimension(0, 30), new java.awt.Dimension(32767, 30));
         highScorePanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -107,13 +133,14 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         firstPlaceLabel = new javax.swing.JLabel();
         secondPlaceLabel = new javax.swing.JLabel();
         thirdPlaceLabel = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         smallRadio = new javax.swing.JRadioButton();
         mediumRadio = new javax.swing.JRadioButton();
         largeRadio = new javax.swing.JRadioButton();
-        newGameButton = new javax.swing.JButton();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel1 = new javax.swing.JPanel();
+        newGameButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         pausButton = new javax.swing.JToggleButton();
         ExitButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -137,17 +164,18 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         sideMenu.setMaximumSize(new java.awt.Dimension(100, 138));
         sideMenu.setMinimumSize(new java.awt.Dimension(100, 138));
         sideMenu.setPreferredSize(new java.awt.Dimension(100, 138));
-        sideMenu.setLayout(new java.awt.GridLayout(4, 1));
-
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        sideMenu.setLayout(new javax.swing.BoxLayout(sideMenu, javax.swing.BoxLayout.PAGE_AXIS));
+        sideMenu.add(filler2);
 
         timeLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         timeLabel.setText("Time");
-        jPanel2.add(timeLabel, new java.awt.GridBagConstraints());
-
-        sideMenu.add(jPanel2);
-
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        timeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        timeLabel.setMaximumSize(new java.awt.Dimension(100, 29));
+        timeLabel.setMinimumSize(new java.awt.Dimension(100, 29));
+        timeLabel.setPreferredSize(new java.awt.Dimension(100, 29));
+        timeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        sideMenu.add(timeLabel);
+        sideMenu.add(filler1);
 
         jLabel2.setText("HIGHSCORE");
 
@@ -211,11 +239,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(highScorePanel, new java.awt.GridBagConstraints());
-
-        sideMenu.add(jPanel3);
-
-        jPanel4.setLayout(new java.awt.GridLayout(2, 1));
+        sideMenu.add(highScorePanel);
 
         jPanel5.setLayout(new java.awt.GridLayout(3, 1));
 
@@ -243,7 +267,10 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         });
         jPanel5.add(largeRadio);
 
-        jPanel4.add(jPanel5);
+        sideMenu.add(jPanel5);
+        sideMenu.add(filler3);
+
+        jPanel1.setLayout(new java.awt.GridLayout(4, 1));
 
         newGameButton.setText("New Game");
         newGameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -251,13 +278,17 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
                 newGameButtonActionPerformed(evt);
             }
         });
-        jPanel4.add(newGameButton);
+        jPanel1.add(newGameButton);
 
-        sideMenu.add(jPanel4);
+        jButton1.setText("Restart Game");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
 
-        jPanel1.setLayout(new java.awt.GridLayout(2, 1));
-
-        pausButton.setText("PAUSE");
+        pausButton.setText("Pause");
         pausButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pausButtonActionPerformed(evt);
@@ -265,7 +296,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         });
         jPanel1.add(pausButton);
 
-        ExitButton.setText("EXIT");
+        ExitButton.setText("Exit");
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExitButtonActionPerformed(evt);
@@ -336,21 +367,26 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         exitGame();
     }//GEN-LAST:event_ExitButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        restartGame();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExitButton;
     private javax.swing.JPanel boardCard;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
     private javax.swing.JLabel firstPlaceLabel;
     private javax.swing.JPanel gamePanel;
     private javax.swing.JPanel highScorePanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JRadioButton largeRadio;
@@ -399,31 +435,6 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         }else if(command.equals("rightClick")){
             SquareView view = (SquareView)evt.getNewValue();
             model.markSquare(view.getXPos(), view.getYPos());
-        }
-    }
-    private void showHighscore(){
-        List<Integer> list = Save.getHighscore();
-        
-        if(list.size()>0){
-            firstPlaceLabel.setText(list.get(0)+"");
-        }
-        else{
-            firstPlaceLabel.setText("0");
-                    
-        }
-        if(list.size()>1){
-            secondPlaceLabel.setText(list.get(1)+"");
-        }
-        else{
-            secondPlaceLabel.setText("0");
-                    
-        }
-        if(list.size()>2){
-            thirdPlaceLabel.setText(list.get(2)+"");
-        }
-        else{
-            thirdPlaceLabel.setText("0");
-                    
         }
     }
 
