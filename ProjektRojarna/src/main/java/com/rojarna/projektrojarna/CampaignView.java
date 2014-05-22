@@ -25,7 +25,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     
     private CampaignModel model;
     private PowerupInterface PU1 = new PUChooseSafeArea();
-    private PUShowAll PU2;
+    private PUChooseRandomFour PU2 = new PUChooseRandomFour();
     private PowerupInterface PU3 = new PUChooseSafeSingle();
     GameBoardView board;
 
@@ -35,11 +35,9 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     public CampaignView(CampaignModel m) {
         initComponents();
         
-        PU2 = new PUShowAll();
         model= m;
         model.addObserver(this);
         board = new GameBoardView(model, this);
-        PU2.addPropertyChangeListener(model);
         boardCard.add(board);
         boardCard.setBackground(Color.CYAN);
     }
@@ -334,7 +332,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
                 model.usePowerup(PU3, view.getXPos(),view.getYPos());
                 PUButton3.setSelected(false);
             }else{
-            model.chooseSquare(view.getXPos(), view.getYPos());                
+                model.chooseSquare(view.getXPos(), view.getYPos());                
             }
             
         }else if(command.equals("rightClick")){
@@ -407,7 +405,6 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         boardCard.removeAll();
         model= new CampaignModel();
         model.addObserver(this);
-        PU2.addPropertyChangeListener(model);
         GameBoardView board = new GameBoardView(model, this);
         boardCard.add(board);
         this.board=board;

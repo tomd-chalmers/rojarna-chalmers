@@ -103,16 +103,6 @@ public class CampaignModelTest extends TestCase {
         assertFalse(m.isLvlComplete());
     }
 
-    public void testNextLevel() {
-        CampaignModel m = new CampaignModel();
-        int lvl = m.getLevel();
-        int width = m.getWidth();
-        int heigth = m.getHeight();
-        int mines = m.getMines();
-        int gametime = m.getGameTimer().getTimeSec();
-        
-    }
-
     public void testGetSquare() {
         CampaignModel m = new CampaignModel();
         Square s = m.getBoard().getSquare(2,2);
@@ -147,7 +137,26 @@ public class CampaignModelTest extends TestCase {
 
     public void testPauseGame() {
         CampaignModel m = new CampaignModel();
-
+        m.chooseSquare(2, 2);
+        m.pauseGame(true);
+        int time = m.getGameTime();
+        try {
+            sleep();
+        } catch (Exception ex){}
+        
+        assertTrue(m.getGameTime() == time);
+        
+        m.pauseGame(false);
+        
+        try {
+            sleep();
+        } catch (Exception ex){}
+        
+        assertTrue(m.getGameTime() < time);
+    }
+    
+    public void sleep() throws Exception{
+        Thread.sleep(2000);
     }
 
     public void testGetMines() {
@@ -155,8 +164,4 @@ public class CampaignModelTest extends TestCase {
         assertTrue(m.getMines() == 10);
     }
 
-    public void testPropertyChange() {
-        CampaignModel m = new CampaignModel();
-    }
-    
 }
