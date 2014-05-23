@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The Campaign game mode, will create its own gameboard and sets
+ * the "rules" for this specific game mode.
  */
 
 package com.rojarna.projektrojarna;
@@ -140,7 +139,6 @@ public class CampaignModel extends AbstractGameModel{
         getGameTimer().stop();
         gameState = State.GAMEOVER;
         getBoard().showMines(true);
-        //spara highscore
         this.setChanged();
         this.notifyObservers();
     }

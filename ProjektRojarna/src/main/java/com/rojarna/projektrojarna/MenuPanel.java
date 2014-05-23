@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The starting view and main menu. First thing the players sees and let 
+ * the player navigate to the diffrent gameMode he/she wants to play.
  */
 
 package com.rojarna.projektrojarna;
@@ -12,7 +11,6 @@ package com.rojarna.projektrojarna;
  */
 public class MenuPanel extends javax.swing.JPanel {
 
-    //PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     
     /**
      * Creates new form MenuPanel

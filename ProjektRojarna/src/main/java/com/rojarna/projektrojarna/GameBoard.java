@@ -1,7 +1,9 @@
  /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Creates a game board in diffrent sizes, with X amount of mines.
+ * also contains method like reset and other method to make the gameboard
+ * versatile and easy to use if the need to create another gameModel emerge.
+ *
+ * GameBoard are using multiple instances of Square to form the board. 
  */
 
 package com.rojarna.projektrojarna;
@@ -13,7 +15,6 @@ import java.awt.Point;
 import com.rojarna.projektrojarna.Square.Item;
 import com.rojarna.projektrojarna.Square.Marking;
 
-import java.util.Scanner;
 
 
 

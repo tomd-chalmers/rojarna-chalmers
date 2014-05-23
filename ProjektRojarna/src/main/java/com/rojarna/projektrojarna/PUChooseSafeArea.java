@@ -1,16 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A powerup that is available in the CampaignModel.
+ * After the person first use this powerup, he/she also has to choose a square.
+ * the powerup will choose the square and if it is a mine it will "flagg" the
+ * square. It will also make the same with all the square that is next to the
+ * choosen square.
  */
 
 package com.rojarna.projektrojarna;
 
 import com.rojarna.projektrojarna.Square.Item;
-import static com.rojarna.projektrojarna.Square.Item.*;
 import com.rojarna.projektrojarna.Square.Marking;
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

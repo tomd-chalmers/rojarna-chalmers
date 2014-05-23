@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The visualisation of the ClassicModel, uses a gameBoardView.
  */
 
 package com.rojarna.projektrojarna;
@@ -9,13 +7,11 @@ package com.rojarna.projektrojarna;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 
@@ -429,7 +425,6 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
                 
                 if(gameOverOption == JOptionPane.YES_OPTION){
                     newGame();
-                    // maybe resert time dont know.
                 }else{
                     exitGame();
                 }

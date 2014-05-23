@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * AbstractGameModel is the abstract class of the diffrent gamemodels.
+ * The game models, CampaignModel and ClassicModel, are the two diffrent
+ * gamerules a player can play.
  */
 
 package com.rojarna.projektrojarna;

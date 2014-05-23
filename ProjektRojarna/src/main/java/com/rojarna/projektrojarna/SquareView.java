@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The view of square, uses images to represent, mines or numbers.
+ * are used by GameBoardView.
  */
 
 package com.rojarna.projektrojarna;
@@ -21,7 +20,6 @@ public class SquareView extends javax.swing.JPanel implements Observer{
     private final int x;
     private final int y;
     
-    //private boolean setBoard = false;
 
     /**
      * Creates new form SquareView

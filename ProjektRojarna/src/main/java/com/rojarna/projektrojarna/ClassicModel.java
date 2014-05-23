@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The "rules" for the classic game mode, creates and uses a gameboard.
  */
 
 package com.rojarna.projektrojarna;
@@ -35,9 +33,7 @@ public class ClassicModel extends AbstractGameModel{
         
         setBoard(new GameBoard(mines, width, heigth));
         state = GameState.PLAYING;
-        //toms edit test:
         setGameTimer(new GameTimer());
-        //slut
         this.setChanged();
         this.notifyObservers();
     }
@@ -83,7 +79,6 @@ public class ClassicModel extends AbstractGameModel{
         getGameTimer().stop();
         
         if(gameWon){
-            //Save.saveClassic(getMines());
             setGameState(GameState.GAMEWON);
         } else{
             getBoard().showMines(true);

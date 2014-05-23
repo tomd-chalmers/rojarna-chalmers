@@ -1,15 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A powerup that is available in the CampaignModel.
+ * It choose four squares, at random, and in case one of theese would be an
+ * mine it sets the marking to FLAGGED.
  */
 
 package com.rojarna.projektrojarna;
 
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import com.rojarna.projektrojarna.Square.Item;
-import static com.rojarna.projektrojarna.Square.Item.*;
 import com.rojarna.projektrojarna.Square.Marking;
 
 /**

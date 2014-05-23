@@ -1,7 +1,7 @@
 package com.rojarna.projektrojarna;
 
 /**
- * Hello world!
+ * The startup file.
  *
  */
 public class App 
@@ -29,12 +29,6 @@ public class App
             java.util.logging.Logger.getLogger(TestFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
-        
-        //ClassicModel model = new ClassicModel(10, 10, 30);
-        //GameView view = new GameView();
-        
         new GameController();
-        //new GameController(model, view);
-        //view.setVisible(true);
     }
 }

@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The gameTimer uses the (util)Timer to make a counter tick either 
+ * from zero and upp or from a given start value and down.
+ * It also has a ot of funktion to help gameModels to easy add and reduce time
+ * from the counter, to make the GameTimer more versatile.
  */
 package com.rojarna.projektrojarna;
 
@@ -35,10 +36,8 @@ public class GameTimer {
         public void actionPerformed(ActionEvent e) {
             if(dec){
                 time--;
-                // fire property change or something, for a view.
             }else{
                 time++;
-                // fire property change or something, for a view.
             }
             property.firePropertyChange("time",true,false);
         }
@@ -92,12 +91,7 @@ public class GameTimer {
     }
     
     public void removeTime(int a){
-        //if(afford(a)){
             time=time-a;
-        //}
-        //else{
-            //cant afford, do stuff?
-        //}
     }
     
     public void addTime(int a){

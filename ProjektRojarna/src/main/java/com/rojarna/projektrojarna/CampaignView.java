@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The view for CampaignModel, uses the view from GameBoard to illustrate 
+ * the game in grafic to the player.
  */
 
 package com.rojarna.projektrojarna;
@@ -266,8 +265,6 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //JOptionPane.showMessageDialog(null,"Du ska väl inte sluta än?",
-        //        "Varning", JOptionPane.PLAIN_MESSAGE);
         int answer = JOptionPane.showConfirmDialog(this, "Du ska väl inte sluta än?",
                 "Varning", JOptionPane.OK_CANCEL_OPTION);
         

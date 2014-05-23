@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The controller of this MVC based application. GameController main purpose is 
+ * to provide the user with input by arranging for relevant views to present
+ * themselves in appropriate places on the screen
  */
 
 package com.rojarna.projektrojarna;
@@ -52,7 +52,6 @@ public class GameController implements Observer, PropertyChangeListener{
             
             frame.setGamePanel(v);
             frame.showGameBoard();
-            //gameView = new ClassicView();
         }
         else if(evt.getPropertyName().equals("CampaignGame")){
             gameModel = new CampaignModel();

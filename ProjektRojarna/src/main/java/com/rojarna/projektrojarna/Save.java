@@ -1,3 +1,8 @@
+/**
+ * The save class. Creates, if not already exists, a save file. and have methods
+ * to get them. 
+ */
+
 package com.rojarna.projektrojarna;
 import java.io.File;
 import java.io.FileWriter;
@@ -9,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 /**
- * OBS! koden är lite stökig ska fixa de senare här är metoderna.
- * 
  * för classic:
  * void saveClassic(int score) - skapar (om det inte redan finns) och lägger till ett score.
  * List<Integer> getHighescore() - returnerar en lista med bästa score på förstaplats.
@@ -21,6 +24,8 @@ import java.util.List;
  * int getSavedCampaignLevel() - returner level
  * int getSavedCampaignTime() - returner tid
  * void clearCampaign() - clearar sparade filen. (tar bort filen).
+ * 
+ * 
  * @author tomd
  *
  */
@@ -82,7 +87,7 @@ public class Save {
 			 catch (IOException e) {
 		            System.err.println("IOException: " + e.getMessage());
 		        }
-			 return intList.get(1);// first value is the level.
+			 return intList.get(1);// second value is the time.
 		}
 	}
 	
@@ -101,7 +106,7 @@ public class Save {
 		}
 	}
 	
-	public static List<Integer> getHighscore(){ // return a list with highscore highest first.
+	public static List<Integer> getHighscore(){ // return a list with highscore lowest first.
 		checkAndCreateClassic();
 		List<String> lines = new ArrayList<String>();
 		List<Integer> intList=new ArrayList<Integer>();
@@ -111,12 +116,10 @@ public class Save {
 	                intList.add(Integer.parseInt(line));
 	            }
 	            Collections.sort(intList);
-	            //Collections.reverse(intList);
 	        } 
 		 catch (IOException e) {
 	            System.err.println("IOException: " + e.getMessage());
 	        }
-		 System.out.println(intList); // for test only
 		return intList;    
 	}
 	

@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * OBS LÄMNA INTE IN UTAN ATT HA KOLLAT IGENOM KOMENTARERNA I DENNA FIL!
+ * the visualistation of gameBoard, uses squareView and are used
+ * by both classicModel and CampaignModel.
  */
 
 package com.rojarna.projektrojarna;
@@ -27,7 +27,7 @@ public class GameBoardView extends javax.swing.JPanel{
         // Och dom kan inte extenda saker eftersom dom redan är en JPanel.
         //I gameView körs GameBoard(Model, null) vilket buggar efter som nu
         // så finns det 2 konstruktorer som den kan passa på.
-        //därför skapar jag änu en onstruktor som inte gör ett skit och använder den
+        //därför skapar jag änu en konstruktor som inte gör ett skit och använder den
         // så länge.
     }
     
