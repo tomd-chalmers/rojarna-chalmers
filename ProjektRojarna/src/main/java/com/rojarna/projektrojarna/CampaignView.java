@@ -129,6 +129,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         PUPanel.setLayout(new java.awt.GridBagLayout());
 
         PUButton1.setText("PU1");
+        PUButton1.setToolTipText("Välj ett område och låt datort säkert räkna ut var minorna finns. Kostar: 30 sec");
         PUButton1.setFocusable(false);
         PUButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +139,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         PUPanel.add(PUButton1, new java.awt.GridBagConstraints());
 
         PUButton2.setText("PU2");
+        PUButton2.setToolTipText("Väljer 4 slumpmäsiga ruton och flagar dom ifall det är minor. Kostar: 15 sec");
         PUButton2.setFocusable(false);
         PUButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +149,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         PUPanel.add(PUButton2, new java.awt.GridBagConstraints());
 
         PUButton3.setText("PU3");
+        PUButton3.setToolTipText("Välj en ruta utan att förlora ett liv om det är en mina. Kostar: 5 sec");
         PUButton3.setFocusable(false);
         PUButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

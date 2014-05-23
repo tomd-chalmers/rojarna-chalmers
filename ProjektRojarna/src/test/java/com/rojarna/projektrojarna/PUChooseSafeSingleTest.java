@@ -64,7 +64,7 @@ public class PUChooseSafeSingleTest extends TestCase {
 
     public void testGetCost() {
         PUChooseSafeSingle p = new PUChooseSafeSingle();
-        assertTrue(p.getCost() == 10);
+        assertTrue(p.getCost() == 5);
     }
     
 }

@@ -16,7 +16,7 @@ import com.rojarna.projektrojarna.Square.Marking;
  */
 public class PUChooseSafeSingle implements PowerupInterface{
 
-    private final int COST = 10;
+    private final int COST = 5;
     
     public void power(GameBoard gb, int x, int y) {
         if(gb.getSquare(x, y).getItem()==Item.MINE){

@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class PUChooseSafeArea implements PowerupInterface{
     
-    private final int COST=10;
+    private final int COST=30;
     
     public void power(GameBoard gb, int x, int y) {
         List <Point> tmp = gb.getBorder(x,y);

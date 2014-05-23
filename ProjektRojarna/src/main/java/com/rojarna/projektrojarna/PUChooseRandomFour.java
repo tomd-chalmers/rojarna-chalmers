@@ -15,7 +15,7 @@ import com.rojarna.projektrojarna.Square.Marking;
  * @author Tom
  */
 public class PUChooseRandomFour implements PowerupInterface{
-    private final int COST=5;
+    private final int COST=15;
     private int x, y, invisible;
     private final PropertyChangeSupport prop = new PropertyChangeSupport(this);
 

@@ -52,7 +52,7 @@ public class PUChooseSafeAreaTest extends TestCase {
 
     public void testGetCost() {
         PUChooseSafeArea p = new PUChooseSafeArea();
-        assertTrue(p.getCost() == 10);
+        assertTrue(p.getCost() == 30);
     }
     
 }

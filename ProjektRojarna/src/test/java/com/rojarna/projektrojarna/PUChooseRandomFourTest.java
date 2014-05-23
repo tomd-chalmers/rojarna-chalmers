@@ -55,7 +55,7 @@ public class PUChooseRandomFourTest extends TestCase {
 
     public void testGetCost() {
         PUChooseRandomFour pu = new PUChooseRandomFour();
-        assertTrue(pu.getCost() == 5);
+        assertTrue(pu.getCost() == 15);
     }
     
 }
