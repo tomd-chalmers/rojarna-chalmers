@@ -32,8 +32,11 @@ public class ClassicModel extends AbstractGameModel{
             throw new IllegalArgumentException();
         
         setBoard(new GameBoard(mines, width, heigth));
+        
         state = GameState.PLAYING;
+        
         setGameTimer(new GameTimer());
+        
         this.setChanged();
         this.notifyObservers();
     }
@@ -48,14 +51,15 @@ public class ClassicModel extends AbstractGameModel{
                 getGameTimer().start();
 
             }
-            if(getBoard().chooseSquare(xPos, yPos) == Item.MINE &&
-                    !getBoard().getSquareMarking(xPos, yPos).equals(Square.Marking.FLAG)){
-                
-                gameOver(false);
-                pauseGame(true);
-            } else if( getBoard().isAllNumberShown() ){
-                gameOver(true);
-                pauseGame(true);
+            
+            if(!(getBoard().getSquareMarking(xPos, yPos).equals(Square.Marking.FLAG))){
+                if(getBoard().chooseSquare(xPos, yPos) == Item.MINE){
+                    gameOver(false);
+                    pauseGame(true);
+                } else if( getBoard().isAllNumberShown() ){
+                    gameOver(true);
+                    pauseGame(true);
+                }
             }
 
             this.setChanged();
