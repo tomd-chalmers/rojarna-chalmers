@@ -1,5 +1,4 @@
 /*
- * OBS LÄMNA INTE IN UTAN ATT HA KOLLAT IGENOM KOMENTARERNA I DENNA FIL!
  * the visualistation of gameBoard, uses squareView and are used
  * by both classicModel and CampaignModel.
  */
@@ -21,14 +20,6 @@ public class GameBoardView extends javax.swing.JPanel{
         initComponents();
         
         this.model=model;
-        // OBS the gameBoard is never set so there may be problems!!
-        // CampaginView och classicView kan inte ha ett gemensamt interface, då
-        // det interfacet måste ha implementat proprtyChangeListener.
-        // Och dom kan inte extenda saker eftersom dom redan är en JPanel.
-        //I gameView körs GameBoard(Model, null) vilket buggar efter som nu
-        // så finns det 2 konstruktorer som den kan passa på.
-        //därför skapar jag änu en konstruktor som inte gör ett skit och använder den
-        // så länge.
     }
     
     public GameBoardView(AbstractGameModel model, CampaignView view) {
@@ -55,8 +46,9 @@ public class GameBoardView extends javax.swing.JPanel{
             }
         }
     }
-    // this is some copypaste shit, but cant make an interface, cuz of propertycahnge stuff
-    // there for there will be duplicated code here, lets look at it at a later date.
+    // below there will be some copypaste,
+    // but cant make an interface, cuz inteface cant implements propertychange
+    // lets look at it at a later date.
     
     public GameBoardView(AbstractGameModel model, ClassicView view) {
         initComponents();
