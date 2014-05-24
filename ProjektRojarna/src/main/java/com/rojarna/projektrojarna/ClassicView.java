@@ -407,7 +407,7 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
             SquareView view = (SquareView)evt.getNewValue();
             model.chooseSquare(view.getXPos(), view.getYPos());
             
-            if(model.getBoard().isAllNumberShown()){
+            if(model.getGameState().equals(ClassicModel.GameState.GAMEWON)){
                 Save.saveClassic(model.getGameTime());
                 int gameWinOption = JOptionPane.showConfirmDialog(null,"Congratulations, "
                         + "you won this round.\nPlay another one?","Game Over",YES_NO_OPTION);
@@ -419,10 +419,10 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
                 }
             }
             
-            if(model.getSquare(view.getXPos(), view.getYPos()).isMine()){
-                int gameOverOption = JOptionPane.showConfirmDialog(null,"Game Over!\nPlay another "
+            if(model.getGameState().equals(ClassicModel.GameState.GAMELOST)){
+                int gameOverOption = JOptionPane.showConfirmDialog(null,"You've lost this round!\nPlay another "
                         + "game?","Game Over",YES_NO_OPTION);
-                
+
                 if(gameOverOption == JOptionPane.YES_OPTION){
                     newGame();
                 }else{
