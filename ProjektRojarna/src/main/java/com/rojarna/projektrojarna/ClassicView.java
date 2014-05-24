@@ -159,9 +159,10 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
 
         add(gamePanel, java.awt.BorderLayout.CENTER);
 
-        sideMenu.setMaximumSize(new java.awt.Dimension(100, 138));
-        sideMenu.setMinimumSize(new java.awt.Dimension(100, 138));
-        sideMenu.setPreferredSize(new java.awt.Dimension(100, 138));
+        sideMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        sideMenu.setMaximumSize(new java.awt.Dimension(200, 37285));
+        sideMenu.setMinimumSize(new java.awt.Dimension(200, 138));
+        sideMenu.setPreferredSize(new java.awt.Dimension(200, 138));
         sideMenu.setLayout(new javax.swing.BoxLayout(sideMenu, javax.swing.BoxLayout.PAGE_AXIS));
         sideMenu.add(filler2);
 

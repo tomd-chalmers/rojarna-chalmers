@@ -88,6 +88,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         setLayout(new java.awt.BorderLayout());
 
         menuPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        menuPanel.setMaximumSize(new java.awt.Dimension(200, 32767));
         menuPanel.setMinimumSize(new java.awt.Dimension(200, 408));
         menuPanel.setPreferredSize(new java.awt.Dimension(200, 408));
         menuPanel.setLayout(new java.awt.GridLayout(8, 1));
