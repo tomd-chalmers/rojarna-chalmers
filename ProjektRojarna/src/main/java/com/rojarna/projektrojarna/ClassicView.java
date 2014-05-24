@@ -51,9 +51,9 @@ public class ClassicView extends javax.swing.JPanel implements PropertyChangeLis
         if(boardSize.equals("small")){
             model = new ClassicModel();
         }else if(boardSize.equals("medium")){
-            model = new ClassicModel(15,20,20);
+            model = new ClassicModel(40,16,16);
         }else if(boardSize.equals("large")){
-            model = new ClassicModel(20,30,30);
+            model = new ClassicModel(99,30,16);
         }else{
             System.out.println("error in size.");
         }
