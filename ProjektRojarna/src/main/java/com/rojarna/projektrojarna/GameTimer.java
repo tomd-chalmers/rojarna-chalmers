@@ -32,7 +32,7 @@ public class GameTimer {
     
     private final Timer timer = new Timer(SEC, new ActionListener() {
         
-            @Override
+        @Override
         public void actionPerformed(ActionEvent e) {
             if(dec){
                 time--;
@@ -48,7 +48,6 @@ public class GameTimer {
         startValue = 0;
         dec = false;
         time = 0;
-        
     }
     
     public GameTimer(int time){
@@ -66,6 +65,7 @@ public class GameTimer {
     public String getTimeMin(){
         int m = time/60;
         int s = time-(60*m);
+        
         String min;
         String sec;
         
@@ -102,7 +102,6 @@ public class GameTimer {
         timer.start();
     }
     
-    // resets the timer, also stops the timer.
     public void reset(){
         timer.stop();
         time=startValue;
