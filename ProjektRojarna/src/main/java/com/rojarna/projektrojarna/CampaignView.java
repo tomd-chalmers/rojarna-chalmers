@@ -226,7 +226,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         pausCard.setLayout(new java.awt.BorderLayout());
 
         pausLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        pausLabel.setIcon(new ImageIcon("src/resources/paus.png"));
+        pausLabel.setIcon(new ImageIcon(getClass().getResource("/images/paus.png")));
         pausLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         pausCard.add(pausLabel, java.awt.BorderLayout.CENTER);
 
@@ -349,7 +349,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         labelUpdate();
         if(model.getState().equals(State.GAMEOVER)&&!newGameButtonCard.isVisible()){
             int choise = JOptionPane.showConfirmDialog(null, 
-                "Do you want to restart?", "GAME OVER", JOptionPane.YES_NO_OPTION,0,new ImageIcon("src/resources/boom.png"));
+                "Do you want to restart?", "GAME OVER", JOptionPane.YES_NO_OPTION,0,new ImageIcon(getClass().getResource("/images/boom.png")));
             if(choise==0){
                 restart();
             }else{
@@ -359,7 +359,7 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
         }else if(model.getState().equals(State.FINISHED)&&!nextLevelButtonCard.isVisible()){
             int choise = JOptionPane.showConfirmDialog(null,
                 "Start level "+(model.getLevel()+1)+"?","Level "+model.getLevel()+" cleared!"
-                    , JOptionPane.YES_NO_OPTION,0,new ImageIcon("src/resources/win.png"));
+                    , JOptionPane.YES_NO_OPTION,0,new ImageIcon(getClass().getResource("/images/win.png")));
             if(choise==0){
                 model.nextLevel();
                 board.renewBoard(this);
@@ -386,11 +386,11 @@ public class CampaignView extends javax.swing.JPanel implements PropertyChangeLi
     
     private void setLives(int lives){
         if(lives>0){
-            lifeLabel1.setIcon(new ImageIcon("src/resources/heart.png"));
+            lifeLabel1.setIcon(new ImageIcon(getClass().getResource("/images/heart.png")));
             if(lives>1){
-                lifeLabel2.setIcon(new ImageIcon("src/resources/heart.png"));
+                lifeLabel2.setIcon(new ImageIcon(getClass().getResource("/images/heart.png")));
                 if(lives>2){
-                    lifeLabel3.setIcon(new ImageIcon("src/resources/heart.png"));
+                    lifeLabel3.setIcon(new ImageIcon(getClass().getResource("/images/heart.png")));
                 }else{
                     lifeLabel3.setIcon(null);
                 }

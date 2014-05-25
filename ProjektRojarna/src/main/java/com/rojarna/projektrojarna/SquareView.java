@@ -39,35 +39,35 @@ public class SquareView extends javax.swing.JPanel implements Observer{
     
     private void setContent(Square s){
         if(s.getItem()==Square.Item.MINE){
-            contentLabel.setIcon(new ImageIcon("src/resources/mine.32.png"));
+            contentLabel.setIcon(new ImageIcon(getClass().getResource("/images/mine.32.png")));
         }else{
             switch(s.getValue()){
                 case 0:
-                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-0.png"));
+                    contentLabel.setIcon(new ImageIcon(getClass().getResource("/images/nbr-0.png")));
                     break;
                 case 1:
-                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-1.png"));
+                    contentLabel.setIcon(new ImageIcon(getClass().getResource("/images/nbr-1.png")));
                     break;
                 case 2:
-                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-2.png"));
+                    contentLabel.setIcon(new ImageIcon(getClass().getResource("/images/nbr-2.png")));
                     break;
                 case 3:
-                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-3.png"));
+                    contentLabel.setIcon(new ImageIcon(getClass().getResource("/images/nbr-3.png")));
                     break;
                 case 4:
-                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-4.png"));
+                    contentLabel.setIcon(new ImageIcon(getClass().getResource("/images/nbr-4.png")));
                     break;
                 case 5:
-                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-5.png"));
+                    contentLabel.setIcon(new ImageIcon(getClass().getResource("/images/nbr-5.png")));
                     break;
                 case 6:
-                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-6.png"));
+                    contentLabel.setIcon(new ImageIcon(getClass().getResource("/images/nbr-6.png")));
                     break;
                 case 7:
-                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-7.png"));
+                    contentLabel.setIcon(new ImageIcon(getClass().getResource("/images/nbr-7.png")));
                     break;
                 case 8:
-                    contentLabel.setIcon(new ImageIcon("src/resources/nbr-8.png"));
+                    contentLabel.setIcon(new ImageIcon(getClass().getResource("/images/nbr-8.png")));
                     break;
             }
         }
@@ -79,10 +79,10 @@ public class SquareView extends javax.swing.JPanel implements Observer{
                 button.setIcon(null);
                 break;
             case FLAG:
-                button.setIcon(new ImageIcon("src/resources/flag.png"));
+                button.setIcon(new ImageIcon(getClass().getResource("/images/flag.png")));
                 break;
             case QUESTION:
-                button.setIcon(new ImageIcon("src/resources/question.png"));
+                button.setIcon(new ImageIcon(getClass().getResource("/images/question.png")));
                 break;
         }
     }
