@@ -2,7 +2,9 @@
  * The inteface for all powerups.
  */
 
-package com.rojarna.projektrojarna;
+package Model;
+
+import Model.GameBoard;
 
 
 /**

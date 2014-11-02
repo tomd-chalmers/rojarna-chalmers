@@ -6,6 +6,9 @@
 
 package com.rojarna.projektrojarna;
 
+import Model.PUChooseRandomFour;
+import Model.Square;
+import Model.GameBoard;
 import junit.framework.TestCase;
 
 /**

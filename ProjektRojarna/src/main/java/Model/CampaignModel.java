@@ -3,7 +3,7 @@
  * the "rules" for this specific game mode.
  */
 
-package com.rojarna.projektrojarna;
+package Model;
 
 import java.beans.PropertyChangeEvent;
 

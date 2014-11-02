@@ -4,8 +4,14 @@
  * themselves in appropriate places on the screen
  */
 
-package com.rojarna.projektrojarna;
+package Controller;
 
+import Model.ClassicModel;
+import Model.AbstractGameModel;
+import Model.CampaignModel;
+import View.ClassicView;
+import View.CampaignView;
+import View.GameFrame;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Observable;

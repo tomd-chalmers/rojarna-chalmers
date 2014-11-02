@@ -3,9 +3,15 @@
  * the game in grafic to the player.
  */
 
-package com.rojarna.projektrojarna;
+package View;
 
-import com.rojarna.projektrojarna.CampaignModel.State;
+import Model.AbstractGameModel;
+import Model.CampaignModel;
+import Model.CampaignModel.State;
+import Model.PUChooseRandomFour;
+import Model.PUChooseSafeArea;
+import Model.PUChooseSafeSingle;
+import Model.PowerupInterface;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;

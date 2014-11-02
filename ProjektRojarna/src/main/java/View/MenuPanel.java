@@ -3,7 +3,7 @@
  * the player navigate to the diffrent gameMode he/she wants to play.
  */
 
-package com.rojarna.projektrojarna;
+package View;
 
 /**
  *

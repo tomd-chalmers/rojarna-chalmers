@@ -4,7 +4,7 @@
  * and ofc gettres and setters.
  */
 
-package com.rojarna.projektrojarna;
+package Model;
 
 /**
  *

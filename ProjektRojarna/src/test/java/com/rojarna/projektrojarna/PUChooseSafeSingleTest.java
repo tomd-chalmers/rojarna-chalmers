@@ -6,10 +6,12 @@
 
 package com.rojarna.projektrojarna;
 
+import Model.PUChooseSafeSingle;
+import Model.GameBoard;
 import junit.framework.TestCase;
-import com.rojarna.projektrojarna.Square.Item;
-import static com.rojarna.projektrojarna.Square.Item.*;
-import com.rojarna.projektrojarna.Square.Marking;
+import Model.Square.Item;
+import static Model.Square.Item.*;
+import Model.Square.Marking;
 
 /**
  *

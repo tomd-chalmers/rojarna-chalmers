@@ -5,10 +5,11 @@
  * square.
  */
 
-package com.rojarna.projektrojarna;
+package Model;
 
-import com.rojarna.projektrojarna.Square.Item;
-import com.rojarna.projektrojarna.Square.Marking;
+import Model.GameBoard;
+import Model.Square.Item;
+import Model.Square.Marking;
 
 /**
  *

@@ -2,9 +2,9 @@
  * The "rules" for the classic game mode, creates and uses a gameboard.
  */
 
-package com.rojarna.projektrojarna;
+package Model;
 
-import com.rojarna.projektrojarna.Square.Item;
+import Model.Square.Item;
 
 /**
  *

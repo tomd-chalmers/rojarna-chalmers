@@ -6,14 +6,14 @@
  * GameBoard are using multiple instances of Square to form the board. 
  */
 
-package com.rojarna.projektrojarna;
+package Model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Point;
 
-import com.rojarna.projektrojarna.Square.Item;
-import com.rojarna.projektrojarna.Square.Marking;
+import Model.Square.Item;
+import Model.Square.Marking;
 
 
 

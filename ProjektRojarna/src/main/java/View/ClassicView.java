@@ -2,8 +2,11 @@
  * The visualisation of the ClassicModel, uses a gameBoardView.
  */
 
-package com.rojarna.projektrojarna;
+package View;
 
+import Model.AbstractGameModel;
+import Model.ClassicModel;
+import Model.Save;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;

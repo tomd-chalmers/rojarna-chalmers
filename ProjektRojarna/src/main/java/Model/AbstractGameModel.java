@@ -4,7 +4,7 @@
  * gamerules a player can play.
  */
 
-package com.rojarna.projektrojarna;
+package Model;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

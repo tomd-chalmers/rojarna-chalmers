@@ -4,7 +4,7 @@
  * It also has a ot of funktion to help gameModels to easy add and reduce time
  * from the counter, to make the GameTimer more versatile.
  */
-package com.rojarna.projektrojarna;
+package Model;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

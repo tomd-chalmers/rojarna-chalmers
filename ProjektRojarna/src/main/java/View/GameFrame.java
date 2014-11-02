@@ -2,7 +2,7 @@
  * The frame for the game...
  */
 
-package com.rojarna.projektrojarna;
+package View;
 
 import java.awt.CardLayout;
 import java.awt.GridLayout;
@@ -47,7 +47,6 @@ public class GameFrame extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 500));
-        setPreferredSize(new java.awt.Dimension(1220, 650));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

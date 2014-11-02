@@ -3,8 +3,10 @@
  * are used by GameBoardView.
  */
 
-package com.rojarna.projektrojarna;
+package View;
 
+import Model.AbstractGameModel;
+import Model.Square;
 import java.awt.CardLayout;
 import java.util.Observable;
 import java.util.Observer;

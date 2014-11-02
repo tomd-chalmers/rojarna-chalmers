@@ -6,9 +6,10 @@
 
 package com.rojarna.projektrojarna;
 
+import Model.Square;
 import junit.framework.TestCase;
-import com.rojarna.projektrojarna.Square.Item;
-import com.rojarna.projektrojarna.Square.Marking;
+import Model.Square.Item;
+import Model.Square.Marking;
 
 /**
  *

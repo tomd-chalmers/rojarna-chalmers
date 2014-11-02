@@ -4,11 +4,12 @@
  * mine it sets the marking to FLAGGED.
  */
 
-package com.rojarna.projektrojarna;
+package Model;
 
+import Model.GameBoard;
 import java.beans.PropertyChangeSupport;
-import com.rojarna.projektrojarna.Square.Item;
-import com.rojarna.projektrojarna.Square.Marking;
+import Model.Square.Item;
+import Model.Square.Marking;
 
 /**
  *

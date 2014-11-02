@@ -6,10 +6,13 @@
 
 package com.rojarna.projektrojarna;
 
+import Model.GameTimer;
+import Model.Square;
+import Model.ClassicModel;
 import junit.framework.TestCase;
-import com.rojarna.projektrojarna.Square.Item;
-import com.rojarna.projektrojarna.Square.Marking;
-import com.rojarna.projektrojarna.ClassicModel.GameState;
+import Model.Square.Item;
+import Model.Square.Marking;
+import Model.ClassicModel.GameState;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

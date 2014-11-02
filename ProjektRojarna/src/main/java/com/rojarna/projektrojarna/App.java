@@ -1,5 +1,7 @@
 package com.rojarna.projektrojarna;
 
+import Controller.GameController;
+
 /**
  * The startup file.
  *

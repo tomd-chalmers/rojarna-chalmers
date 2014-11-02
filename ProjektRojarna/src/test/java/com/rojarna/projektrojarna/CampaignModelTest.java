@@ -6,10 +6,14 @@
 
 package com.rojarna.projektrojarna;
 
+import Model.PUChooseSafeArea;
+import Model.PUChooseSafeSingle;
+import Model.Square;
+import Model.CampaignModel;
 import junit.framework.TestCase;
-import com.rojarna.projektrojarna.Square.Item;
-import com.rojarna.projektrojarna.Square.Marking;
-import com.rojarna.projektrojarna.CampaignModel.State;
+import Model.Square.Item;
+import Model.Square.Marking;
+import Model.CampaignModel.State;
 
 /**
  *

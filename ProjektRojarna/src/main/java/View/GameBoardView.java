@@ -3,7 +3,9 @@
  * by both classicModel and CampaignModel.
  */
 
-package com.rojarna.projektrojarna;
+package View;
+
+import Model.AbstractGameModel;
 
 /**
  *

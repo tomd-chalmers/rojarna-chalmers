@@ -6,6 +6,7 @@
 
 package com.rojarna.projektrojarna;
 
+import Model.Save;
 import junit.framework.TestCase;
 
 /**
