@@ -1,17 +1,16 @@
-/*
+/**
  * The "rules" for the classic game mode, creates and uses a gameboard.
+ * 
+ * @author Tobias
+ * @revised Oskar
+ * @revised Tom
  */
 
 package Model;
 
 import Model.Square.Item;
 
-/**
- *
- * @author Tobias
- * @revised Oskar
- * @revised Tom
- */
+
 public class ClassicModel extends AbstractGameModel{
     private GameState state;
     

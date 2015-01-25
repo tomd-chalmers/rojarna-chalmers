@@ -1,16 +1,14 @@
-/*
+/**
  * The model of the square, is used by gameBoard. Has enums for the diffrent
  * markings it can have, and diffrent Item.
  * and ofc gettres and setters.
+ * @author Gaming
+ * @revised Oskar Frost
  */
 
 package Model;
 
-/**
- *
- * @author Gaming
- * @revised Oskar Frost
- */
+
 public class Square {
 
     private Item item;

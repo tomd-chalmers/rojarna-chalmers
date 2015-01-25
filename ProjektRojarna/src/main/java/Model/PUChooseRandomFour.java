@@ -1,7 +1,8 @@
-/*
+/**
  * A powerup that is available in the CampaignModel.
  * It choose four squares, at random, and in case one of theese would be an
  * mine it sets the marking to FLAGGED.
+ * @author Tom
  */
 
 package Model;
@@ -11,10 +12,7 @@ import java.beans.PropertyChangeSupport;
 import Model.Square.Item;
 import Model.Square.Marking;
 
-/**
- *
- * @author Tom
- */
+
 public class PUChooseRandomFour implements PowerupInterface{
     private final int COST=15;
     private int x, y, invisible;

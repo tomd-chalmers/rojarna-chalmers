@@ -1,6 +1,7 @@
-/*
+/**
  * The view of square, uses images to represent, mines or numbers.
  * are used by GameBoardView.
+ * @author Oskar
  */
 
 package View;
@@ -13,10 +14,6 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-/**
- *
- * @author Oskar
- */
 public class SquareView extends javax.swing.JPanel implements Observer{
     
     private final int x;

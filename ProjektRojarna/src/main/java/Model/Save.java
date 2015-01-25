@@ -1,6 +1,21 @@
 /**
  * The save class. Creates, if not already exists, a save file. and have methods
  * to get them. 
+ * 
+ * for classic:
+ * void saveClassic(int score) - skapar (om det inte redan finns) och lägger till ett score.
+ * List<Integer> getHighescore() - returnerar en lista med bästa score på förstaplats.
+ * void clearClassic() - clearar allt score. (tar bort filen).
+ * 
+ * for campaign:
+ * void saveCampaign(int level, int time) -  sparar leveln och tiden(i sekunder)
+ * int getSavedCampaignLevel() - returner level
+ * int getSavedCampaignTime() - returner tid
+ * void clearCampaign() - clearar sparade filen. (tar bort filen).
+ * 
+ * 
+ * @author tomd
+ *
  */
 
 package Model;
@@ -13,22 +28,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-/**
- * för classic:
- * void saveClassic(int score) - skapar (om det inte redan finns) och lägger till ett score.
- * List<Integer> getHighescore() - returnerar en lista med bästa score på förstaplats.
- * void clearClassic() - clearar allt score. (tar bort filen).
- * 
- * för campaign:
- * void saveCampaign(int level, int time) -  sparar leveln och tiden(i sekunder)
- * int getSavedCampaignLevel() - returner level
- * int getSavedCampaignTime() - returner tid
- * void clearCampaign() - clearar sparade filen. (tar bort filen).
- * 
- * 
- * @author tomd
- *
- */
+
+
+
 public class Save {
 	private final static String pathClassic = "save/classicSave.sav";
 	private final static File fileClassic = new File(pathClassic);

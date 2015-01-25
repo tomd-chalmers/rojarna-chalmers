@@ -1,16 +1,14 @@
-/*
+/**
  * the visualistation of gameBoard, uses squareView and are used
  * by both classicModel and CampaignModel.
+ * @author Tom
  */
 
 package View;
 
 import Model.AbstractGameModel;
 
-/**
- *
- * @author Tom
- */
+
 public class GameBoardView extends javax.swing.JPanel{
     /**
      * Creates new form GameBoardView

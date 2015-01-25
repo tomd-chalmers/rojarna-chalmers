@@ -1,7 +1,9 @@
-/*
+/**
  * The controller of this MVC based application. GameController main purpose is 
  * to provide the user with input by arranging for relevant views to present
  * themselves in appropriate places on the screen
+ * 
+ * @author Tobias
  */
 
 package Controller;
@@ -17,10 +19,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- *
- * @author Tobias
- */
+
 public class GameController implements Observer, PropertyChangeListener{
     
     private AbstractGameModel gameModel = null;

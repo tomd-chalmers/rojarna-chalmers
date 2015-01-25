@@ -1,8 +1,13 @@
-/*
+/**
  * The gameTimer uses the (util)Timer to make a counter tick either 
  * from zero and upp or from a given start value and down.
  * It also has a ot of funktion to help gameModels to easy add and reduce time
  * from the counter, to make the GameTimer more versatile.
+ * 
+ * @author Tobias
+ * @revised Tom
+ * @revised Tobias
+ * @revised (redone) Tom
  */
 package Model;
 
@@ -13,13 +18,6 @@ import java.beans.PropertyChangeSupport;
 import javax.swing.Timer;
 
 
-/**
- *
- * @author Tobias
- * @revised Tom
- * @revised Tobias
- * @revised (redone) Tom
- */
 public class GameTimer {
     
     private final PropertyChangeSupport property = new PropertyChangeSupport(this);

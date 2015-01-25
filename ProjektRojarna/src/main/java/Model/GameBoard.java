@@ -1,9 +1,14 @@
- /*
+ /**
  * Creates a game board in diffrent sizes, with X amount of mines.
  * also contains method like reset and other method to make the gameboard
  * versatile and easy to use if the need to create another gameModel emerge.
  *
  * GameBoard are using multiple instances of Square to form the board. 
+ * 
+ * @author Tobias
+ * @revised Oskar Frost
+ * @revised Joakim Milleson
+ * @revised Oskar Frost
  */
 
 package Model;
@@ -17,14 +22,6 @@ import Model.Square.Marking;
 
 
 
-
-/**
- *
- * @author Tobias
- * @revised Oskar Frost
- * @revised Joakim Milleson
- * @revised Oskar Frost
- */
 public class GameBoard{
 	
     private Square[][] board;

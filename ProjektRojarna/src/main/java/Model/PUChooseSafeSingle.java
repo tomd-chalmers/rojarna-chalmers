@@ -1,8 +1,9 @@
-/*
+/**
  * A powerup that is available in the CampaignModel.
  * After the person first use this powerup, he/she also has to choose a square.
  * the powerup will choose the square and if it is a mine it will "flagg" the
  * square.
+ * @author Joakim
  */
 
 package Model;
@@ -11,10 +12,7 @@ import Model.GameBoard;
 import Model.Square.Item;
 import Model.Square.Marking;
 
-/**
- *
- * @author Joakim
- */
+
 public class PUChooseSafeSingle implements PowerupInterface{
 
     private final int COST = 5;

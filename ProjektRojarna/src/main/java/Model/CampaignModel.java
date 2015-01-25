@@ -1,6 +1,8 @@
-/*
+/**
  * The Campaign game mode, will create its own gameboard and sets
  * the "rules" for this specific game mode.
+ * 
+ * @author Joakim
  */
 
 package Model;
@@ -8,10 +10,6 @@ package Model;
 import java.beans.PropertyChangeEvent;
 
 
-/**
- *
- * @author Joakim
- */
 public class CampaignModel extends AbstractGameModel{
       
     private int mines, width, height, currentLives= 3, level = 1;

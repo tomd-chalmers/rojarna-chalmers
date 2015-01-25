@@ -1,5 +1,6 @@
-/*
+/**
  * The frame for the game...
+ * @author Gaming
  */
 
 package View;
@@ -9,10 +10,7 @@ import java.awt.GridLayout;
 import java.beans.PropertyChangeListener;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Gaming
- */
+
 public class GameFrame extends javax.swing.JFrame{
 
     private final MenuPanel menuPanel;

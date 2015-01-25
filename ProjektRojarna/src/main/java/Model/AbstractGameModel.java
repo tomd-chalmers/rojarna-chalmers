@@ -1,7 +1,9 @@
-/*
+/**
  * AbstractGameModel is the abstract class of the diffrent gamemodels.
  * The game models, CampaignModel and ClassicModel, are the two diffrent
  * gamerules a player can play.
+ * 
+ * @author Tobias
  */
 
 package Model;
@@ -10,10 +12,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Observable;
 
-/**
- *
- * @author Tobias
- */
+
 public abstract class AbstractGameModel extends Observable implements PropertyChangeListener{
     private GameBoard gameBoard;
     private GameTimer gameTimer;

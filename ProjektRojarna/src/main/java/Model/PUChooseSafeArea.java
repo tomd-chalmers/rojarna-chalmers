@@ -1,9 +1,10 @@
-/*
+/**
  * A powerup that is available in the CampaignModel.
  * After the person first use this powerup, he/she also has to choose a square.
  * the powerup will choose the square and if it is a mine it will "flagg" the
  * square. It will also make the same with all the square that is next to the
  * choosen square.
+ * @author Tom
  */
 
 package Model;
@@ -14,10 +15,7 @@ import Model.Square.Marking;
 import java.awt.Point;
 import java.util.List;
 
-/**
- *
- * @author Tom
- */
+
 public class PUChooseSafeArea implements PowerupInterface{
     
     private final int COST=30;

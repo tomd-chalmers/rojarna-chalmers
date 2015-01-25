@@ -1,5 +1,6 @@
-/*
+/**
  * The visualisation of the ClassicModel, uses a gameBoardView.
+ * @author Tom
  */
 
 package View;
@@ -18,10 +19,7 @@ import java.util.Observer;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 
-/**
- *
- * @author Tom
- */
+
 public class ClassicView extends javax.swing.JPanel implements PropertyChangeListener,Observer{
     
     

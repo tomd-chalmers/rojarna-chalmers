@@ -1,14 +1,11 @@
-/*
+/**
  * The starting view and main menu. First thing the players sees and let 
  * the player navigate to the diffrent gameMode he/she wants to play.
+ * @author Tom
  */
 
 package View;
 
-/**
- *
- * @author Gaming
- */
 public class MenuPanel extends javax.swing.JPanel {
 
     

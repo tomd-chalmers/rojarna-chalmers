@@ -1,6 +1,7 @@
-/*
+/**
  * The view for CampaignModel, uses the view from GameBoard to illustrate 
  * the game in grafic to the player.
+ * @author Oskar
  */
 
 package View;
@@ -22,10 +23,7 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Oskar
- */
+
 public class CampaignView extends javax.swing.JPanel implements PropertyChangeListener, Observer{
     
     private CampaignModel model;
